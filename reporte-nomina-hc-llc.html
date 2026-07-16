@@ -1,0 +1,323 @@
+<title>Reporte de Nómina — Empresas HC LLC</title>
+<style>
+  :root{
+    --bg:#FBFBF9; --panel:#FFFFFF; --ink:#16232E; --muted:#5B6B78;
+    --line:#E4E7E4; --line-strong:#D2D7D3;
+    --navy:#1F3A5F; --teal:#2E6E7E; --gold:#B8860B; --gold-soft:#F6EAC9;
+    --good:#2E7D4F; --good-bg:#E7F1EA; --warn:#B8860B; --warn-bg:#FBF1D8;
+    --crit:#B23A3A; --crit-bg:#F6E4E2;
+    --tile:#F4F5F2; --thead:#1F3A5F; --zebra:#F7F8F6;
+    --shadow:0 1px 2px rgba(22,35,46,.06),0 6px 20px rgba(22,35,46,.05);
+    --radius:12px;
+    --serif:Georgia,"Iowan Old Style","Times New Roman",serif;
+    --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  }
+  @media (prefers-color-scheme:dark){
+    :root{
+      --bg:#11181F; --panel:#182430; --ink:#EAF0F4; --muted:#9DB0BD;
+      --line:#26333F; --line-strong:#33434F;
+      --navy:#8FB3D9; --teal:#6FB6C4; --gold:#DDB65A; --gold-soft:#3A3016;
+      --good:#7FC79B; --good-bg:#183026; --warn:#DDB65A; --warn-bg:#33290F;
+      --crit:#E08B87; --crit-bg:#3A1F1E;
+      --tile:#1E2C39; --thead:#22394F; --zebra:#1B2833;
+      --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 24px rgba(0,0,0,.28);
+    }
+  }
+  :root[data-theme="light"]{
+    --bg:#FBFBF9; --panel:#FFFFFF; --ink:#16232E; --muted:#5B6B78;
+    --line:#E4E7E4; --line-strong:#D2D7D3; --navy:#1F3A5F; --teal:#2E6E7E;
+    --gold:#B8860B; --gold-soft:#F6EAC9; --good:#2E7D4F; --good-bg:#E7F1EA;
+    --warn:#B8860B; --warn-bg:#FBF1D8; --crit:#B23A3A; --crit-bg:#F6E4E2;
+    --tile:#F4F5F2; --thead:#1F3A5F; --zebra:#F7F8F6;
+  }
+  :root[data-theme="dark"]{
+    --bg:#11181F; --panel:#182430; --ink:#EAF0F4; --muted:#9DB0BD;
+    --line:#26333F; --line-strong:#33434F; --navy:#8FB3D9; --teal:#6FB6C4;
+    --gold:#DDB65A; --gold-soft:#3A3016; --good:#7FC79B; --good-bg:#183026;
+    --warn:#DDB65A; --warn-bg:#33290F; --crit:#E08B87; --crit-bg:#3A1F1E;
+    --tile:#1E2C39; --thead:#22394F; --zebra:#1B2833;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);
+    line-height:1.5;-webkit-font-smoothing:antialiased;font-variant-numeric:tabular-nums}
+  .wrap{max-width:1120px;margin:0 auto;padding:40px 24px 72px}
+  .num{font-variant-numeric:tabular-nums;font-feature-settings:"tnum" 1}
+
+  /* Header */
+  header.masthead{border-top:4px solid var(--gold);background:var(--panel);
+    border:1px solid var(--line);border-top:4px solid var(--gold);
+    border-radius:var(--radius);padding:26px 30px;box-shadow:var(--shadow)}
+  .eyebrow{font-size:12px;letter-spacing:.16em;text-transform:uppercase;
+    color:var(--teal);font-weight:700}
+  h1{font-family:var(--serif);font-weight:700;font-size:clamp(26px,4vw,38px);
+    line-height:1.1;margin:10px 0 6px;text-wrap:balance;letter-spacing:-.01em}
+  .sub{color:var(--muted);font-size:15px;max-width:60ch}
+  .metarow{display:flex;flex-wrap:wrap;gap:10px 26px;margin-top:18px;
+    padding-top:16px;border-top:1px solid var(--line);font-size:13px}
+  .metarow b{color:var(--ink)}.metarow span{color:var(--muted)}
+
+  h2{font-family:var(--serif);font-size:22px;font-weight:700;margin:44px 0 4px;
+    letter-spacing:-.01em}
+  .lede{color:var(--muted);font-size:14px;margin:0 0 18px}
+
+  /* KPI tiles */
+  .kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:24px}
+  @media(max-width:760px){.kpis{grid-template-columns:repeat(2,1fr)}}
+  @media(max-width:460px){.kpis{grid-template-columns:1fr}}
+  .tile{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);
+    padding:18px 18px 16px;box-shadow:var(--shadow);position:relative;overflow:hidden}
+  .tile::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--teal)}
+  .tile.accent-gold::before{background:var(--gold)}
+  .tile.accent-navy::before{background:var(--navy)}
+  .tile .lbl{font-size:12px;text-transform:uppercase;letter-spacing:.08em;
+    color:var(--muted);font-weight:600}
+  .tile .val{font-size:27px;font-weight:700;margin-top:8px;letter-spacing:-.02em}
+  .tile .val .cur{font-size:15px;color:var(--muted);font-weight:600;margin-right:2px}
+  .tile .note{font-size:12px;color:var(--muted);margin-top:4px}
+
+  /* Breakdown bar */
+  .breakdown{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);
+    padding:22px 24px;box-shadow:var(--shadow);margin-top:22px}
+  .bar{display:flex;height:34px;border-radius:8px;overflow:hidden;margin:16px 0 14px;
+    border:1px solid var(--line-strong)}
+  .bar>span{display:block}
+  .seg-net{background:var(--teal)}.seg-ret{background:var(--navy)}
+  .seg-pat{background:var(--gold)}
+  .legend{display:flex;flex-wrap:wrap;gap:18px;font-size:13px}
+  .legend .k{display:inline-flex;align-items:center;gap:8px;color:var(--muted)}
+  .legend .sw{width:12px;height:12px;border-radius:3px;display:inline-block}
+  .legend b{color:var(--ink)}
+
+  /* Tables */
+  .tablecard{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);
+    box-shadow:var(--shadow);overflow:hidden;margin-top:10px}
+  .scroll{overflow-x:auto}
+  table{border-collapse:collapse;width:100%;font-size:13.5px;min-width:640px}
+  thead th{background:var(--thead);color:#fff;text-align:right;padding:11px 12px;
+    font-weight:600;font-size:12px;letter-spacing:.02em;white-space:nowrap}
+  thead th:first-child{text-align:left}
+  tbody td{padding:10px 12px;text-align:right;border-top:1px solid var(--line);white-space:nowrap}
+  tbody td:first-child{text-align:left;font-weight:600}
+  tbody tr:nth-child(even){background:var(--zebra)}
+  tfoot td{padding:12px;text-align:right;font-weight:700;border-top:2px solid var(--line-strong);
+    background:var(--tile)}
+  tfoot td:first-child{text-align:left;text-transform:uppercase;font-size:12px;letter-spacing:.06em}
+  .pos{color:var(--good);font-weight:700}
+  .tag{font-size:11px;color:var(--muted);font-weight:500}
+  .exempt{color:var(--muted)}
+
+  /* two-col */
+  .cols{display:grid;grid-template-columns:1.15fr .85fr;gap:22px;margin-top:10px}
+  @media(max-width:840px){.cols{grid-template-columns:1fr}}
+
+  /* checklist */
+  .checkcard,.ratecard{background:var(--panel);border:1px solid var(--line);
+    border-radius:var(--radius);box-shadow:var(--shadow);padding:6px 4px}
+  .checkcard ul{list-style:none;margin:0;padding:0}
+  .checkcard li{display:flex;align-items:flex-start;gap:12px;padding:12px 18px;
+    border-top:1px solid var(--line)}
+  .checkcard li:first-child{border-top:none}
+  .ck-main{flex:1}
+  .ck-main .t{font-weight:600;font-size:14px}
+  .ck-main .m{font-size:12px;color:var(--muted);margin-top:2px}
+  .pill{font-size:11px;font-weight:700;padding:3px 9px;border-radius:999px;
+    white-space:nowrap;letter-spacing:.02em;margin-top:1px}
+  .pill.ok{background:var(--good-bg);color:var(--good)}
+  .pill.due{background:var(--warn-bg);color:var(--warn)}
+  .pill.act{background:var(--crit-bg);color:var(--crit)}
+
+  .ratecard{padding:20px 22px}
+  .ratecard h3{font-family:var(--serif);font-size:16px;margin:0 0 14px}
+  .rate{display:flex;justify-content:space-between;gap:12px;padding:8px 0;
+    border-top:1px dashed var(--line);font-size:13.5px}
+  .rate:first-of-type{border-top:none}
+  .rate .r{font-weight:700;color:var(--navy)}
+  .rate .d{color:var(--muted);font-size:11.5px}
+
+  .disclaimer{margin-top:34px;background:var(--warn-bg);border:1px solid var(--line);
+    border-left:4px solid var(--gold);border-radius:10px;padding:16px 20px;
+    font-size:12.5px;color:var(--muted)}
+  .disclaimer b{color:var(--ink)}
+  footer{margin-top:26px;font-size:12px;color:var(--muted);text-align:center}
+  a{color:var(--teal)}
+</style>
+
+<div class="wrap">
+
+  <header class="masthead">
+    <div class="eyebrow">Empresas HC LLC · Puerto Rico</div>
+    <h1>Reporte de Nómina y Cumplimiento</h1>
+    <p class="sub">Resumen de un período de pago con empleados W-2 y contratistas 1099,
+      alineado a la normativa laboral y contributiva de Puerto Rico.</p>
+    <div class="metarow">
+      <span>Período: <b>Ejemplo · 1–15 de una quincena 2026</b></span>
+      <span>Generado: <b>16 de julio de 2026</b></span>
+      <span>Frecuencia: <b>Quincenal</b></span>
+      <span>Estado: <b style="color:var(--good)">Datos ilustrativos</b></span>
+    </div>
+  </header>
+
+  <h2>Resumen del período</h2>
+  <p class="lede">Cifras totales de la nómina. El costo patronal incluye el bruto más las
+    contribuciones que paga la empresa.</p>
+  <div class="kpis">
+    <div class="tile accent-navy">
+      <div class="lbl">Bruto empleados W-2</div>
+      <div class="val"><span class="cur">$</span>3,576<span style="font-size:16px">.00</span></div>
+      <div class="note">3 empleados · incluye horas extra 2×</div>
+    </div>
+    <div class="tile">
+      <div class="lbl">Neto a pagar (empleados)</div>
+      <div class="val"><span class="cur">$</span>3,195<span style="font-size:16px">.71</span></div>
+      <div class="note">Después de SS, Medicare, SINOT y 499R</div>
+    </div>
+    <div class="tile accent-navy">
+      <div class="lbl">Retenciones al empleado</div>
+      <div class="val"><span class="cur">$</span>380<span style="font-size:16px">.29</span></div>
+      <div class="note">A depositar en Hacienda / DTRH</div>
+    </div>
+    <div class="tile accent-gold">
+      <div class="lbl">Costo patronal total</div>
+      <div class="val"><span class="cur">$</span>3,981<span style="font-size:16px">.88</span></div>
+      <div class="note">Bruto + $405.88 de aportes patronales</div>
+    </div>
+    <div class="tile">
+      <div class="lbl">Contratistas 1099 (neto)</div>
+      <div class="val"><span class="cur">$</span>2,420<span style="font-size:16px">.00</span></div>
+      <div class="note">Bruto $2,450 · retención 10% $30</div>
+    </div>
+    <div class="tile accent-gold">
+      <div class="lbl">Provisión Bono de Navidad</div>
+      <div class="val"><span class="cur">$</span>1,200<span style="font-size:16px">.00</span></div>
+      <div class="note">Acumulado anual · pago 15-nov a 15-dic</div>
+    </div>
+  </div>
+
+  <div class="breakdown">
+    <strong style="font-size:14px">¿A dónde va cada dólar del costo patronal? ($3,981.88)</strong>
+    <div class="bar" role="img" aria-label="Neto a empleados 80%, retenciones 10%, aportes patronales 10%">
+      <span class="seg-net" style="width:80.3%"></span>
+      <span class="seg-ret" style="width:9.5%"></span>
+      <span class="seg-pat" style="width:10.2%"></span>
+    </div>
+    <div class="legend">
+      <span class="k"><span class="sw" style="background:var(--teal)"></span>Neto a empleados <b>$3,195.71</b></span>
+      <span class="k"><span class="sw" style="background:var(--navy)"></span>Retenciones (a depositar) <b>$380.29</b></span>
+      <span class="k"><span class="sw" style="background:var(--gold)"></span>Aportes patronales <b>$405.88</b></span>
+    </div>
+  </div>
+
+  <h2>Nómina — Empleados W-2</h2>
+  <p class="lede">Horas extra pagadas a 2× (Ley 379). Topes anuales de SS, SINOT y desempleo aplicados por acumulado.</p>
+  <div class="tablecard"><div class="scroll">
+    <table>
+      <thead><tr>
+        <th>Empleado</th><th>Tarifa</th><th>H. reg.</th><th>H. extra</th>
+        <th>Bruto</th><th>Seg. Social</th><th>Medicare</th><th>SINOT</th>
+        <th>Ret. 499R</th><th>Neto</th>
+      </tr></thead>
+      <tbody>
+        <tr><td>María Rodríguez <span class="tag">· Administradora</span></td>
+          <td>$18.00</td><td>80</td><td>5</td><td>$1,620.00</td>
+          <td>$100.44</td><td>$23.49</td><td>$4.86</td><td>$81.00</td>
+          <td class="pos">$1,410.21</td></tr>
+        <tr><td>José Torres <span class="tag">· Chofer/Reparto</span></td>
+          <td>$12.50</td><td>80</td><td>8</td><td>$1,200.00</td>
+          <td>$74.40</td><td>$17.40</td><td>$3.60</td><td>$15.00</td>
+          <td class="pos">$1,089.60</td></tr>
+        <tr><td>Ana Vega <span class="tag">· Ventas</span></td>
+          <td>$10.50</td><td>72</td><td>0</td><td>$756.00</td>
+          <td>$46.87</td><td>$10.96</td><td>$2.27</td><td>$0.00</td>
+          <td class="pos">$695.90</td></tr>
+      </tbody>
+      <tfoot><tr>
+        <td>Totales</td><td></td><td>232</td><td>13</td><td>$3,576.00</td>
+        <td>$221.71</td><td>$51.85</td><td>$10.73</td><td>$96.00</td>
+        <td>$3,195.71</td>
+      </tr></tfoot>
+    </table>
+  </div></div>
+
+  <h2>Pagos — Contratistas 1099</h2>
+  <p class="lede">Retención de 10% sobre servicios (Hacienda). Primeros $500/año exentos; con relevo total, 0%.</p>
+  <div class="tablecard"><div class="scroll">
+    <table style="min-width:560px">
+      <thead><tr>
+        <th>Contratista</th><th>Servicio</th><th>Relevo</th>
+        <th>Pago bruto</th><th>Base sujeta</th><th>Retención 10%</th><th>Neto</th>
+      </tr></thead>
+      <tbody>
+        <tr><td>Servicios Contables LM</td><td style="text-align:left">Contabilidad</td>
+          <td>No</td><td>$800.00</td><td>$300.00</td><td>$30.00</td><td class="pos">$770.00</td></tr>
+        <tr><td>Diseño Web PR</td><td style="text-align:left">Página web</td>
+          <td>No</td><td>$450.00</td><td class="exempt">$0.00 <span class="tag">(&lt;$500)</span></td>
+          <td>$0.00</td><td class="pos">$450.00</td></tr>
+        <tr><td>Consultor J. Ríos</td><td style="text-align:left">Consultoría</td>
+          <td>Sí</td><td>$1,200.00</td><td class="exempt">$0.00</td><td>$0.00</td>
+          <td class="pos">$1,200.00</td></tr>
+      </tbody>
+      <tfoot><tr>
+        <td>Totales</td><td></td><td></td><td>$2,450.00</td><td>$300.00</td>
+        <td>$30.00</td><td>$2,420.00</td>
+      </tr></tfoot>
+    </table>
+  </div></div>
+
+  <h2>Cumplimiento y tasas</h2>
+  <p class="lede">Estado de las obligaciones del período y las tasas clave aplicadas.</p>
+  <div class="cols">
+    <div class="checkcard">
+      <ul>
+        <li><span class="ck-main"><div class="t">Salario mínimo ≥ $10.50/h</div>
+          <div class="m">Ley 47-2021 · verificado en todas las tarifas</div></span>
+          <span class="pill ok">Cumple</span></li>
+        <li><span class="ck-main"><div class="t">Horas extra a 2× (&gt;8h/día ó &gt;40h/sem)</div>
+          <div class="m">Ley 379-1948 · aplicado a María y José</div></span>
+          <span class="pill ok">Cumple</span></li>
+        <li><span class="ck-main"><div class="t">Seguro Social + Medicare retenidos</div>
+          <div class="m">FICA · Form. 941-PR</div></span>
+          <span class="pill ok">Cumple</span></li>
+        <li><span class="ck-main"><div class="t">Contribución sobre ingresos (PR)</div>
+          <div class="m">Form. 499R-1B · depósito según calendario</div></span>
+          <span class="pill due">Por depositar</span></li>
+        <li><span class="ck-main"><div class="t">SINOT 0.3% + 0.3%</div>
+          <div class="m">DTRH · planilla trimestral</div></span>
+          <span class="pill due">Trimestral</span></li>
+        <li><span class="ck-main"><div class="t">Desempleo (FUTA 0.6% + SUTA)</div>
+          <div class="m">Form. 940 / PR UI · primeros $7,000</div></span>
+          <span class="pill due">Trimestral</span></li>
+        <li><span class="ck-main"><div class="t">Retención 10% a contratistas</div>
+          <div class="m">Hacienda · Form. 480.6</div></span>
+          <span class="pill ok">Cumple</span></li>
+        <li><span class="ck-main"><div class="t">Bono de Navidad (Ley 148)</div>
+          <div class="m">Provisión $1,200 · pagar antes del 15-dic</div></span>
+          <span class="pill act">Pendiente</span></li>
+        <li><span class="ck-main"><div class="t">Vacaciones y licencia por enfermedad</div>
+          <div class="m">Ley 180 / Ley 4-2017 · acumular (≥130h/mes)</div></span>
+          <span class="pill due">Acumular</span></li>
+      </ul>
+    </div>
+    <div class="ratecard">
+      <h3>Tasas aplicadas · 2026</h3>
+      <div class="rate"><span>Salario mínimo <span class="d">Ley 47-2021</span></span><span class="r">$10.50/h</span></div>
+      <div class="rate"><span>Horas extra <span class="d">Ley 379</span></span><span class="r">2.0×</span></div>
+      <div class="rate"><span>Seguro Social <span class="d">c/u, base $176,100*</span></span><span class="r">6.20%</span></div>
+      <div class="rate"><span>Medicare <span class="d">c/u, sin tope</span></span><span class="r">1.45%</span></div>
+      <div class="rate"><span>SINOT <span class="d">c/u, base $9,000</span></span><span class="r">0.30%</span></div>
+      <div class="rate"><span>FUTA neto <span class="d">base $7,000</span></span><span class="r">0.60%</span></div>
+      <div class="rate"><span>SUTA <span class="d">tasa asignada por DTRH</span></span><span class="r">2.80%</span></div>
+      <div class="rate"><span>Retención contratista <span class="d">servicios</span></span><span class="r">10.0%</span></div>
+      <div class="rate"><span>Bono Navidad <span class="d">&gt;15 empl., tope $600</span></span><span class="r">6.00%</span></div>
+      <p class="d" style="margin:14px 0 0">* Base de Seguro Social 2026 por confirmar con la SSA; ajústela en la plantilla.</p>
+    </div>
+  </div>
+
+  <div class="disclaimer">
+    <b>Aviso importante.</b> Este reporte usa datos de ejemplo con fines ilustrativos. Las tasas
+    (base de Seguro Social, tasa SUTA asignada a HC LLC y las tablas de retención 499R) cambian y
+    deben verificarse con el <b>Departamento de Hacienda</b> y el <b>Departamento del Trabajo y Recursos
+    Humanos (DTRH)</b> de Puerto Rico para cada período. No sustituye asesoría contributiva o legal profesional.
+  </div>
+
+  <footer>Empresas HC LLC · Reporte de nómina generado para revisión interna · Puerto Rico 2026</footer>
+</div>
