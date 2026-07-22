@@ -1,0 +1,436 @@
+<title>Ruta de Venta — JK Business Group</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+  :root {
+    --ground: #F5F1E8;
+    --surface: #FFFFFF;
+    --surface-2: #FBF7EE;
+    --ink: #12252B;
+    --ink-soft: #4A5B60;
+    --ink-faint: #8A9599;
+    --line: #E4DDCC;
+    --line-strong: #D6CDB6;
+    --gold: #A9842E;
+    --gold-bg: #F3E9CE;
+    --coral: #C1512F;
+    --coral-bg: #F7E2D8;
+    --green: #3F7A4B;
+    --green-bg: #E1EEDD;
+    --shadow: 0 1px 2px rgba(18,37,43,.06), 0 8px 30px rgba(18,37,43,.07);
+    --radius: 14px;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --ground: #0E1B20;
+      --surface: #16282E;
+      --surface-2: #132329;
+      --ink: #EFEadf;
+      --ink-soft: #A9B7BA;
+      --ink-faint: #6C7B7F;
+      --line: #244149;
+      --line-strong: #315058;
+      --gold: #D6B063;
+      --gold-bg: #2A2A1C;
+      --coral: #E8896B;
+      --coral-bg: #34211A;
+      --green: #7FB588;
+      --green-bg: #1B2E20;
+      --shadow: 0 1px 2px rgba(0,0,0,.3), 0 10px 34px rgba(0,0,0,.34);
+    }
+  }
+  :root[data-theme="light"] {
+    --ground: #F5F1E8; --surface: #FFFFFF; --surface-2: #FBF7EE;
+    --ink: #12252B; --ink-soft: #4A5B60; --ink-faint: #8A9599;
+    --line: #E4DDCC; --line-strong: #D6CDB6;
+    --gold: #A9842E; --gold-bg: #F3E9CE;
+    --coral: #C1512F; --coral-bg: #F7E2D8;
+    --green: #3F7A4B; --green-bg: #E1EEDD;
+    --shadow: 0 1px 2px rgba(18,37,43,.06), 0 8px 30px rgba(18,37,43,.07);
+  }
+  :root[data-theme="dark"] {
+    --ground: #0E1B20; --surface: #16282E; --surface-2: #132329;
+    --ink: #EFEADF; --ink-soft: #A9B7BA; --ink-faint: #6C7B7F;
+    --line: #244149; --line-strong: #315058;
+    --gold: #D6B063; --gold-bg: #2A2A1C;
+    --coral: #E8896B; --coral-bg: #34211A;
+    --green: #7FB588; --green-bg: #1B2E20;
+    --shadow: 0 1px 2px rgba(0,0,0,.3), 0 10px 34px rgba(0,0,0,.34);
+  }
+
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--ground);
+    color: var(--ink);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+  }
+  .serif { font-family: Georgia, "Times New Roman", serif; }
+  .mono { font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace; }
+
+  .app {
+    display: grid;
+    grid-template-columns: 300px minmax(0, 1fr);
+    min-height: 100vh;
+    max-width: 1240px;
+    margin: 0 auto;
+  }
+
+  /* ---------- Sidebar ---------- */
+  .rail {
+    border-right: 1px solid var(--line);
+    padding: 26px 22px;
+    position: sticky;
+    top: 0;
+    align-self: start;
+    height: 100vh;
+    overflow-y: auto;
+    background: var(--surface-2);
+  }
+  .brand { display: flex; align-items: baseline; gap: 9px; margin-bottom: 4px; }
+  .brand .mark {
+    font-family: Georgia, serif; font-weight: 700; font-size: 20px;
+    letter-spacing: .5px; color: var(--ink);
+    border: 1.5px solid var(--gold); border-radius: 8px; padding: 2px 9px;
+  }
+  .brand .co { font-size: 12px; letter-spacing: .16em; text-transform: uppercase; color: var(--ink-faint); }
+  .rail h1 {
+    font-family: Georgia, serif; font-weight: 700;
+    font-size: 22px; line-height: 1.15; margin: 16px 0 4px; text-wrap: balance;
+  }
+  .rail .sub { font-size: 12.5px; color: var(--ink-soft); margin: 0 0 20px; }
+
+  .steps { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 3px; }
+  .step {
+    display: grid; grid-template-columns: 30px 1fr; align-items: center; gap: 12px;
+    width: 100%; text-align: left; cursor: pointer;
+    background: none; border: 0; border-radius: 10px;
+    padding: 10px 10px; color: var(--ink-soft);
+    font: inherit; font-size: 13.5px; position: relative;
+    transition: background .15s, color .15s;
+  }
+  .step:hover { background: var(--ground); color: var(--ink); }
+  .step .num {
+    font-family: ui-monospace, monospace; font-size: 12px; font-weight: 600;
+    width: 30px; height: 30px; display: grid; place-items: center;
+    border-radius: 50%; border: 1px solid var(--line-strong); color: var(--ink-faint);
+    transition: all .15s;
+  }
+  .step .lbl { font-weight: 600; line-height: 1.25; }
+  .step .lbl small { display: block; font-weight: 400; font-size: 11.5px; color: var(--ink-faint); margin-top: 1px; }
+  .step[aria-current="true"] { background: var(--surface); color: var(--ink); box-shadow: var(--shadow); }
+  .step[aria-current="true"] .num { background: var(--gold); border-color: var(--gold); color: #1c1608; }
+  .step[data-tone="coral"][aria-current="true"] .num { background: var(--coral); border-color: var(--coral); color: #fff; }
+  .step:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; }
+
+  .rail .foot { margin-top: 22px; padding-top: 16px; border-top: 1px solid var(--line); font-size: 11.5px; color: var(--ink-faint); }
+  .kbd { font-family: ui-monospace, monospace; font-size: 10.5px; background: var(--ground); border: 1px solid var(--line-strong); border-radius: 5px; padding: 1px 5px; color: var(--ink-soft); }
+
+  /* ---------- Main ---------- */
+  .main { padding: 30px clamp(20px, 4vw, 52px) 80px; }
+  .topbar { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-bottom: 26px; flex-wrap: wrap; }
+  .toggles { display: flex; gap: 8px; }
+  .tgl {
+    font: inherit; font-size: 12.5px; font-weight: 600; cursor: pointer;
+    background: var(--surface); color: var(--ink-soft);
+    border: 1px solid var(--line-strong); border-radius: 999px; padding: 7px 14px;
+    display: inline-flex; align-items: center; gap: 7px; transition: all .15s;
+  }
+  .tgl:hover { color: var(--ink); border-color: var(--gold); }
+  .tgl[aria-pressed="true"] { background: var(--gold-bg); color: var(--gold); border-color: var(--gold); }
+  .tgl:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; }
+
+  .eyebrow { font-size: 12px; letter-spacing: .18em; text-transform: uppercase; color: var(--gold); font-weight: 700; margin-bottom: 8px; }
+  .sec-tone-coral .eyebrow { color: var(--coral); }
+  .sec h2 { font-family: Georgia, serif; font-size: clamp(28px, 4vw, 40px); line-height: 1.08; margin: 0 0 10px; text-wrap: balance; }
+  .sec .goal { font-size: 16px; color: var(--ink-soft); margin: 0 0 26px; max-width: 62ch; }
+  .sec .goal b { color: var(--ink); }
+
+  .block { margin-bottom: 24px; }
+  .block-head { display: flex; align-items: center; gap: 9px; margin-bottom: 12px; }
+  .block-head .tag {
+    font-size: 10.5px; letter-spacing: .12em; text-transform: uppercase; font-weight: 700;
+    padding: 3px 9px; border-radius: 6px;
+  }
+  .tag.strat { background: var(--surface); color: var(--ink-soft); border: 1px solid var(--line-strong); }
+  .tag.script { background: var(--gold-bg); color: var(--gold); }
+  .sec-tone-coral .tag.script { background: var(--coral-bg); color: var(--coral); }
+  .block-head .tag-note { font-size: 12px; color: var(--ink-faint); }
+
+  ul.strat-list { margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 9px; }
+  ul.strat-list li { position: relative; padding-left: 22px; font-size: 15px; color: var(--ink); max-width: 68ch; }
+  ul.strat-list li::before { content: ""; position: absolute; left: 4px; top: 9px; width: 7px; height: 7px; border-radius: 2px; background: var(--gold); }
+  .sec-tone-coral ul.strat-list li::before { background: var(--coral); }
+  ul.strat-list li b { font-weight: 700; }
+
+  .lines { display: flex; flex-direction: column; gap: 12px; }
+  .line {
+    background: var(--surface); border: 1px solid var(--line);
+    border-left: 3px solid var(--gold); border-radius: 12px;
+    padding: 15px 18px; box-shadow: var(--shadow);
+  }
+  .sec-tone-coral .line { border-left-color: var(--coral); }
+  .line p { margin: 0; font-family: Georgia, serif; font-size: 17px; line-height: 1.5; color: var(--ink); }
+  .line p .fill { color: var(--gold); font-style: italic; font-family: -apple-system, sans-serif; font-size: 15px; }
+  .sec-tone-coral .line p .fill { color: var(--coral); }
+  .line .cue { display: block; font-family: -apple-system, sans-serif; font-size: 11px; letter-spacing: .1em; text-transform: uppercase; color: var(--ink-faint); margin-bottom: 7px; font-weight: 600; }
+
+  .callout {
+    background: var(--green-bg); border: 1px solid transparent;
+    border-radius: 12px; padding: 14px 16px; font-size: 14px; color: var(--ink);
+    display: flex; gap: 11px; align-items: flex-start; margin-top: 4px;
+  }
+  .callout.warn { background: var(--coral-bg); }
+  .callout .ic { font-weight: 800; color: var(--green); font-family: Georgia, serif; }
+  .callout.warn .ic { color: var(--coral); }
+  .callout b { display: block; margin-bottom: 1px; }
+
+  /* horizon cards (paso 5) */
+  .horizons { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 14px; margin-bottom: 8px; }
+  .hz { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 16px; box-shadow: var(--shadow); }
+  .hz .d { font-family: ui-monospace, monospace; font-size: 30px; font-weight: 700; color: var(--coral); line-height: 1; font-variant-numeric: tabular-nums; }
+  .hz .d span { font-size: 13px; color: var(--ink-faint); font-weight: 500; margin-left: 3px; }
+  .hz ul { margin: 12px 0 0; padding-left: 16px; font-size: 13.5px; color: var(--ink-soft); }
+  .hz li { margin-bottom: 6px; }
+
+  /* objections table */
+  .obj { display: flex; flex-direction: column; gap: 10px; }
+  .obj-row { display: grid; grid-template-columns: minmax(120px, 0.9fr) minmax(0, 1.6fr); gap: 14px; align-items: start; background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 13px 16px; box-shadow: var(--shadow); }
+  .obj-row .q { font-weight: 700; font-size: 14px; color: var(--coral); }
+  .obj-row .a { font-family: Georgia, serif; font-size: 15px; color: var(--ink); }
+
+  .progress-note { font-size: 12.5px; color: var(--ink-faint); margin-top: 2px; }
+
+  /* condensed "solo cierres" mode */
+  body.closes-only .strat-only { display: none !important; }
+
+  @media (max-width: 820px) {
+    .app { grid-template-columns: 1fr; }
+    .rail { position: static; height: auto; border-right: 0; border-bottom: 1px solid var(--line); }
+    .steps { flex-direction: row; overflow-x: auto; padding-bottom: 6px; }
+    .step { min-width: 150px; }
+  }
+  @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+</style>
+
+<div class="app">
+  <nav class="rail" aria-label="Pasos de la ruta de venta">
+    <div class="brand"><span class="mark">JK</span><span class="co">Business Group</span></div>
+    <h1 class="serif">Ruta de Venta</h1>
+    <p class="sub">Guion en vivo · del diagnóstico al cierre</p>
+    <ul class="steps" id="steps"></ul>
+    <div class="foot">
+      Navega con <span class="kbd">1</span>–<span class="kbd">6</span> o <span class="kbd">←</span> <span class="kbd">→</span>.<br>
+      <span class="kbd">C</span> activa <b>Solo cierres</b>.
+    </div>
+  </nav>
+
+  <main class="main">
+    <div class="topbar">
+      <div class="progress-note" id="crumb">Paso 1 de 6</div>
+      <div class="toggles">
+        <button class="tgl" id="closesBtn" aria-pressed="false">◗ Solo cierres</button>
+        <button class="tgl" id="themeBtn" aria-pressed="false">☾ Tema</button>
+      </div>
+    </div>
+    <div id="stage"></div>
+  </main>
+</div>
+
+<script>
+const DATA = [
+  {
+    n: 1, tone: "gold", title: "Conexión y diagnóstico", nav: "Diagnóstico",
+    navSub: "Detectar el dolor real",
+    goal: "Que el cliente hable el <b>70%</b> del tiempo y tú detectes el dolor — y su costo — antes de proponer nada.",
+    strat: [
+      "No vendas todavía. Escucha y toma nota de las palabras exactas que usa para describir su problema.",
+      "Consigue que ponga <b>número</b> a su dolor: cuánto le cuesta hoy en dinero, tiempo o tranquilidad.",
+      "<b>Regla:</b> no avances al Paso 2 hasta que el cliente diga en voz alta su dolor y lo que ese dolor le cuesta."
+    ],
+    lines: [
+      { cue: "Apertura", t: "¿Qué te trajo a buscar una solución justo ahora?" },
+      { cue: "Cuantificar el dolor", t: "¿Cuánto te está costando ese problema hoy — en dinero, en tiempo, en tranquilidad?" },
+      { cue: "Proyectar al futuro", t: "Si esto siguiera igual dentro de 6 meses, ¿qué pasaría con tu negocio?" }
+    ]
+  },
+  {
+    n: 2, tone: "gold", title: "Vender el valor y la inversión", nav: "Valor e inversión",
+    navSub: "El retorno antes que el precio",
+    goal: "Que perciba el <b>retorno</b> antes de escuchar el precio. No vendes un producto: vendes una transformación.",
+    strat: [
+      "<b>Ancla el valor antes del precio.</b> Traduce cada beneficio a dinero, tiempo o tranquilidad.",
+      "Habla de <b>inversión</b>, nunca de \"costo\" o \"precio\": es lo que pone hoy para recuperar lo que pierde.",
+      "Usa la reducción a lo mínimo: divide la inversión entre 30 y compárala con un gasto cotidiano.",
+      "Cierra el paso con un <b>\"sí, tiene sentido\"</b> antes de pasar a la oferta. Ese sí pequeño abre el cierre."
+    ],
+    lines: [
+      { cue: "Anclar valor", t: "Déjame mostrarte lo que esto significa para tu negocio, no solo lo que incluye. El objetivo no es que gastes: es que recuperes lo que hoy estás perdiendo." },
+      { cue: "Presentar la inversión", t: "Tu inversión es de <span class='fill'>[monto]</span>. Con lo que esto te ayuda a lograr, se paga solo en <span class='fill'>[tiempo]</span>. Después de eso, todo lo demás es ganancia para ti." },
+      { cue: "Reducir a lo mínimo", t: "Son apenas <span class='fill'>[monto ÷ 30]</span> al día — menos que <span class='fill'>[referencia cotidiana]</span>. Y a cambio, tu negocio <span class='fill'>[resultado]</span>." },
+      { cue: "Confirmar antes de avanzar", t: "Si esto te devuelve <span class='fill'>[resultado]</span>, ¿la inversión te parece justa?" }
+    ],
+    note: { type: "ok", head: "Micro-sí", body: "No pases a la oferta hasta escuchar “sí, tiene sentido”." }
+  },
+  {
+    n: 3, tone: "gold", title: "Oferta irresistible", nav: "Oferta irresistible",
+    navSub: "Que decir sí sea lo obvio",
+    goal: "Apila valor hasta que el <b>sí</b> sea la decisión obvia: núcleo + bonos + garantía por la misma inversión.",
+    strat: [
+      "<b>Núcleo:</b> el resultado principal que ya vendiste en el Paso 2.",
+      "<b>Bonos:</b> 2 o 3 extras que suben el valor percibido sin subir el precio (soporte, sesión, plantillas, beneficio exclusivo).",
+      "<b>Garantía:</b> reduce el riesgo de decidir — el riesgo lo asumes tú, no el cliente."
+    ],
+    lines: [
+      { cue: "Apilar la oferta", t: "Esto incluye el resultado principal, más <span class='fill'>[bono 1]</span>, <span class='fill'>[bono 2]</span> y <span class='fill'>[bono 3]</span> — todo por la misma inversión de la que hablamos." },
+      { cue: "Garantía", t: "Si haces tu parte y no ves <span class='fill'>[resultado]</span>, <span class='fill'>[garantía]</span>. El riesgo lo asumo yo, no tú." },
+      { cue: "Puente al cierre", t: "Por eso te digo que este es el mejor momento para entrar." }
+    ]
+  },
+  {
+    n: 4, tone: "coral", title: "Cierre por cupos", nav: "Cierre por cupos",
+    navSub: "Urgencia real · pedir la decisión",
+    goal: "Que decidir <b>hoy</b> tenga una razón concreta y honesta. Luego pide la decisión, sin rodeos.",
+    strat: [
+      "Usa solo escasez <b>real</b>. Si prometes cupos limitados, respétalos: tu credibilidad es tu activo más caro.",
+      "Enmarca los cupos como un beneficio para el cliente: pocos clientes = atención real y resultados.",
+      "Después de crear la urgencia, <b>pide la decisión de forma directa</b>."
+    ],
+    lines: [
+      { cue: "Escasez real", t: "Trabajo con un número limitado de negocios este mes para darle atención real a cada uno. Me quedan <span class='fill'>[X]</span> cupos." },
+      { cue: "Fecha de cierre", t: "No abro esto a todo el mundo al mismo tiempo, justamente para que funcione. Los cupos de este ciclo se cierran el <span class='fill'>[fecha]</span>." },
+      { cue: "Pedir la decisión", t: "¿Quieres que aparte uno de esos cupos para ti hoy?" }
+    ],
+    note: { type: "warn", head: "Solo escasez real", body: "Si prometes cupos limitados, cúmplelo. La credibilidad es tu activo más caro." }
+  },
+  {
+    n: 5, tone: "coral", title: "El costo de postergar", nav: "Costo de postergar",
+    navSub: "30 · 60 · 90 días",
+    goal: "Que vea que <b>“lo pienso” también tiene precio</b>. No decidir es una decisión — y se paga mes a mes.",
+    strat: [
+      "Frase puente: “Entiendo que quieras pensarlo. Hagamos juntos un ejercicio rápido: veamos qué le pasa a tu negocio si esto se posterga.”",
+      "El problema no se detiene porque lo pospongan: <b>se acumula</b>. Y el retorno que ganaría también se pospone.",
+      "Cierra el ejercicio con la pregunta clave y déjala respirar en silencio."
+    ],
+    horizons: [
+      { d: "30", u: "días", pts: ["Un mes más con el mismo problema y perdiendo esas ventas.", "El costo del problema no se detiene: se acumula."] },
+      { d: "60", u: "días", pts: ["Dos meses en los que la competencia avanzó y él siguió igual.", "El retorno que ya estaría recibiendo también se pospone."] },
+      { d: "90", u: "días", pts: ["Un trimestre completo decidido por la indecisión.", "Lo que hoy cuesta resolver, mañana cuesta más — en dinero y oportunidad."] }
+    ],
+    lines: [
+      { cue: "La pregunta clave", t: "¿Qué le sucede a tu negocio si no apruebas esto hoy?" },
+      { cue: "Espejo honesto", t: "Sé honesto conmigo: en 90 días, ¿estás mejor por haber esperado, o en el mismo lugar preguntándote por qué no empezaste hoy?" }
+    ],
+    note: { type: "warn", head: "Idea central", body: "El cliente cree que postergar es “no gastar”. Muéstrale que postergar es seguir pagando el problema, mes a mes, sin recibir la solución." }
+  },
+  {
+    n: 6, tone: "gold", title: "Objeciones y cierre final", nav: "Objeciones y cierre",
+    navSub: "Confirmar y asegurar el pago",
+    goal: "Resolver la última resistencia y <b>pedir el cierre con claridad</b>. El cierre no llega solo: hay que pedirlo.",
+    objections: [
+      { q: "“Está caro”", a: "Comparémoslo con lo que te cuesta el problema cada mes. ¿Qué es más caro: la inversión una vez, o el problema para siempre?" },
+      { q: "“Lo tengo que pensar”", a: "Perfecto. ¿Qué necesitas pensar exactamente: el resultado, la inversión o el momento? Resolvámoslo ahora." },
+      { q: "“No tengo el dinero ahora”", a: "Por eso justamente esto existe: para que dejes de perder. Veamos las opciones de pago que sí te funcionan." },
+      { q: "“Lo consulto con mi socio/pareja”", a: "Muy bien. Si mañana te dice que sí, ¿tú ya estás decidido? Dejemos tu parte lista." }
+    ],
+    lines: [
+      { cue: "Cierre final", t: "Entonces hagamos esto: aparto tu cupo, das el primer paso hoy, y empezamos a devolverte <span class='fill'>[resultado]</span> cuanto antes. ¿Te parece?" }
+    ]
+  }
+];
+
+const stepsEl = document.getElementById('steps');
+const stageEl = document.getElementById('stage');
+const crumbEl = document.getElementById('crumb');
+let active = 0;
+
+DATA.forEach((s, i) => {
+  const b = document.createElement('button');
+  b.className = 'step';
+  b.dataset.tone = s.tone;
+  b.setAttribute('aria-current', i === 0 ? 'true' : 'false');
+  b.innerHTML = `<span class="num">${s.n}</span><span class="lbl">${s.nav}<small>${s.navSub}</small></span>`;
+  b.addEventListener('click', () => go(i));
+  stepsEl.appendChild(b);
+});
+
+function esc(x){ return x; }
+
+function render(s) {
+  let h = `<section class="sec ${s.tone === 'coral' ? 'sec-tone-coral' : ''}">
+    <div class="eyebrow">Paso ${s.n} · ${s.nav}</div>
+    <h2 class="serif">${s.title}</h2>
+    <p class="goal strat-only">${s.goal}</p>`;
+
+  if (s.strat) {
+    h += `<div class="block strat-only">
+      <div class="block-head"><span class="tag strat">Estrategia</span><span class="tag-note">Qué haces tú</span></div>
+      <ul class="strat-list">${s.strat.map(x => `<li>${x}</li>`).join('')}</ul></div>`;
+  }
+
+  if (s.horizons) {
+    h += `<div class="block strat-only"><div class="horizons">${s.horizons.map(z => `
+      <div class="hz"><div class="d">${z.d}<span>${z.u}</span></div>
+      <ul>${z.pts.map(p => `<li>${p}</li>`).join('')}</ul></div>`).join('')}</div></div>`;
+  }
+
+  if (s.objections) {
+    h += `<div class="block strat-only">
+      <div class="block-head"><span class="tag strat">Objeciones</span><span class="tag-note">Respuesta lista</span></div>
+      <div class="obj">${s.objections.map(o => `
+        <div class="obj-row"><div class="q">${o.q}</div><div class="a">${o.a}</div></div>`).join('')}</div></div>`;
+  }
+
+  if (s.lines) {
+    h += `<div class="block">
+      <div class="block-head"><span class="tag script">◗ Cierres · guion</span><span class="tag-note">Léelo textual</span></div>
+      <div class="lines">${s.lines.map(l => `
+        <div class="line"><span class="cue">${l.cue}</span><p>${l.t}</p></div>`).join('')}</div></div>`;
+  }
+
+  if (s.note) {
+    h += `<div class="callout ${s.note.type === 'warn' ? 'warn' : ''}">
+      <span class="ic">${s.note.type === 'warn' ? '!' : '✓'}</span>
+      <span><b>${s.note.head}</b>${s.note.body}</span></div>`;
+  }
+
+  h += `</section>`;
+  stageEl.innerHTML = h;
+}
+
+function go(i) {
+  active = (i + DATA.length) % DATA.length;
+  render(DATA[active]);
+  crumbEl.textContent = `Paso ${DATA[active].n} de ${DATA.length}`;
+  [...stepsEl.children].forEach((c, j) => c.setAttribute('aria-current', j === active ? 'true' : 'false'));
+  stageEl.parentElement.scrollTo && window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// Toggles
+const closesBtn = document.getElementById('closesBtn');
+closesBtn.addEventListener('click', () => {
+  const on = document.body.classList.toggle('closes-only');
+  closesBtn.setAttribute('aria-pressed', on);
+});
+
+const themeBtn = document.getElementById('themeBtn');
+themeBtn.addEventListener('click', () => {
+  const root = document.documentElement;
+  const dark = (root.getAttribute('data-theme') || (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light')) === 'dark';
+  root.setAttribute('data-theme', dark ? 'light' : 'dark');
+  themeBtn.setAttribute('aria-pressed', !dark);
+  themeBtn.textContent = dark ? '☀ Tema' : '☾ Tema';
+});
+
+// Keyboard
+document.addEventListener('keydown', (e) => {
+  if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+  if (e.key >= '1' && e.key <= '6') go(+e.key - 1);
+  else if (e.key === 'ArrowRight') go(active + 1);
+  else if (e.key === 'ArrowLeft') go(active - 1);
+  else if (e.key.toLowerCase() === 'c') closesBtn.click();
+});
+
+render(DATA[0]);
+</script>
