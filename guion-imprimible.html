@@ -1,0 +1,99 @@
+<title>Guion de Venta — Hoja de 1 página · JK Business Group</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+  :root { --ink:#12252B; --soft:#4A5B60; --faint:#7C878B; --gold:#8f6d1f; --coral:#B5461F; --green:#2f6b3c; --line:#D9D2C2; --bg:#fff; }
+  * { box-sizing: border-box; }
+  body { margin:0; background:#EDE9DE; color:var(--ink); font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif; line-height:1.4; }
+  .sheet { background:var(--bg); max-width:820px; margin:20px auto; padding:26px 30px; box-shadow:0 6px 30px rgba(0,0,0,.14); }
+  .head { display:flex; justify-content:space-between; align-items:baseline; border-bottom:2px solid var(--gold); padding-bottom:8px; margin-bottom:14px; }
+  .head h1 { font-family:Georgia,serif; font-size:21px; margin:0; }
+  .head .mark { font-family:Georgia,serif; font-weight:700; border:1.4px solid var(--gold); border-radius:6px; padding:1px 8px; font-size:14px; color:var(--gold); }
+  .head .co { font-size:10px; letter-spacing:.14em; text-transform:uppercase; color:var(--faint); }
+  .grid { display:grid; grid-template-columns:1fr 1fr; gap:12px 22px; }
+  .step { break-inside:avoid; }
+  .step h2 { font-size:13px; margin:0 0 3px; display:flex; align-items:center; gap:7px; }
+  .step h2 .n { font-family:ui-monospace,monospace; font-size:10px; font-weight:700; width:19px; height:19px; display:inline-grid; place-items:center; border-radius:50%; background:var(--gold); color:#fff; }
+  .step.coral h2 .n { background:var(--coral); }
+  .step .do { font-size:10.5px; color:var(--soft); margin:0 0 5px; }
+  .step .do b { color:var(--ink); }
+  .step .say { font-family:Georgia,serif; font-size:11.5px; color:var(--ink); border-left:2px solid var(--gold); padding-left:8px; margin:4px 0 0; }
+  .step.coral .say { border-left-color:var(--coral); }
+  .step .say .cue { display:block; font-family:-apple-system,sans-serif; font-size:8.5px; letter-spacing:.08em; text-transform:uppercase; color:var(--faint); font-weight:700; margin-top:5px; }
+  .fill { color:var(--gold); font-style:italic; }
+  .horiz { font-size:10px; color:var(--coral); font-weight:600; margin-top:3px; }
+  .foot { margin-top:14px; border-top:1px solid var(--line); padding-top:8px; font-size:9.5px; color:var(--faint); display:flex; justify-content:space-between; }
+  .print-btn { position:fixed; top:16px; right:16px; background:var(--gold); color:#fff; border:0; border-radius:8px; padding:9px 15px; font:inherit; font-size:13px; font-weight:600; cursor:pointer; box-shadow:0 3px 10px rgba(0,0,0,.2); }
+  @media print {
+    body { background:#fff; }
+    .sheet { box-shadow:none; margin:0; max-width:none; padding:0; }
+    .print-btn { display:none; }
+    @page { margin:12mm; }
+  }
+</style>
+
+<button class="print-btn" onclick="window.print()">⎙ Imprimir / PDF</button>
+
+<div class="sheet">
+  <div class="head">
+    <div>
+      <h1>Ruta de Venta — Guion rápido</h1>
+      <span class="co">Estructura + cierres · para tener al lado en la llamada</span>
+    </div>
+    <div style="text-align:right"><span class="mark">JK</span><br><span class="co">Business Group</span></div>
+  </div>
+
+  <div class="grid">
+    <div class="step">
+      <h2><span class="n">1</span> Conexión y diagnóstico</h2>
+      <p class="do">El cliente habla el <b>70%</b>. Detecta el dolor y su costo antes de proponer.</p>
+      <p class="say">¿Qué te trajo a buscar una solución justo ahora?
+        <span class="cue">Cuantificar</span>¿Cuánto te está costando ese problema hoy — en dinero, tiempo, tranquilidad?</p>
+    </div>
+
+    <div class="step">
+      <h2><span class="n">2</span> Valor e inversión</h2>
+      <p class="do">Retorno <b>antes</b> del precio. Di “inversión”, nunca “costo”.</p>
+      <p class="say">Tu inversión es de <span class="fill">[monto]</span>. Se paga solo en <span class="fill">[tiempo]</span>; después, todo es ganancia.
+        <span class="cue">Confirmar</span>Si esto te devuelve <span class="fill">[resultado]</span>, ¿la inversión te parece justa?</p>
+    </div>
+
+    <div class="step">
+      <h2><span class="n">3</span> Oferta irresistible</h2>
+      <p class="do">Núcleo + <b>bonos</b> + garantía, por la misma inversión.</p>
+      <p class="say">Incluye el resultado principal, más <span class="fill">[bonos]</span> — todo por la misma inversión.
+        <span class="cue">Puente → cupos</span>¿Tiene sentido para ti? Entonces déjame contarte cómo entramos y qué disponibilidad tengo…</p>
+    </div>
+
+    <div class="step coral">
+      <h2><span class="n">4</span> Cierre por cupos</h2>
+      <p class="do">Escasez <b>real</b>. Crea urgencia y <b>pide la decisión</b>.</p>
+      <p class="say">Trabajo con un número limitado de negocios este mes. Me quedan <span class="fill">[X]</span> cupos.
+        <span class="cue">Pedir decisión</span>¿Quieres que aparte uno de esos cupos para ti hoy?</p>
+    </div>
+
+    <div class="step coral">
+      <h2><span class="n">5</span> Costo de postergar</h2>
+      <p class="do">“Lo pienso” también cuesta. <b>Úsalo apenas dude</b>, no solo al final.</p>
+      <p class="horiz">30 días: sigue perdiendo · 60: la competencia avanzó · 90: un trimestre perdido</p>
+      <p class="say"><span class="cue">Pregunta clave</span>¿Qué le sucede a tu negocio si no apruebas esto hoy?</p>
+    </div>
+
+    <div class="step">
+      <h2><span class="n">6</span> Objeciones y cierre</h2>
+      <p class="do">Cada objeción es una duda. Resuélvela y <b>vuelve a cerrar</b>.</p>
+      <p class="say"><span class="cue">“Está caro”</span>¿Qué es más caro: la inversión una vez, o el problema para siempre?
+        <span class="cue">Cierre final</span>Aparto tu cupo, das el primer paso hoy y empezamos. ¿Te parece?</p>
+    </div>
+
+    <div class="step" style="grid-column:1 / -1">
+      <h2><span class="n">7</span> Casos de éxito (prueba social)</h2>
+      <p class="do">Úsalos en el Paso 2 (reforzar valor) y en el 6 (vencer objeción). Elige el caso más <b>parecido al cliente</b>. Estructura: situación → qué hicimos → resultado en número.</p>
+      <p class="say">Déjame contarte lo que le pasó a <span class="fill">[cliente]</span>, que estaba justo como tú… hicimos <span class="fill">[qué]</span> y logró <span class="fill">[resultado]</span>. Y eso es lo que quiero para tu negocio. ¿Lo hacemos?</p>
+    </div>
+  </div>
+
+  <div class="foot">
+    <span>Regla de oro: valor antes que precio · escasez real · no decidir también cuesta · pide siempre el cierre.</span>
+    <span>JK Business Group</span>
+  </div>
+</div>

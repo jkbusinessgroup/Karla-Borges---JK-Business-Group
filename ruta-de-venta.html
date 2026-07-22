@@ -202,6 +202,31 @@
 
   .progress-note { font-size: 12.5px; color: var(--ink-faint); margin-top: 2px; }
 
+  /* coaching block (equipo) */
+  .coach-block { display: none; margin-top: 8px; }
+  body.coaching .coach-block { display: block; }
+  .coach {
+    background: linear-gradient(0deg, var(--surface-2), var(--surface-2));
+    border: 1px dashed var(--line-strong); border-radius: 12px;
+    padding: 14px 16px; display: grid; gap: 10px;
+  }
+  .coach .ch-head { display: flex; align-items: center; gap: 8px; font-size: 11px; letter-spacing: .14em; text-transform: uppercase; font-weight: 700; color: var(--ink-faint); }
+  .coach .ch-row { display: grid; grid-template-columns: 88px 1fr; gap: 10px; font-size: 13.5px; align-items: start; }
+  .coach .ch-row .k { font-weight: 700; font-size: 11px; letter-spacing: .06em; text-transform: uppercase; padding-top: 2px; }
+  .coach .ch-row.avoid .k { color: var(--coral); }
+  .coach .ch-row.tone .k { color: var(--gold); }
+  .coach .ch-row.tip .k { color: var(--green); }
+  .coach .ch-row .v { color: var(--ink); }
+
+  /* casos de éxito */
+  .cases { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 14px; }
+  .case { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 16px; box-shadow: var(--shadow); display: grid; gap: 9px; }
+  .case .st { font-size: 11px; letter-spacing: .1em; text-transform: uppercase; font-weight: 700; color: var(--ink-faint); }
+  .case .row2 { font-size: 13.5px; }
+  .case .row2 b { color: var(--ink); }
+  .case .res { font-family: Georgia, serif; font-size: 16px; color: var(--green); border-top: 1px solid var(--line); padding-top: 9px; }
+  .case .fill { color: var(--gold); font-style: italic; }
+
   /* condensed "solo cierres" mode */
   body.closes-only .strat-only { display: none !important; }
 
@@ -221,8 +246,8 @@
     <p class="sub">Guion en vivo · del diagnóstico al cierre</p>
     <ul class="steps" id="steps"></ul>
     <div class="foot">
-      Navega con <span class="kbd">1</span>–<span class="kbd">6</span> o <span class="kbd">←</span> <span class="kbd">→</span>.<br>
-      <span class="kbd">C</span> activa <b>Solo cierres</b>.
+      Navega con <span class="kbd">1</span>–<span class="kbd">7</span> o <span class="kbd">←</span> <span class="kbd">→</span>.<br>
+      <span class="kbd">C</span> = Solo cierres · <span class="kbd">O</span> = Coaching.
     </div>
   </nav>
 
@@ -231,6 +256,7 @@
       <div class="progress-note" id="crumb">Paso 1 de 6</div>
       <div class="toggles">
         <button class="tgl" id="closesBtn" aria-pressed="false">◗ Solo cierres</button>
+        <button class="tgl" id="coachBtn" aria-pressed="false">◎ Coaching</button>
         <button class="tgl" id="themeBtn" aria-pressed="false">☾ Tema</button>
       </div>
     </div>
@@ -253,7 +279,12 @@ const DATA = [
       { cue: "Apertura", t: "¿Qué te trajo a buscar una solución justo ahora?" },
       { cue: "Cuantificar el dolor", t: "¿Cuánto te está costando ese problema hoy — en dinero, en tiempo, en tranquilidad?" },
       { cue: "Proyectar al futuro", t: "Si esto siguiera igual dentro de 6 meses, ¿qué pasaría con tu negocio?" }
-    ]
+    ],
+    coach: {
+      avoid: "No arranques presentando tu producto ni el precio. Si hablas tú más que el cliente, perdiste el paso.",
+      tone: "Curioso y tranquilo, como un asesor — no como alguien que quiere vender.",
+      tip: "Anota las palabras EXACTAS del cliente; las usarás para venderle en el Paso 2."
+    }
   },
   {
     n: 2, tone: "gold", title: "Vender el valor y la inversión", nav: "Valor e inversión",
@@ -271,7 +302,12 @@ const DATA = [
       { cue: "Reducir a lo mínimo", t: "Son apenas <span class='fill'>[monto ÷ 30]</span> al día — menos que <span class='fill'>[referencia cotidiana]</span>. Y a cambio, tu negocio <span class='fill'>[resultado]</span>." },
       { cue: "Confirmar antes de avanzar", t: "Si esto te devuelve <span class='fill'>[resultado]</span>, ¿la inversión te parece justa?" }
     ],
-    note: { type: "ok", head: "Micro-sí", body: "No pases a la oferta hasta escuchar “sí, tiene sentido”." }
+    note: { type: "ok", head: "Micro-sí", body: "No pases a la oferta hasta escuchar “sí, tiene sentido”." },
+    coach: {
+      avoid: "Nunca digas “precio” o “te cuesta”. Nunca sueltes el número antes de haber anclado el valor.",
+      tone: "Seguro al decir la inversión: dila completa, sin bajar la voz ni pedir perdón, y quédate callado después.",
+      tip: "Aquí es ideal soltar un caso de éxito (Paso 7) para que el valor se sienta real, no teórico."
+    }
   },
   {
     n: 3, tone: "gold", title: "Oferta irresistible", nav: "Oferta irresistible",
@@ -285,8 +321,13 @@ const DATA = [
     lines: [
       { cue: "Apilar la oferta", t: "Esto incluye el resultado principal, más <span class='fill'>[bono 1]</span>, <span class='fill'>[bono 2]</span> y <span class='fill'>[bono 3]</span> — todo por la misma inversión de la que hablamos." },
       { cue: "Garantía", t: "Si haces tu parte y no ves <span class='fill'>[resultado]</span>, <span class='fill'>[garantía]</span>. El riesgo lo asumo yo, no tú." },
-      { cue: "Puente al cierre", t: "Por eso te digo que este es el mejor momento para entrar." }
-    ]
+      { cue: "Puente al cierre → cupos", t: "¿Tiene sentido para ti todo esto? Perfecto. Entonces déjame contarte cómo entramos y qué disponibilidad tengo ahora mismo…" }
+    ],
+    coach: {
+      avoid: "No sigas agregando bonos sin parar: demasiados extras hacen que la oferta parezca desesperada.",
+      tone: "Entusiasta pero natural. La oferta se vende sola si el valor del Paso 2 quedó claro.",
+      tip: "El puente al cierre es clave: enlaza la oferta con los cupos SIN pausa, para que la urgencia no suene a presión."
+    }
   },
   {
     n: 4, tone: "coral", title: "Cierre por cupos", nav: "Cierre por cupos",
@@ -302,7 +343,12 @@ const DATA = [
       { cue: "Fecha de cierre", t: "No abro esto a todo el mundo al mismo tiempo, justamente para que funcione. Los cupos de este ciclo se cierran el <span class='fill'>[fecha]</span>." },
       { cue: "Pedir la decisión", t: "¿Quieres que aparte uno de esos cupos para ti hoy?" }
     ],
-    note: { type: "warn", head: "Solo escasez real", body: "Si prometes cupos limitados, cúmplelo. La credibilidad es tu activo más caro." }
+    note: { type: "warn", head: "Solo escasez real", body: "Si prometes cupos limitados, cúmplelo. La credibilidad es tu activo más caro." },
+    coach: {
+      avoid: "No inventes cupos que no existen ni uses urgencia falsa: se nota y destruye la confianza.",
+      tone: "Firme y sereno. Después de pedir la decisión, CÁLLATE. El primero que habla, pierde.",
+      tip: "Enmárcalo como beneficio: pocos clientes = más atención = mejores resultados para él."
+    }
   },
   {
     n: 5, tone: "coral", title: "El costo de postergar", nav: "Costo de postergar",
@@ -322,7 +368,13 @@ const DATA = [
       { cue: "La pregunta clave", t: "¿Qué le sucede a tu negocio si no apruebas esto hoy?" },
       { cue: "Espejo honesto", t: "Sé honesto conmigo: en 90 días, ¿estás mejor por haber esperado, o en el mismo lugar preguntándote por qué no empezaste hoy?" }
     ],
-    note: { type: "warn", head: "Idea central", body: "El cliente cree que postergar es “no gastar”. Muéstrale que postergar es seguir pagando el problema, mes a mes, sin recibir la solución." }
+    note: { type: "warn", head: "Idea central", body: "El cliente cree que postergar es “no gastar”. Muéstrale que postergar es seguir pagando el problema, mes a mes, sin recibir la solución." },
+    note2: { type: "ok", head: "Úsalo fuera de orden", body: "El “lo pienso” aparece en cualquier momento. Apenas escuches una duda, salta a este paso (tecla 5) — no esperes al final." },
+    coach: {
+      avoid: "No conviertas el ejercicio en una amenaza. No es asustar: es ayudarle a ver el costo real de esperar.",
+      tone: "Empático y honesto. Hazle la pregunta clave y deja el silencio incómodo hacer su trabajo.",
+      tip: "Es tu palanca #1 contra el “lo pienso”. Domínalo de memoria: los tres horizontes 30 / 60 / 90."
+    }
   },
   {
     n: 6, tone: "gold", title: "Objeciones y cierre final", nav: "Objeciones y cierre",
@@ -336,7 +388,36 @@ const DATA = [
     ],
     lines: [
       { cue: "Cierre final", t: "Entonces hagamos esto: aparto tu cupo, das el primer paso hoy, y empezamos a devolverte <span class='fill'>[resultado]</span> cuanto antes. ¿Te parece?" }
-    ]
+    ],
+    coach: {
+      avoid: "No dejes la objeción a medias ni cambies de tema. No termines la llamada sin pedir el sí de forma directa.",
+      tone: "Calmado y resolutivo: cada objeción es una duda, no un “no”. Respóndela y vuelve a pedir el cierre.",
+      tip: "Después de responder una objeción, SIEMPRE vuelve a cerrar. Objeción resuelta → pregunta de cierre otra vez."
+    }
+  },
+  {
+    n: 7, tone: "gold", title: "Casos de éxito · prueba social", nav: "Casos de éxito",
+    navSub: "Tu prueba social a la mano",
+    goal: "Historias reales de clientes para <b>demostrar el valor con hechos</b>, no con promesas. Tenlas listas para soltarlas en el momento justo.",
+    strat: [
+      "<b>Cuándo usarlos:</b> en el Paso 2 para reforzar el valor, y en el Paso 6 para vencer una objeción con un caso parecido al del cliente.",
+      "Estructura de cada caso: <b>situación → qué hicimos → resultado</b>. El resultado siempre en número o cambio concreto.",
+      "Elige el caso más <b>parecido al cliente</b> que tienes enfrente: mismo rubro, mismo dolor. La identificación es lo que convence."
+    ],
+    cases: [
+      { st: "Caso 1", who: "[Cliente / rubro]", pain: "[el problema que tenía]", did: "[lo que implementó]", res: "[resultado en número: +X ventas, −Y horas]" },
+      { st: "Caso 2", who: "[Cliente / rubro]", pain: "[el problema que tenía]", did: "[lo que implementó]", res: "[resultado en número]" },
+      { st: "Caso 3", who: "[Cliente / rubro]", pain: "[el problema que tenía]", did: "[lo que implementó]", res: "[resultado en número]" }
+    ],
+    lines: [
+      { cue: "Introducir un caso", t: "Déjame contarte lo que le pasó a <span class='fill'>[cliente]</span>, que estaba justo como tú: tenía <span class='fill'>[mismo problema]</span>. Hicimos <span class='fill'>[qué]</span> y en <span class='fill'>[tiempo]</span> logró <span class='fill'>[resultado]</span>." },
+      { cue: "Cerrar con el caso", t: "Y eso es exactamente lo que quiero para tu negocio. ¿Lo hacemos?" }
+    ],
+    coach: {
+      avoid: "No inventes ni exageres casos: un resultado falso que se descubre te cierra la venta y la reputación.",
+      tone: "Cuéntalo como una historia, no como un dato de folleto. Que el cliente se vea reflejado.",
+      tip: "Ten 3 o 4 casos memorizados por rubro. El caso correcto en el momento correcto cierra más que cualquier argumento."
+    }
   }
 ];
 
@@ -382,6 +463,18 @@ function render(s) {
         <div class="obj-row"><div class="q">${o.q}</div><div class="a">${o.a}</div></div>`).join('')}</div></div>`;
   }
 
+  if (s.cases) {
+    h += `<div class="block strat-only">
+      <div class="block-head"><span class="tag strat">Casos</span><span class="tag-note">Rellena con clientes reales</span></div>
+      <div class="cases">${s.cases.map(c => `
+        <div class="case">
+          <div class="st">${c.st} · <span class="fill">${c.who}</span></div>
+          <div class="row2"><b>Dolor:</b> <span class="fill">${c.pain}</span></div>
+          <div class="row2"><b>Qué hicimos:</b> <span class="fill">${c.did}</span></div>
+          <div class="res">→ <span class="fill">${c.res}</span></div>
+        </div>`).join('')}</div></div>`;
+  }
+
   if (s.lines) {
     h += `<div class="block">
       <div class="block-head"><span class="tag script">◗ Cierres · guion</span><span class="tag-note">Léelo textual</span></div>
@@ -389,10 +482,19 @@ function render(s) {
         <div class="line"><span class="cue">${l.cue}</span><p>${l.t}</p></div>`).join('')}</div></div>`;
   }
 
-  if (s.note) {
-    h += `<div class="callout ${s.note.type === 'warn' ? 'warn' : ''}">
-      <span class="ic">${s.note.type === 'warn' ? '!' : '✓'}</span>
-      <span><b>${s.note.head}</b>${s.note.body}</span></div>`;
+  [s.note, s.note2].forEach(nt => {
+    if (nt) h += `<div class="callout ${nt.type === 'warn' ? 'warn' : ''} strat-only">
+      <span class="ic">${nt.type === 'warn' ? '!' : '✓'}</span>
+      <span><b>${nt.head}</b>${nt.body}</span></div>`;
+  });
+
+  if (s.coach) {
+    h += `<div class="coach-block"><div class="coach">
+      <div class="ch-head">◎ Coaching para el equipo</div>
+      <div class="ch-row avoid"><div class="k">Evita</div><div class="v">${s.coach.avoid}</div></div>
+      <div class="ch-row tone"><div class="k">Tono</div><div class="v">${s.coach.tone}</div></div>
+      <div class="ch-row tip"><div class="k">Tip</div><div class="v">${s.coach.tip}</div></div>
+    </div></div>`;
   }
 
   h += `</section>`;
@@ -414,6 +516,12 @@ closesBtn.addEventListener('click', () => {
   closesBtn.setAttribute('aria-pressed', on);
 });
 
+const coachBtn = document.getElementById('coachBtn');
+coachBtn.addEventListener('click', () => {
+  const on = document.body.classList.toggle('coaching');
+  coachBtn.setAttribute('aria-pressed', on);
+});
+
 const themeBtn = document.getElementById('themeBtn');
 themeBtn.addEventListener('click', () => {
   const root = document.documentElement;
@@ -426,10 +534,11 @@ themeBtn.addEventListener('click', () => {
 // Keyboard
 document.addEventListener('keydown', (e) => {
   if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
-  if (e.key >= '1' && e.key <= '6') go(+e.key - 1);
+  if (e.key >= '1' && e.key <= '7') go(+e.key - 1);
   else if (e.key === 'ArrowRight') go(active + 1);
   else if (e.key === 'ArrowLeft') go(active - 1);
   else if (e.key.toLowerCase() === 'c') closesBtn.click();
+  else if (e.key.toLowerCase() === 'o') coachBtn.click();
 });
 
 render(DATA[0]);

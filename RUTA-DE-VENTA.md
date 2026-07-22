@@ -15,6 +15,7 @@
 | 4 | Cierre por cupos | Crear urgencia real y pedir la decisión |
 | 5 | Costo de postergar (30 / 60 / 90 días) | Mostrar qué pierde si no aprueba hoy |
 | 6 | Manejo de objeciones y cierre final | Confirmar y asegurar el pago |
+| 7 | Casos de éxito (prueba social) | Demostrar el valor con hechos reales |
 
 ---
 
@@ -82,8 +83,8 @@ Estructura:
 3. **Garantía:** reduce el riesgo de decidir.
    - "Si haces tu parte y no ves [resultado], [garantía]. El riesgo lo asumo yo, no tú."
 
-Cierre del paso:
-> "Todo esto — el resultado principal más los bonos — por la misma inversión de la que hablamos. Por eso te digo que es el mejor momento para entrar."
+Cierre del paso — **puente explícito a cupos** (enlaza sin pausa para que la urgencia no suene a presión):
+> "Todo esto — el resultado principal más los bonos — por la misma inversión de la que hablamos. ¿Tiene sentido para ti? Perfecto. Entonces déjame contarte cómo entramos y qué disponibilidad tengo ahora mismo…"
 
 ---
 
@@ -128,6 +129,8 @@ Pregunta de cierre del ejercicio:
 
 > **Idea central:** El cliente cree que postergar es "no gastar". Muéstrale que postergar es **seguir pagando** el problema, mes a mes, sin recibir la solución.
 
+> **Úsalo fuera de orden:** el "lo pienso" aparece en cualquier momento. Apenas escuches una duda, ve a este paso — no esperes al final.
+
 ---
 
 ## Paso 6 — Manejo de objeciones y cierre final
@@ -141,6 +144,30 @@ Pregunta de cierre del ejercicio:
 
 Cierre final:
 > "Entonces hagamos esto: aparto tu cupo, das el primer paso hoy, y empezamos a devolverte [resultado] cuanto antes. ¿Te parece?"
+
+---
+
+## Paso 7 — Casos de éxito (prueba social)
+
+**Objetivo:** demostrar el valor con **hechos reales**, no con promesas. Ten historias listas para soltarlas en el momento justo.
+
+**Cuándo usarlos:**
+- En el **Paso 2**, para reforzar el valor y que se sienta real.
+- En el **Paso 6**, para vencer una objeción con un caso parecido al del cliente.
+
+**Estructura de cada caso:** situación → qué hicimos → **resultado en número o cambio concreto**.
+Elige siempre el caso más **parecido al cliente** que tienes enfrente (mismo rubro, mismo dolor): la identificación es lo que convence.
+
+| Caso | Cliente / rubro | Dolor | Qué hicimos | Resultado |
+|------|-----------------|-------|-------------|-----------|
+| 1 | [cliente] | [problema] | [qué] | [+X ventas / −Y horas] |
+| 2 | [cliente] | [problema] | [qué] | [resultado en número] |
+| 3 | [cliente] | [problema] | [qué] | [resultado en número] |
+
+Guion para introducir un caso:
+> "Déjame contarte lo que le pasó a **[cliente]**, que estaba justo como tú: tenía **[mismo problema]**. Hicimos **[qué]** y en **[tiempo]** logró **[resultado]**. Y eso es exactamente lo que quiero para tu negocio. ¿Lo hacemos?"
+
+> **Regla:** nunca inventes ni exageres un caso. Un resultado falso que se descubre te cierra la venta y la reputación.
 
 ---
 
