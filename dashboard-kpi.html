@@ -1,0 +1,451 @@
+<title>Dashboard Financiero · JK Business Group</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+  :root{
+    --bg:#eef1f5; --panel:#ffffff; --panel-2:#f6f8fb; --line:#dde3ec;
+    --ink:#131a22; --muted:#5c6b7a; --faint:#8fa0b1;
+    --accent:#0f6d78; --accent-soft:#0f6d7815;
+    --good:#12855a; --good-bg:#12855a18; --good-line:#12855a55;
+    --warn:#b9791b; --warn-bg:#b9791b1c; --warn-line:#b9791b55;
+    --crit:#c23838; --crit-bg:#c2383818; --crit-line:#c2383855;
+    --s-ingreso:#0f6d78; --s-costo:#5b7db1; --s-gasto:#c8964f; --s-util:#3e9e6e;
+    --shadow:0 1px 2px #131a2208, 0 6px 20px #131a220a;
+    --radius:14px;
+    --ff:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+    --fm:"SF Mono",ui-monospace,"Cascadia Mono","Roboto Mono",Menlo,Consolas,monospace;
+  }
+  @media (prefers-color-scheme:dark){
+    :root{
+      --bg:#0b0f14; --panel:#141b23; --panel-2:#0f151c; --line:#25313d;
+      --ink:#e8eef4; --muted:#93a3b3; --faint:#657688;
+      --accent:#48c6cf; --accent-soft:#48c6cf1a;
+      --good:#3ecb8c; --good-bg:#3ecb8c16; --good-line:#3ecb8c44;
+      --warn:#e0a94a; --warn-bg:#e0a94a18; --warn-line:#e0a94a44;
+      --crit:#f0736f; --crit-bg:#f0736f16; --crit-line:#f0736f44;
+      --s-ingreso:#48c6cf; --s-costo:#7d9fd6; --s-gasto:#e0b160; --s-util:#54c78f;
+      --shadow:0 1px 2px #0006, 0 8px 26px #0007;
+    }
+  }
+  :root[data-theme="light"]{
+    --bg:#eef1f5; --panel:#ffffff; --panel-2:#f6f8fb; --line:#dde3ec;
+    --ink:#131a22; --muted:#5c6b7a; --faint:#8fa0b1;
+    --accent:#0f6d78; --accent-soft:#0f6d7815;
+    --good:#12855a; --good-bg:#12855a18; --good-line:#12855a55;
+    --warn:#b9791b; --warn-bg:#b9791b1c; --warn-line:#b9791b55;
+    --crit:#c23838; --crit-bg:#c2383818; --crit-line:#c2383855;
+    --s-ingreso:#0f6d78; --s-costo:#5b7db1; --s-gasto:#c8964f; --s-util:#3e9e6e;
+    --shadow:0 1px 2px #131a2208, 0 6px 20px #131a220a;
+  }
+  :root[data-theme="dark"]{
+    --bg:#0b0f14; --panel:#141b23; --panel-2:#0f151c; --line:#25313d;
+    --ink:#e8eef4; --muted:#93a3b3; --faint:#657688;
+    --accent:#48c6cf; --accent-soft:#48c6cf1a;
+    --good:#3ecb8c; --good-bg:#3ecb8c16; --good-line:#3ecb8c44;
+    --warn:#e0a94a; --warn-bg:#e0a94a18; --warn-line:#e0a94a44;
+    --crit:#f0736f; --crit-bg:#f0736f16; --crit-line:#f0736f44;
+    --s-ingreso:#48c6cf; --s-costo:#7d9fd6; --s-gasto:#e0b160; --s-util:#54c78f;
+    --shadow:0 1px 2px #0006, 0 8px 26px #0007;
+  }
+
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--ff);
+    -webkit-font-smoothing:antialiased;line-height:1.45;letter-spacing:.1px}
+  .wrap{max-width:1240px;margin:0 auto;padding:26px 20px 56px}
+  .tnum{font-variant-numeric:tabular-nums;font-feature-settings:"tnum" 1}
+
+  /* ---------- Header ---------- */
+  header.top{display:flex;flex-wrap:wrap;align-items:flex-end;gap:18px 26px;
+    padding-bottom:20px;border-bottom:1px solid var(--line);margin-bottom:22px}
+  .brand{display:flex;align-items:center;gap:13px}
+  .mark{width:44px;height:44px;border-radius:11px;flex:0 0 auto;display:grid;place-items:center;
+    background:linear-gradient(150deg,var(--accent),color-mix(in srgb,var(--accent) 55%,#000));
+    color:#fff;font-weight:800;font-size:16px;letter-spacing:.5px;box-shadow:var(--shadow)}
+  .brand h1{margin:0;font-size:19px;font-weight:750;letter-spacing:-.2px}
+  .brand .sub{margin:2px 0 0;font-size:12.5px;color:var(--muted)}
+  .top .spacer{flex:1 1 40px}
+  .top-meta{display:flex;flex-direction:column;align-items:flex-end;gap:9px}
+  .updated{font-size:11.5px;color:var(--faint);letter-spacing:.3px}
+  .updated b{color:var(--muted);font-weight:600}
+
+  /* period toggle */
+  .seg{display:inline-flex;background:var(--panel-2);border:1px solid var(--line);
+    border-radius:10px;padding:3px;gap:2px}
+  .seg button{appearance:none;border:0;background:transparent;color:var(--muted);
+    font:inherit;font-size:12.5px;font-weight:600;padding:7px 14px;border-radius:7px;cursor:pointer;
+    letter-spacing:.2px;transition:color .15s,background .15s}
+  .seg button:hover{color:var(--ink)}
+  .seg button[aria-pressed="true"]{background:var(--panel);color:var(--accent);box-shadow:var(--shadow)}
+  .seg button:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+
+  /* ---------- Health banner ---------- */
+  .health{display:flex;flex-wrap:wrap;align-items:center;gap:16px 22px;
+    background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);
+    padding:16px 20px;margin-bottom:22px;box-shadow:var(--shadow);
+    border-left:4px solid var(--warn)}
+  .health .h-title{font-size:12px;text-transform:uppercase;letter-spacing:1.4px;color:var(--faint);
+    font-weight:700;margin-bottom:3px}
+  .health .h-state{font-size:16.5px;font-weight:700}
+  .health .h-desc{font-size:13px;color:var(--muted);max-width:52ch}
+  .legend{display:flex;gap:16px;margin-left:auto;flex-wrap:wrap}
+  .legend span{display:inline-flex;align-items:center;gap:7px;font-size:12px;color:var(--muted);font-weight:600}
+  .dot{width:10px;height:10px;border-radius:50%;flex:0 0 auto;box-shadow:0 0 0 3px transparent}
+  .dot.good{background:var(--good)} .dot.warn{background:var(--warn)} .dot.crit{background:var(--crit)}
+  .tally{display:inline-flex;align-items:center;gap:5px;font-weight:700}
+
+  /* ---------- KPI grid ---------- */
+  .grid{display:grid;gap:16px;grid-template-columns:repeat(4,1fr)}
+  @media(max-width:1080px){.grid{grid-template-columns:repeat(2,1fr)}}
+  @media(max-width:560px){.grid{grid-template-columns:1fr}}
+
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);
+    padding:16px 16px 14px;box-shadow:var(--shadow);position:relative;overflow:hidden;
+    display:flex;flex-direction:column;gap:11px;min-height:150px}
+  .card::before{content:"";position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--stripe,var(--line))}
+  .card.good{--stripe:var(--good)} .card.warn{--stripe:var(--warn)} .card.crit{--stripe:var(--crit)}
+  .card .k-head{display:flex;align-items:flex-start;justify-content:space-between;gap:10px}
+  .k-label{font-size:12px;color:var(--muted);font-weight:650;letter-spacing:.25px;text-transform:uppercase}
+  .k-sub{font-size:11px;color:var(--faint);margin-top:2px;font-weight:500;letter-spacing:.2px;text-transform:none}
+  .pill{display:inline-flex;align-items:center;gap:6px;font-size:10.5px;font-weight:750;
+    letter-spacing:.5px;text-transform:uppercase;padding:4px 9px;border-radius:999px;white-space:nowrap}
+  .pill.good{color:var(--good);background:var(--good-bg)}
+  .pill.warn{color:var(--warn);background:var(--warn-bg)}
+  .pill.crit{color:var(--crit);background:var(--crit-bg)}
+  .pill .dot{width:7px;height:7px}
+  .k-value{font-size:26px;font-weight:760;letter-spacing:-.6px;line-height:1}
+  .k-foot{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:auto}
+  .delta{display:inline-flex;align-items:center;gap:4px;font-size:12px;font-weight:700}
+  .delta.up{color:var(--good)} .delta.down{color:var(--crit)} .delta.flat{color:var(--muted)}
+  .delta .arw{font-size:11px}
+  .delta small{color:var(--faint);font-weight:500;letter-spacing:.2px}
+  .spark{width:96px;height:34px;flex:0 0 auto}
+
+  /* ---------- lower panels ---------- */
+  .panels{display:grid;gap:16px;grid-template-columns:1.55fr 1fr;margin-top:20px}
+  @media(max-width:920px){.panels{grid-template-columns:1fr}}
+  .panel{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);
+    padding:18px 20px 20px;box-shadow:var(--shadow)}
+  .panel h2{margin:0;font-size:14.5px;font-weight:720;letter-spacing:-.1px}
+  .panel .p-head{display:flex;align-items:baseline;justify-content:space-between;gap:12px;margin-bottom:2px}
+  .panel .p-note{font-size:12px;color:var(--muted);margin:2px 0 16px}
+  .chart-legend{display:flex;flex-wrap:wrap;gap:14px;margin-bottom:12px}
+  .chart-legend span{display:inline-flex;align-items:center;gap:7px;font-size:12px;color:var(--muted);font-weight:600}
+  .swatch{width:12px;height:12px;border-radius:3px;flex:0 0 auto}
+  .chart-box{position:relative;width:100%}
+  canvas{display:block;width:100%}
+
+  /* aging / CxC vs CxP */
+  .bars{display:flex;flex-direction:column;gap:15px;margin-top:4px}
+  .bar-row .bl{display:flex;justify-content:space-between;align-items:baseline;gap:10px;margin-bottom:7px}
+  .bar-row .bl .name{font-size:12.5px;font-weight:650;color:var(--ink)}
+  .bar-row .bl .amt{font-size:13px;font-weight:700}
+  .bar-row .bl .amt small{color:var(--faint);font-weight:500;font-size:11px;margin-left:5px}
+  .track{height:9px;border-radius:6px;background:var(--panel-2);overflow:hidden;border:1px solid var(--line)}
+  .fill{height:100%;border-radius:6px}
+  .netline{display:flex;justify-content:space-between;align-items:center;margin-top:18px;
+    padding-top:15px;border-top:1px dashed var(--line);font-size:13px}
+  .netline .lab{color:var(--muted);font-weight:600}
+  .netline .val{font-size:18px;font-weight:760;letter-spacing:-.3px}
+
+  footer.note{margin-top:26px;font-size:11.5px;color:var(--faint);line-height:1.6;
+    display:flex;flex-wrap:wrap;gap:6px 18px;align-items:center}
+  footer.note .tag{display:inline-flex;align-items:center;gap:6px;padding:4px 10px;border-radius:999px;
+    background:var(--panel);border:1px solid var(--line);color:var(--muted);font-weight:600}
+  @media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+
+<div class="wrap">
+  <header class="top">
+    <div class="brand">
+      <div class="mark">JK</div>
+      <div>
+        <h1>JK Business Group</h1>
+        <p class="sub">Panel financiero · Indicadores clave &amp; alertas semáforo</p>
+      </div>
+    </div>
+    <div class="spacer"></div>
+    <div class="top-meta">
+      <div class="seg" role="group" aria-label="Periodo">
+        <button id="btn-mes" aria-pressed="true">Mensual · Jul 2026</button>
+        <button id="btn-ytd" aria-pressed="false">Acumulado 2026 (YTD)</button>
+      </div>
+      <div class="updated">Actualizado <b>22 jul 2026, 09:40</b> · Moneda <b>USD</b></div>
+    </div>
+  </header>
+
+  <section class="health" id="health" aria-live="polite">
+    <div>
+      <div class="h-title">Estado general del negocio</div>
+      <div class="h-state" id="h-state">Saludable — con puntos a vigilar</div>
+      <div class="h-desc" id="h-desc">Rentabilidad y patrimonio en meta. Vigilar la estructura de costos, el gasto operativo y los días de cobro.</div>
+    </div>
+    <div class="legend">
+      <span class="tally"><span class="dot good"></span><span id="t-good">5</span>&nbsp;Óptimo</span>
+      <span class="tally"><span class="dot warn"></span><span id="t-warn">3</span>&nbsp;Vigilar</span>
+      <span class="tally"><span class="dot crit"></span><span id="t-crit">0</span>&nbsp;Crítico</span>
+    </div>
+  </section>
+
+  <div class="grid" id="kpi-grid"></div>
+
+  <div class="panels">
+    <div class="panel">
+      <div class="p-head">
+        <h2>Ingresos, costos, gastos y utilidad</h2>
+      </div>
+      <p class="p-note" id="chart-note">Evolución mensual · feb – jul 2026 (miles de USD)</p>
+      <div class="chart-legend">
+        <span><span class="swatch" style="background:var(--s-ingreso)"></span>Ingresos</span>
+        <span><span class="swatch" style="background:var(--s-costo)"></span>Costos</span>
+        <span><span class="swatch" style="background:var(--s-gasto)"></span>Gastos</span>
+        <span><span class="swatch" style="background:var(--s-util)"></span>Utilidad neta</span>
+      </div>
+      <div class="chart-box"><canvas id="trend" height="300"></canvas></div>
+    </div>
+
+    <div class="panel">
+      <div class="p-head"><h2>Cuentas por cobrar vs. pagar</h2></div>
+      <p class="p-note">Saldos al cierre y su antigüedad (aging)</p>
+      <div class="bars">
+        <div class="bar-row">
+          <div class="bl"><span class="name">Por cobrar (CxC)</span>
+            <span class="amt tnum" id="ar-amt">$498,700</span></div>
+          <div class="track"><div class="fill" id="ar-fill" style="width:100%;background:var(--s-ingreso)"></div></div>
+          <div class="bl" style="margin-top:7px"><span class="k-sub">DSO 34 días · corriente 71% · +90d 8%</span></div>
+        </div>
+        <div class="bar-row">
+          <div class="bl"><span class="name">Por pagar (CxP)</span>
+            <span class="amt tnum" id="ap-amt">$356,200</span></div>
+          <div class="track"><div class="fill" id="ap-fill" style="background:var(--s-costo)"></div></div>
+          <div class="bl" style="margin-top:7px"><span class="k-sub">DPO 28 días · corriente 84% · vencido 5%</span></div>
+        </div>
+        <div class="netline">
+          <span class="lab">Posición neta (CxC − CxP)</span>
+          <span class="val tnum" style="color:var(--good)" id="net-pos">+$142,500</span>
+        </div>
+        <div class="netline" style="border-top:0;padding-top:4px;margin-top:2px">
+          <span class="lab">Razón corriente / Liquidez</span>
+          <span class="val tnum" style="font-size:15px">1.82×</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer class="note">
+    <span class="tag">◆ Datos de ejemplo</span>
+    <span>Las cifras son ilustrativas para demostrar el panel. Los saldos de balance (CxC, CxP, Patrimonio) se muestran al cierre y no varían por periodo. Reemplaza los valores en el bloque <code>DATA</code> del código con los reales.</span>
+  </footer>
+</div>
+
+<script>
+(function(){
+  "use strict";
+  const fmt0 = new Intl.NumberFormat('en-US',{style:'currency',currency:'USD',maximumFractionDigits:0});
+  const pct = v => (v>0?'+':'') + v.toFixed(1) + '%';
+
+  // ---------------- DATA ----------------
+  // Series mensuales (miles de USD) feb–jul 2026 para sparklines y gráfico
+  const MONTHS = ['Feb','Mar','Abr','May','Jun','Jul'];
+  const SER = {
+    ingreso: [1010,1075,1120,1098,1188,1285.4],
+    costo:   [610,640,662,651,690,742.3],
+    gasto:   [285,292,300,305,311,318.9],
+    util:    [115,143,158,142,187,224.2],
+    flujo:   [98,132,120,145,150.2,186.5],
+    cxc:     [455,472,468,510,489,498.7],
+    cxp:     [330,342,338,360,349,356.2],
+    patri:   [3010,3060,3095,3140,3180,3240]
+  };
+
+  // status: 'good' | 'warn' | 'crit'
+  const KPIS = {
+    ingresos:{
+      label:'Ingresos', sub:'Ventas del periodo', series:SER.ingreso,
+      mes:{value:1285400, delta:8.2, ref:'vs. junio', status:'good', badge:'En meta'},
+      ytd:{value:7862400, delta:11.4, ref:'vs. 2025', status:'good', badge:'En meta'}
+    },
+    costos:{
+      label:'Costos', sub:'Costo de ventas', series:SER.costo,
+      mes:{value:742300, delta:7.6, ref:'57.7% de ingresos', status:'warn', badge:'Vigilar', invert:true},
+      ytd:{value:4655600, delta:9.8, ref:'59.2% de ingresos', status:'warn', badge:'Vigilar', invert:true}
+    },
+    gastos:{
+      label:'Gastos operativos', sub:'Administración y ventas', series:SER.gasto,
+      mes:{value:318900, delta:2.5, ref:'24.8% de ingresos', status:'warn', badge:'Vigilar', invert:true},
+      ytd:{value:2102800, delta:6.2, ref:'26.7% de ingresos', status:'warn', badge:'Vigilar', invert:true}
+    },
+    rentabilidad:{
+      label:'Rentabilidad', sub:'Margen neto', series:SER.util,
+      mes:{value:224200, delta:19.9, ref:'margen 17.4%', status:'good', badge:'Óptimo', suffix:' · 17.4%'},
+      ytd:{value:1104000, delta:21.0, ref:'margen 14.0%', status:'good', badge:'Óptimo', suffix:' · 14.0%'}
+    },
+    flujo:{
+      label:'Flujo de efectivo', sub:'Flujo neto de caja', series:SER.flujo,
+      mes:{value:186500, delta:24.2, ref:'vs. junio', status:'good', badge:'Positivo'},
+      ytd:{value:1024500, delta:18.3, ref:'vs. 2025', status:'good', badge:'Positivo'}
+    },
+    cxc:{
+      label:'Cuentas por cobrar', sub:'Saldo al cierre · DSO 34d', series:SER.cxc, balance:true,
+      mes:{value:498700, delta:2.0, ref:'DSO 34 días', status:'warn', badge:'Vigilar', invert:true},
+      ytd:{value:498700, delta:2.0, ref:'DSO 34 días', status:'warn', badge:'Vigilar', invert:true}
+    },
+    cxp:{
+      label:'Cuentas por pagar', sub:'Saldo al cierre · DPO 28d', series:SER.cxp, balance:true,
+      mes:{value:356200, delta:2.1, ref:'DPO 28 días', status:'good', badge:'Al día', invert:true},
+      ytd:{value:356200, delta:2.1, ref:'DPO 28 días', status:'good', badge:'Al día', invert:true}
+    },
+    patrimonio:{
+      label:'Patrimonio', sub:'Capital contable', series:SER.patri, balance:true,
+      mes:{value:3240000, delta:6.9, ref:'vs. año anterior', status:'good', badge:'Creciendo'},
+      ytd:{value:3240000, delta:6.9, ref:'vs. año anterior', status:'good', badge:'Creciendo'}
+    }
+  };
+  const ORDER = ['ingresos','costos','gastos','rentabilidad','flujo','cxc','cxp','patrimonio'];
+  const STATUS_LABEL = {good:'Óptimo',warn:'Vigilar',crit:'Crítico'};
+
+  // -------------- sparkline (SVG) --------------
+  function sparkline(series, status){
+    const w=96,h=34,p=3;
+    const min=Math.min(...series), max=Math.max(...series);
+    const rng=(max-min)||1;
+    const X=i=>p+i*(w-2*p)/(series.length-1);
+    const Y=v=>h-p-((v-min)/rng)*(h-2*p);
+    let d='',a='';
+    series.forEach((v,i)=>{ const x=X(i).toFixed(1),y=Y(v).toFixed(1);
+      d+=(i?'L':'M')+x+' '+y+' '; });
+    a='M'+X(0).toFixed(1)+' '+(h-p)+' '+d.replace('M','L')+'L'+X(series.length-1).toFixed(1)+' '+(h-p)+' Z';
+    const col=`var(--${status==='crit'?'crit':status==='warn'?'warn':'good'})`;
+    const lx=X(series.length-1).toFixed(1), ly=Y(series[series.length-1]).toFixed(1);
+    const id='g'+Math.round(series[0]*100+series.length);
+    return `<svg class="spark" viewBox="0 0 ${w} ${h}" preserveAspectRatio="none" aria-hidden="true">
+      <defs><linearGradient id="${id}" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stop-color="${col}" stop-opacity="0.22"/>
+        <stop offset="1" stop-color="${col}" stop-opacity="0"/></linearGradient></defs>
+      <path d="${a}" fill="url(#${id})"/>
+      <path d="${d}" fill="none" stroke="${col}" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
+      <circle cx="${lx}" cy="${ly}" r="2.4" fill="${col}"/></svg>`;
+  }
+
+  // -------------- render KPI cards --------------
+  const grid = document.getElementById('kpi-grid');
+  function render(period){
+    grid.innerHTML='';
+    let g=0,w=0,c=0;
+    ORDER.forEach(key=>{
+      const k=KPIS[key], d=k[period];
+      if(d.status==='good')g++; else if(d.status==='warn')w++; else c++;
+      const invert=!!d.invert;
+      const dir = d.delta>0.05?'up':d.delta<-0.05?'down':'flat';
+      // para métricas donde subir es malo (costos, gastos, CxC), invertimos el color de la flecha
+      const good = invert ? (d.delta<=0.05) : (d.delta>=-0.05);
+      const dcls = dir==='flat'?'flat':(good?'up':'down');
+      const arw = dir==='up'?'▲':dir==='down'?'▼':'▬';
+      const val = fmt0.format(d.value) + (d.suffix?`<span style="font-size:14px;color:var(--muted);font-weight:600">${d.suffix}</span>`:'');
+      const el=document.createElement('article');
+      el.className='card '+d.status;
+      el.innerHTML=`
+        <div class="k-head">
+          <div><div class="k-label">${k.label}</div><div class="k-sub">${k.sub}</div></div>
+          <span class="pill ${d.status}"><span class="dot ${d.status}"></span>${d.badge}</span>
+        </div>
+        <div class="k-value tnum">${val}</div>
+        <div class="k-foot">
+          <span class="delta ${dcls}"><span class="arw">${arw}</span>${pct(d.delta)}
+            <small>${d.ref}</small></span>
+          ${sparkline(k.series, d.status)}
+        </div>`;
+      grid.appendChild(el);
+    });
+    document.getElementById('t-good').textContent=g;
+    document.getElementById('t-warn').textContent=w;
+    document.getElementById('t-crit').textContent=c;
+    const health=document.getElementById('health');
+    const state=document.getElementById('h-state');
+    if(c>0){health.style.borderLeftColor='var(--crit)';state.textContent='Atención — hay indicadores críticos';}
+    else if(w>0){health.style.borderLeftColor='var(--warn)';state.textContent='Saludable — con puntos a vigilar';}
+    else{health.style.borderLeftColor='var(--good)';state.textContent='Sólido — todos los indicadores en meta';}
+    document.getElementById('chart-note').textContent = period==='ytd'
+      ? 'Evolución mensual · feb – jul 2026 (miles de USD) · acumulado YTD en tarjetas'
+      : 'Evolución mensual · feb – jul 2026 (miles de USD)';
+    drawTrend();
+  }
+
+  // -------------- toggle --------------
+  const bMes=document.getElementById('btn-mes'), bYtd=document.getElementById('btn-ytd');
+  function setPeriod(p){
+    bMes.setAttribute('aria-pressed', p==='mes');
+    bYtd.setAttribute('aria-pressed', p==='ytd');
+    render(p);
+  }
+  bMes.addEventListener('click',()=>setPeriod('mes'));
+  bYtd.addEventListener('click',()=>setPeriod('ytd'));
+
+  // -------------- trend chart (canvas) --------------
+  const cv=document.getElementById('trend');
+  function css(v){return getComputedStyle(document.documentElement).getPropertyValue(v).trim();}
+  function drawTrend(){
+    const ctx=cv.getContext('2d');
+    const dpr=window.devicePixelRatio||1;
+    const cssW=cv.clientWidth||760, cssH=300;
+    cv.width=cssW*dpr; cv.height=cssH*dpr;
+    ctx.setTransform(dpr,0,0,dpr,0,0);
+    ctx.clearRect(0,0,cssW,cssH);
+    const padL=52,padR=14,padT=14,padB=28;
+    const W=cssW-padL-padR, H=cssH-padT-padB;
+    const all=[...SER.ingreso,...SER.costo,...SER.gasto,...SER.util];
+    const maxV=Math.ceil(Math.max(...all)/100)*100, minV=0;
+    const X=i=>padL+i*W/(MONTHS.length-1);
+    const Y=v=>padT+H-((v-minV)/(maxV-minV))*H;
+    const line=css('--line'), muted=css('--muted');
+    // grid + y labels
+    ctx.font='11px '+css('--ff').replace(/^,?/,'')||'11px sans-serif';
+    ctx.textBaseline='middle';
+    const steps=4;
+    for(let s=0;s<=steps;s++){
+      const v=minV+(maxV-minV)*s/steps, y=Y(v);
+      ctx.strokeStyle=line; ctx.lineWidth=1;
+      ctx.beginPath(); ctx.moveTo(padL,y); ctx.lineTo(padL+W,y); ctx.stroke();
+      ctx.fillStyle=muted; ctx.textAlign='right';
+      ctx.fillText('$'+(v/1000).toFixed(1)+'M', padL-9, y);
+    }
+    // x labels
+    ctx.textAlign='center'; ctx.textBaseline='top'; ctx.fillStyle=muted;
+    MONTHS.forEach((m,i)=>ctx.fillText(m, X(i), padT+H+9));
+    // series
+    const defs=[['ingreso','--s-ingreso',true],['costo','--s-costo',false],
+                ['gasto','--s-gasto',false],['util','--s-util',true]];
+    defs.forEach(([key,col,fill])=>{
+      const c=css(col), data=SER[key];
+      if(fill){
+        const grd=ctx.createLinearGradient(0,padT,0,padT+H);
+        grd.addColorStop(0,c+'33'); grd.addColorStop(1,c+'00');
+        ctx.beginPath(); ctx.moveTo(X(0),Y(data[0]));
+        data.forEach((v,i)=>ctx.lineTo(X(i),Y(v)));
+        ctx.lineTo(X(data.length-1),padT+H); ctx.lineTo(X(0),padT+H); ctx.closePath();
+        ctx.fillStyle=grd; ctx.fill();
+      }
+      ctx.beginPath(); ctx.moveTo(X(0),Y(data[0]));
+      data.forEach((v,i)=>ctx.lineTo(X(i),Y(v)));
+      ctx.strokeStyle=c; ctx.lineWidth=fill?2.4:1.8; ctx.lineJoin='round'; ctx.lineCap='round';
+      if(!fill){ctx.setLineDash([]);} ctx.stroke();
+      // endpoint dot
+      const li=data.length-1;
+      ctx.beginPath(); ctx.arc(X(li),Y(data[li]),fill?3.6:3,0,7); ctx.fillStyle=c; ctx.fill();
+      ctx.beginPath(); ctx.arc(X(li),Y(data[li]),fill?3.6:3,0,7);
+      ctx.strokeStyle=css('--panel'); ctx.lineWidth=1.5; ctx.stroke();
+    });
+  }
+
+  // CxC/CxP bar widths (relative)
+  (function bars(){
+    const ar=498700, ap=356200, m=Math.max(ar,ap);
+    document.getElementById('ar-fill').style.width=(ar/m*100).toFixed(1)+'%';
+    document.getElementById('ap-fill').style.width=(ap/m*100).toFixed(1)+'%';
+  })();
+
+  setPeriod('mes');
+  let rid; window.addEventListener('resize',()=>{clearTimeout(rid);rid=setTimeout(drawTrend,120);});
+  // redraw on theme toggle
+  new MutationObserver(drawTrend).observe(document.documentElement,{attributes:true,attributeFilter:['data-theme']});
+  if(window.matchMedia) window.matchMedia('(prefers-color-scheme:dark)').addEventListener('change',drawTrend);
+})();
+</script>
