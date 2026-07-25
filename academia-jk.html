@@ -58,39 +58,33 @@
 
 :root {
   color-scheme: dark light;
-  /* JK institutional palette — Marino profundo base, oro protagonista */
-  --navy:        #011A38;
-  --navy-deep:   #010F24;
-  --navy-grad:   #02244A;
-  --gold:        #CB9831;
-  --gold-flat:   #CAAD6F;
-  --gold-hi:     #E7D3A3;
-  --gold-deep:   #8F6F2E;
-  --smoke:       #F1F1F3;
-  --slate:       #444B55;
-  --grayline:    #C8C8C8;
-  /* functional data colors */
-  --positive:    #2F7D5D;
-  --attention:   #C9962F;
-  --risk:        #A4443C;
+  /* Palette matched to the "Academia JK · Bienvenida" slide — warm ink + gold */
+  --gold:        #C9A24B;
+  --gold-hi:     #E4C878;
+  --gold-deep:   #9A7A2E;
+  --champagne:   #EFE3C6;
 
-  /* Ceremonial dark ground (default) */
-  --bg:          #010F24;
-  --bg-top:      #02244A;
-  --surface:     #04203F;
-  --surface-2:   #06294C;
-  --line:        rgba(202,173,111,.20);
-  --line-soft:   rgba(241,241,243,.10);
-  --text:        #F1F1F3;
-  --muted:       #AEBCCB;
-  --faint:       #7286A0;
-  --accent-text: #E2BD6A;
+  /* functional data colors */
+  --positive:    #4E9C77;
+  --attention:   #C9962F;
+  --risk:        #C05A4E;
+
+  /* Dark ceremonial ground (default) */
+  --bg:          #100D0A;
+  --bg-top:      #1A140C;
+  --surface:     #1E1811;
+  --surface-2:   #251E15;
+  --line:        rgba(201,162,75,.26);
+  --line-soft:   rgba(245,240,230,.09);
+  --text:        #F5F0E6;
+  --muted:       #B4A98E;
+  --faint:       #8B7E63;
+  --accent-text: #E4C878;
 
   --serif: "Cormorant Garamond", Georgia, "Times New Roman", serif;
   --sans:  "Poppins", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
 
   --maxw: 1120px;
-  /* Scale echoes the manual: display 56 · section 32 · subtitle 22 · body 16 · label 11 */
   --fs-label: .72rem;
   --fs-body:  clamp(1rem, .96rem + .2vw, 1.08rem);
   --fs-sub:   clamp(1.15rem, 1.05rem + .5vw, 1.4rem);
@@ -101,28 +95,33 @@
 
 @media (prefers-color-scheme: light) {
   :root {
-    /* Institutional light ground — Blanco ahumado */
-    --bg:          #F1F1F3;
+    /* Institutional light ground — warm cream */
+    --gold:        #9C7420;
+    --gold-hi:     #C79A46;
+    --gold-deep:   #7E5D14;
+    --bg:          #F5F0E6;
     --bg-top:      #FFFFFF;
-    --surface:     #FFFFFF;
-    --surface-2:   #FAFAFB;
-    --line:        rgba(143,111,46,.28);
-    --line-soft:   #E1E2E6;
-    --text:        #011A38;
-    --muted:       #444B55;
-    --faint:       #7C8794;
-    --accent-text: #8F6F2E;
+    --surface:     #FBF7EE;
+    --surface-2:   #F3ECDD;
+    --line:        rgba(120,88,20,.30);
+    --line-soft:   #E7DEC9;
+    --text:        #221B10;
+    --muted:       #6E6350;
+    --faint:       #8C7E63;
+    --accent-text: #7E5D14;
   }
 }
 :root[data-theme="dark"] {
-  --bg:#010F24; --bg-top:#02244A; --surface:#04203F; --surface-2:#06294C;
-  --line:rgba(202,173,111,.20); --line-soft:rgba(241,241,243,.10);
-  --text:#F1F1F3; --muted:#AEBCCB; --faint:#7286A0; --accent-text:#E2BD6A;
+  --gold:#C9A24B; --gold-hi:#E4C878; --gold-deep:#9A7A2E;
+  --bg:#100D0A; --bg-top:#1A140C; --surface:#1E1811; --surface-2:#251E15;
+  --line:rgba(201,162,75,.26); --line-soft:rgba(245,240,230,.09);
+  --text:#F5F0E6; --muted:#B4A98E; --faint:#8B7E63; --accent-text:#E4C878;
 }
 :root[data-theme="light"] {
-  --bg:#F1F1F3; --bg-top:#FFFFFF; --surface:#FFFFFF; --surface-2:#FAFAFB;
-  --line:rgba(143,111,46,.28); --line-soft:#E1E2E6;
-  --text:#011A38; --muted:#444B55; --faint:#7C8794; --accent-text:#8F6F2E;
+  --gold:#9C7420; --gold-hi:#C79A46; --gold-deep:#7E5D14;
+  --bg:#F5F0E6; --bg-top:#FFFFFF; --surface:#FBF7EE; --surface-2:#F3ECDD;
+  --line:rgba(120,88,20,.30); --line-soft:#E7DEC9;
+  --text:#221B10; --muted:#6E6350; --faint:#8C7E63; --accent-text:#7E5D14;
 }
 
 * { box-sizing: border-box; }
@@ -140,9 +139,8 @@ body {
 .wrap { max-width: var(--maxw); margin-inline: auto; padding-inline: clamp(1.25rem, 5vw, 3rem); }
 
 h1, h2, h3, .serif { font-family: var(--serif); font-weight: 600; line-height: 1.04; }
-::selection { background: var(--gold); color: #010F24; }
+::selection { background: var(--gold); color: #100D0A; }
 
-/* Eyebrow / label — Poppins uppercase, wide tracking (manual: 11/SemiBold/.24em) */
 .eyebrow {
   font-family: var(--sans);
   text-transform: uppercase;
@@ -154,9 +152,8 @@ h1, h2, h3, .serif { font-family: var(--serif); font-weight: 600; line-height: 1
 }
 a { color: inherit; }
 
-/* Metallic gold keyword — only one per heading (manual rule) */
 .grad {
-  background: linear-gradient(94deg, #E7D3A3, #CB9831 45%, #8F6F2E);
+  background: linear-gradient(94deg, var(--gold-hi), var(--gold) 45%, var(--gold-deep));
   -webkit-background-clip: text; background-clip: text;
   -webkit-text-fill-color: transparent;
   font-style: italic;
@@ -166,66 +163,54 @@ a { color: inherit; }
   :root:not([data-theme="dark"]) .grad { -webkit-text-fill-color: var(--gold-deep); background: none; }
 }
 
-/* ---------------- Hero (ceremonial portada) ---------------- */
+/* ---------------- Hero (matches Bienvenida slide) ---------------- */
 .hero {
   position: relative;
   background:
-    radial-gradient(120% 80% at 50% -10%, var(--bg-top), transparent 55%),
-    var(--bg);
+    radial-gradient(120% 85% at 78% 6%, color-mix(in oklab, var(--gold) 14%, transparent), transparent 48%),
+    radial-gradient(90% 70% at 8% 100%, color-mix(in oklab, var(--gold) 10%, transparent), transparent 44%),
+    linear-gradient(160deg, var(--bg-top), var(--bg));
   padding-block: clamp(3.5rem, 10vh, 7rem) clamp(3rem, 7vh, 5.5rem);
   overflow: hidden;
 }
-/* Filete dorado — gold frame line, a JK signature */
-.hero::after {
-  content: "";
-  position: absolute; inset: 14px;
-  border: 1px solid var(--line);
-  pointer-events: none;
-}
-/* Monograma marca de agua */
+/* Corner filigree — mirrors the slide */
+.hero .fil { position: absolute; width: 46px; height: 46px; border: 1px solid var(--gold); opacity: .5; pointer-events: none; z-index: 1; }
+.hero .fil.tl { top: 20px; left: 20px; border-right: 0; border-bottom: 0; }
+.hero .fil.br { bottom: 20px; right: 20px; border-left: 0; border-top: 0; }
 .watermark {
-  position: absolute; right: -3vw; bottom: -8vw;
+  position: absolute; right: -3vw; bottom: -9vw;
   font-family: var(--serif); font-weight: 700; font-style: italic;
   font-size: 44vw; line-height: .7; color: var(--gold);
   opacity: .05; pointer-events: none; user-select: none; z-index: 0;
 }
-.hero .wrap { position: relative; z-index: 1; }
+.hero .wrap { position: relative; z-index: 2; }
 
-.crest { display: inline-flex; align-items: center; gap: .8rem; }
-.crest .mono {
-  font-family: var(--serif); font-weight: 700; font-size: 1.5rem;
-  letter-spacing: .04em; color: var(--gold);
-  border: 1px solid var(--line); border-radius: 2px;
-  width: 2.6rem; height: 2.6rem; display: grid; place-items: center;
+/* Brand lockup */
+.lockup { display: flex; align-items: center; gap: 1.1rem; }
+.monogram {
+  width: 4.2rem; height: 4.2rem; border-radius: 50%;
+  display: grid; place-items: center; position: relative; flex: none;
+  border: 1px solid var(--gold);
+  background: radial-gradient(circle at 50% 34%, color-mix(in oklab, var(--gold-hi) 18%, transparent), transparent 62%);
+  box-shadow: 0 0 0 5px color-mix(in oklab, var(--gold) 6%, transparent), inset 0 0 22px color-mix(in oklab, var(--gold) 10%, transparent);
 }
-.crest .who { display: flex; flex-direction: column; line-height: 1.3; }
-.crest .who b { font-family: var(--sans); font-weight: 600; font-size: .82rem; letter-spacing: .04em; }
-.crest .who span { font-size: .7rem; text-transform: uppercase; letter-spacing: .22em; color: var(--faint); }
+.monogram::after { content: ""; position: absolute; inset: 7px; border-radius: 50%; border: 1px solid var(--line); }
+.monogram span {
+  font-family: var(--serif); font-weight: 700; font-size: 1.9rem; letter-spacing: .03em; line-height: 1;
+  background: linear-gradient(180deg, var(--gold-hi), var(--gold));
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+}
+.wordmark { display: flex; flex-direction: column; gap: .2rem; }
+.wordmark .academia { font-family: var(--serif); font-weight: 700; font-size: 1.7rem; line-height: 1; color: var(--text); }
+.wordmark .academia em { font-style: normal; background: linear-gradient(180deg, var(--gold-hi), var(--gold)); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.wordmark .tagline { font-size: .68rem; letter-spacing: .3em; text-transform: uppercase; color: var(--muted); }
+.wordmark .group { font-size: .64rem; letter-spacing: .24em; text-transform: uppercase; color: var(--accent-text); }
 
-.hero h1 {
-  font-size: var(--fs-hero);
-  margin: clamp(1.5rem, 5vh, 2.6rem) 0 0;
-  letter-spacing: -.005em;
-  text-wrap: balance;
-}
-.manifesto {
-  max-width: 34ch;
-  margin: 1.5rem 0 0;
-  font-family: var(--serif);
-  font-style: italic;
-  font-size: var(--fs-sub);
-  font-weight: 500;
-  line-height: 1.4;
-  color: var(--text);
-}
+.hero h1 { font-size: var(--fs-hero); margin: clamp(1.6rem, 5vh, 2.8rem) 0 0; letter-spacing: -.005em; text-wrap: balance; }
+.manifesto { max-width: 34ch; margin: 1.5rem 0 0; font-family: var(--serif); font-style: italic; font-size: var(--fs-sub); font-weight: 500; line-height: 1.4; color: var(--text); }
 .manifesto + p { max-width: 46ch; margin: 1.1rem 0 0; color: var(--muted); }
 
-.hero-meta {
-  margin-top: clamp(2rem, 5vh, 3rem);
-  display: flex; flex-wrap: wrap; gap: 1.4rem 3rem;
-  padding-top: 1.6rem;
-  border-top: 1px solid var(--line);
-}
+.hero-meta { margin-top: clamp(2rem, 5vh, 3rem); display: flex; flex-wrap: wrap; gap: 1.4rem 3rem; padding-top: 1.6rem; border-top: 1px solid var(--line); }
 .hero-meta div { display: flex; flex-direction: column; gap: .1rem; }
 .hero-meta .n { font-family: var(--serif); font-weight: 600; font-size: clamp(1.8rem,3vw,2.6rem); color: var(--accent-text); line-height: 1; }
 .hero-meta .k { font-size: var(--fs-label); letter-spacing: .16em; text-transform: uppercase; color: var(--faint); }
@@ -236,91 +221,43 @@ section { padding-block: clamp(3rem, 8vh, 6rem); }
 .sec-head h2 { font-size: var(--fs-h2); margin: .7rem 0 0; text-wrap: balance; }
 .sec-head p { color: var(--muted); font-size: var(--fs-sub); margin: 1rem 0 0; max-width: 54ch; line-height: 1.5; }
 
-/* Pilares */
-.pillars {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 1px;
-  background: var(--line-soft);
-  border: 1px solid var(--line-soft);
-}
+.pillars { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1px; background: var(--line-soft); border: 1px solid var(--line-soft); }
 .pillar { background: var(--bg); padding: 1.8rem 1.6rem; display: flex; flex-direction: column; gap: .5rem; }
 .pillar .rn { font-family: var(--serif); font-style: italic; font-weight: 600; color: var(--accent-text); font-size: 1.1rem; }
 .pillar h3 { font-size: var(--fs-sub); margin: .2rem 0 .1rem; }
 .pillar p { margin: 0; color: var(--muted); font-size: .92rem; line-height: 1.5; }
 .pillar .sostiene { margin-top: .3rem; font-size: var(--fs-label); text-transform: uppercase; letter-spacing: .14em; color: var(--faint); }
 
-/* ---------------- La Línea de Ruta (roadmap) ---------------- */
+/* ---------------- La Ruta (roadmap) ---------------- */
 .road { position: relative; }
-.road::before {
-  content: ""; position: absolute; top: 8px; bottom: 8px; left: 27px;
-  width: 1.5px; background: var(--line-soft);
-}
-.road-fill {
-  position: absolute; top: 8px; left: 27px; width: 1.5px; height: 0;
-  background: linear-gradient(var(--gold-hi), var(--gold), var(--gold-deep));
-  box-shadow: 0 0 14px color-mix(in oklab, var(--gold) 60%, transparent);
-  transition: height .12s linear;
-}
+.road::before { content: ""; position: absolute; top: 8px; bottom: 8px; left: 27px; width: 1.5px; background: var(--line-soft); }
+.road-fill { position: absolute; top: 8px; left: 27px; width: 1.5px; height: 0; background: linear-gradient(var(--gold-hi), var(--gold), var(--gold-deep)); box-shadow: 0 0 14px color-mix(in oklab, var(--gold) 55%, transparent); transition: height .12s linear; }
 @media (min-width: 800px) { .road::before, .road-fill { left: 50%; transform: translateX(-.75px); } }
 
 .stage { position: relative; padding-left: 72px; padding-block: clamp(1.2rem, 3vh, 2rem); }
-.node {
-  position: absolute; left: 0; top: clamp(1.2rem, 3vh, 2rem);
-  width: 56px; height: 56px; border-radius: 50%;
-  display: grid; place-items: center;
-  background: var(--surface); border: 1.5px solid var(--line-soft);
-  font-family: var(--serif); font-weight: 600; font-size: 1.15rem; color: var(--faint);
-  z-index: 2; transition: all .55s ease;
-}
-.stage.is-in .node {
-  border-color: var(--gold);
-  color: #010F24;
-  background: linear-gradient(150deg, var(--gold-hi), var(--gold) 55%, var(--gold-deep));
-  box-shadow: 0 0 0 6px color-mix(in oklab, var(--gold) 14%, transparent);
-}
+.node { position: absolute; left: 0; top: clamp(1.2rem, 3vh, 2rem); width: 56px; height: 56px; border-radius: 50%; display: grid; place-items: center; background: var(--surface); border: 1.5px solid var(--line-soft); font-family: var(--serif); font-weight: 600; font-size: 1.15rem; color: var(--faint); z-index: 2; transition: all .55s ease; }
+.stage.is-in .node { border-color: var(--gold); color: #100D0A; background: linear-gradient(150deg, var(--gold-hi), var(--gold) 55%, var(--gold-deep)); box-shadow: 0 0 0 6px color-mix(in oklab, var(--gold) 14%, transparent); }
 .node.seal { font-style: italic; font-size: 1.4rem; }
 
-.card {
-  background: var(--surface);
-  border: 1px solid var(--line-soft);
-  border-radius: 4px;
-  padding: clamp(1.5rem, 3.5vw, 2.4rem);
-  opacity: 0; transform: translateY(20px);
-  transition: opacity .7s ease, transform .7s cubic-bezier(.2,.7,.2,1);
-}
+.card { background: var(--surface); border: 1px solid var(--line-soft); border-radius: 4px; padding: clamp(1.5rem, 3.5vw, 2.4rem); opacity: 0; transform: translateY(20px); transition: opacity .7s ease, transform .7s cubic-bezier(.2,.7,.2,1); }
 .stage.is-in .card { opacity: 1; transform: none; }
 .card-top { display: flex; flex-direction: column; gap: .3rem; }
 .card .phase { font-size: var(--fs-label); letter-spacing: .22em; text-transform: uppercase; color: var(--accent-text); }
 .card h3 { font-size: var(--fs-h3); margin: .15rem 0 0; }
 .card .obj { color: var(--muted); margin: 1rem 0 0; max-width: 60ch; line-height: 1.6; }
 
-.quote {
-  margin: 1.5rem 0 0; padding: .3rem 0 .3rem 1.2rem;
-  border-left: 2px solid var(--gold);
-  font-family: var(--serif); font-style: italic; font-weight: 500;
-  font-size: var(--fs-sub); line-height: 1.35; color: var(--text);
-}
+.quote { margin: 1.5rem 0 0; padding: .3rem 0 .3rem 1.2rem; border-left: 2px solid var(--gold); font-family: var(--serif); font-style: italic; font-weight: 500; font-size: var(--fs-sub); line-height: 1.35; color: var(--text); }
 
 .grid2 { display: grid; grid-template-columns: 1fr; gap: 1.5rem 2.4rem; margin-top: 1.7rem; }
 @media (min-width: 600px) { .grid2 { grid-template-columns: 1fr 1fr; } }
-.block h4 {
-  font-family: var(--sans); font-weight: 600;
-  font-size: var(--fs-label); text-transform: uppercase; letter-spacing: .18em;
-  color: var(--faint); margin: 0 0 .8rem;
-}
+.block h4 { font-family: var(--sans); font-weight: 600; font-size: var(--fs-label); text-transform: uppercase; letter-spacing: .18em; color: var(--faint); margin: 0 0 .8rem; }
 .chips { display: flex; flex-wrap: wrap; gap: .5rem; }
-.chip {
-  font-size: .82rem; font-weight: 500;
-  padding: .34rem .8rem; border: 1px solid var(--line); border-radius: 999px;
-  background: transparent; color: var(--text);
-}
+.chip { font-size: .82rem; font-weight: 500; padding: .34rem .8rem; border: 1px solid var(--line); border-radius: 999px; background: transparent; color: var(--text); }
 ul.ticks { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: .6rem; }
 ul.ticks li { position: relative; padding-left: 1.4rem; color: var(--muted); font-size: .95rem; line-height: 1.5; }
 ul.ticks li::before { content: ""; position: absolute; left: 0; top: .6em; width: 6px; height: 6px; border-radius: 50%; background: var(--gold); }
 ul.ticks li b { color: var(--text); font-weight: 600; }
 
-/* Medidor Súper JK */
 .gauge { display: grid; grid-template-columns: repeat(auto-fit,minmax(150px,1fr)); gap: .8rem; margin-top: 1.7rem; }
 .lvl { border: 1px solid var(--line-soft); border-radius: 4px; padding: 1rem 1.1rem; background: var(--surface-2); }
 .lvl .dot { width: 11px; height: 11px; border-radius: 50%; display: inline-block; margin-right: .5rem; }
@@ -336,24 +273,12 @@ ul.ticks li b { color: var(--text); font-weight: 600; }
 .trait h3 { font-size: var(--fs-sub); margin: .5rem 0 .4rem; }
 .trait p { margin: 0; color: var(--muted); font-size: .9rem; line-height: 1.5; }
 
-.affirm {
-  margin-top: clamp(2.4rem,6vh,3.6rem);
-  border: 1px solid var(--line);
-  border-radius: 4px;
-  padding: clamp(1.8rem, 4vw, 3rem);
-  background: var(--surface);
-}
+.affirm { margin-top: clamp(2.4rem,6vh,3.6rem); border: 1px solid var(--line); border-radius: 4px; padding: clamp(1.8rem, 4vw, 3rem); background: var(--surface); }
 .affirm p { font-family: var(--serif); font-style: italic; font-weight: 500; font-size: var(--fs-sub); line-height: 1.4; margin: 0; text-wrap: pretty; }
 
 /* ---------------- Closing ---------------- */
 .close { text-align: center; }
-.close .seal {
-  width: 92px; height: 92px; margin: 0 auto 1.8rem; border-radius: 50%;
-  display: grid; place-items: center;
-  border: 1.5px solid var(--gold); color: var(--gold);
-  font-family: var(--serif); font-weight: 700; font-style: italic; font-size: 2rem;
-  box-shadow: 0 0 0 7px color-mix(in oklab, var(--gold) 10%, transparent);
-}
+.close .seal { width: 92px; height: 92px; margin: 0 auto 1.8rem; border-radius: 50%; display: grid; place-items: center; border: 1.5px solid var(--gold); color: var(--gold); font-family: var(--serif); font-weight: 700; font-style: italic; font-size: 2rem; box-shadow: 0 0 0 7px color-mix(in oklab, var(--gold) 10%, transparent); }
 .close h2 { font-size: var(--fs-h2); margin: 0 auto; max-width: 18ch; text-wrap: balance; }
 .close p { color: var(--muted); font-size: var(--fs-sub); max-width: 46ch; margin: 1.3rem auto 0; line-height: 1.5; }
 
@@ -361,17 +286,7 @@ ul.ticks li b { color: var(--text); font-weight: 600; }
 .foot .band { color: var(--faint); font-size: var(--fs-label); letter-spacing: .16em; text-transform: uppercase; }
 .foot .band b { color: var(--accent-text); font-weight: 600; }
 
-/* Theme toggle */
-.toggle {
-  position: fixed; top: 1rem; right: 1rem; z-index: 30;
-  display: inline-flex; align-items: center; gap: .5rem;
-  padding: .5rem .85rem; border-radius: 999px;
-  border: 1px solid var(--line);
-  background: color-mix(in oklab, var(--surface) 80%, transparent);
-  backdrop-filter: blur(8px);
-  color: var(--muted); font-family: var(--sans); font-size: .78rem; font-weight: 500;
-  cursor: pointer;
-}
+.toggle { position: fixed; top: 1rem; right: 1rem; z-index: 30; display: inline-flex; align-items: center; gap: .5rem; padding: .5rem .85rem; border-radius: 999px; border: 1px solid var(--line); background: color-mix(in oklab, var(--surface) 80%, transparent); backdrop-filter: blur(8px); color: var(--muted); font-family: var(--sans); font-size: .78rem; font-weight: 500; cursor: pointer; }
 .toggle:hover { color: var(--text); border-color: var(--gold); }
 .toggle:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; }
 
@@ -386,20 +301,23 @@ ul.ticks li b { color: var(--text); font-weight: 600; }
 </button>
 
 <header class="hero">
+  <span class="fil tl" aria-hidden="true"></span>
+  <span class="fil br" aria-hidden="true"></span>
   <div class="watermark" aria-hidden="true">JK</div>
   <div class="wrap">
-    <div class="crest">
-      <span class="mono">JK</span>
-      <span class="who">
-        <b>JK Business Group Firm</b>
-        <span>Universidad Corporativa · Academia Team SPY</span>
-      </span>
+    <div class="lockup">
+      <div class="monogram" aria-hidden="true"><span>JK</span></div>
+      <div class="wordmark">
+        <div class="academia">Academia&nbsp;<em>JK</em></div>
+        <div class="tagline">Escuela de Negocios</div>
+        <div class="group">JK Business Group</div>
+      </div>
     </div>
 
     <h1>Líder por <span class="grad">Diseño</span></h1>
 
     <p class="manifesto">«Construimos nuestra mejor versión un día a la vez, hasta que sucede. Inspirando y dejando huellas.»</p>
-    <p>La ruta de formación que acompaña a cada colaborador desde que entra a JK hasta que se convierte en un Súper Líder: cultura, liderazgo, bienestar y resultados.</p>
+    <p>La ruta de formación que acompaña a cada líder JK desde que entra hasta que se convierte en un Súper Líder: cultura, liderazgo, bienestar y resultados.</p>
 
     <div class="hero-meta">
       <div><span class="n">4</span><span class="k">Etapas de formación</span></div>
@@ -447,12 +365,12 @@ ul.ticks li b { color: var(--text); font-weight: 600; }
     </div>
   </section>
 
-  <!-- La Línea de Ruta -->
+  <!-- La Ruta -->
   <section class="wrap" aria-labelledby="ruta-h">
     <div class="sec-head">
       <p class="eyebrow">La Línea de Ruta</p>
       <h2 id="ruta-h">El recorrido del líder, etapa por etapa</h2>
-      <p>La misma línea dorada que le mostramos al cliente marca aquí el avance del líder. Cuatro etapas, cada una con su hito. Al recorrerlas, el colaborador alcanza el estándar de un Súper Líder JK.</p>
+      <p>La misma línea dorada que le mostramos al cliente marca aquí el avance del líder. Cuatro etapas, cada una con su hito. Al recorrerlas, el líder alcanza el estándar de un Súper Líder JK.</p>
     </div>
 
     <div class="road" id="road">
@@ -466,7 +384,7 @@ ul.ticks li b { color: var(--text); font-weight: 600; }
             <span class="phase">Etapa uno · El ingreso</span>
             <h3>Bienvenida: los primeros 90 días</h3>
           </div>
-          <p class="obj">Nadie entra a JK a improvisar. Se contrata por valores, potencial y actitud —el currículo solo confirma lo técnico— y todo colaborador inicia un proceso formal de integración a la cultura, la historia y la promesa que le hacemos al cliente.</p>
+          <p class="obj">Nadie entra a JK a improvisar. Se contrata por valores, potencial y actitud —el currículo solo confirma lo técnico— y todo líder inicia un proceso formal de integración a la cultura, la historia y la promesa que le hacemos al cliente.</p>
           <p class="quote">«La excelencia es un hábito, no un evento.»</p>
           <div class="grid2">
             <div class="block">
@@ -663,7 +581,7 @@ ul.ticks li b { color: var(--text); font-weight: 600; }
 </main>
 
 <footer class="foot">
-  <div class="wrap band">Academia <b>Team SPY</b> · Universidad Corporativa JK · <b>Líder por Diseño</b></div>
+  <div class="wrap band">Academia <b>JK</b> · Escuela de Negocios · <b>JK Business Group</b></div>
 </footer>
 
 <script>
