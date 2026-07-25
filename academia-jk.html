@@ -1,0 +1,617 @@
+<style>
+  :root {
+    color-scheme: light dark;
+    /* Warm espresso + gold palette (dark is the default premium ground) */
+    --bg:        #14100C;
+    --bg-2:      #1B150F;
+    --surface:   #1E1811;
+    --surface-2: #251E15;
+    --line:      #3A2F22;
+    --text:      #F3EBDD;
+    --muted:     #B7A488;
+    --faint:     #8B7A62;
+    --gold:      #D4A24C;
+    --gold-hi:   #E9C77A;
+    --gold-deep: #A9772C;
+    --shadow:    0 30px 70px -30px rgba(0,0,0,.75);
+
+    --serif: Georgia, "Iowan Old Style", "Palatino Linotype", "Times New Roman", serif;
+    --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+
+    --maxw: 1080px;
+    --step--1: clamp(.82rem, .78rem + .2vw, .9rem);
+    --step-0:  clamp(1rem, .96rem + .25vw, 1.12rem);
+    --step-1:  clamp(1.2rem, 1.1rem + .5vw, 1.5rem);
+    --step-2:  clamp(1.6rem, 1.35rem + 1.2vw, 2.4rem);
+    --step-3:  clamp(2.2rem, 1.7rem + 2.4vw, 3.6rem);
+    --step-4:  clamp(3rem, 2rem + 4.6vw, 6rem);
+  }
+
+  @media (prefers-color-scheme: light) {
+    :root {
+      --bg:        #F5EFE4;
+      --bg-2:      #EFE7D7;
+      --surface:   #FBF6EC;
+      --surface-2: #F3EAD9;
+      --line:      #E1D3BB;
+      --text:      #2A2016;
+      --muted:     #6E5E48;
+      --faint:     #9A8973;
+      --gold:      #A9772C;
+      --gold-hi:   #C79A46;
+      --gold-deep: #8A5F1F;
+      --shadow:    0 30px 60px -34px rgba(58,42,20,.35);
+    }
+  }
+  /* Explicit toggle overrides must win in both directions */
+  :root[data-theme="dark"] {
+    --bg:#14100C; --bg-2:#1B150F; --surface:#1E1811; --surface-2:#251E15;
+    --line:#3A2F22; --text:#F3EBDD; --muted:#B7A488; --faint:#8B7A62;
+    --gold:#D4A24C; --gold-hi:#E9C77A; --gold-deep:#A9772C;
+    --shadow:0 30px 70px -30px rgba(0,0,0,.75);
+  }
+  :root[data-theme="light"] {
+    --bg:#F5EFE4; --bg-2:#EFE7D7; --surface:#FBF6EC; --surface-2:#F3EAD9;
+    --line:#E1D3BB; --text:#2A2016; --muted:#6E5E48; --faint:#9A8973;
+    --gold:#A9772C; --gold-hi:#C79A46; --gold-deep:#8A5F1F;
+    --shadow:0 30px 60px -34px rgba(58,42,20,.35);
+  }
+
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--sans);
+    font-size: var(--step-0);
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+  .wrap { max-width: var(--maxw); margin-inline: auto; padding-inline: clamp(1.2rem, 4vw, 2.5rem); }
+
+  h1, h2, h3, .serif { font-family: var(--serif); font-weight: 400; }
+  ::selection { background: var(--gold); color: #14100C; }
+
+  .eyebrow {
+    font-family: var(--sans);
+    text-transform: uppercase;
+    letter-spacing: .32em;
+    font-size: var(--step--1);
+    font-weight: 600;
+    color: var(--gold);
+    margin: 0;
+  }
+  a { color: inherit; }
+
+  /* ---------- Ambient / hero ---------- */
+  .hero {
+    position: relative;
+    padding-block: clamp(4.5rem, 12vh, 9rem) clamp(3rem, 8vh, 6rem);
+    overflow: hidden;
+  }
+  .hero::before {
+    content: "";
+    position: absolute; inset: -20% -10% auto -10%;
+    height: 70%;
+    background: radial-gradient(60% 90% at 50% 0%, color-mix(in oklab, var(--gold) 22%, transparent), transparent 70%);
+    pointer-events: none;
+    z-index: 0;
+  }
+  .hero .wrap { position: relative; z-index: 1; }
+
+  .crest {
+    display: inline-flex; align-items: center; gap: .7rem;
+    padding: .5rem .95rem;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    background: color-mix(in oklab, var(--surface) 70%, transparent);
+    backdrop-filter: blur(6px);
+  }
+  .crest .mark {
+    font-family: var(--serif);
+    font-weight: 700;
+    letter-spacing: .04em;
+    color: var(--gold);
+  }
+  .crest .lbl { font-size: var(--step--1); letter-spacing: .22em; text-transform: uppercase; color: var(--muted); }
+
+  .hero h1 {
+    font-size: var(--step-4);
+    line-height: .98;
+    margin: 1.4rem 0 0;
+    letter-spacing: -.01em;
+    text-wrap: balance;
+  }
+  .hero h1 .grad {
+    background: linear-gradient(100deg, var(--gold-hi), var(--gold) 40%, var(--gold-deep));
+    -webkit-background-clip: text; background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-style: italic;
+  }
+  .lede {
+    max-width: 40ch;
+    margin: 1.6rem 0 0;
+    font-size: var(--step-1);
+    color: var(--muted);
+    line-height: 1.5;
+    text-wrap: pretty;
+  }
+  .hero-meta {
+    margin-top: 2.4rem;
+    display: flex; flex-wrap: wrap; gap: 1.6rem 2.6rem;
+    padding-top: 1.6rem;
+    border-top: 1px solid var(--line);
+  }
+  .hero-meta div { display: flex; flex-direction: column; gap: .15rem; }
+  .hero-meta .n { font-family: var(--serif); font-size: var(--step-2); color: var(--gold); line-height: 1; }
+  .hero-meta .k { font-size: var(--step--1); letter-spacing: .12em; text-transform: uppercase; color: var(--faint); }
+
+  /* ---------- Section scaffolding ---------- */
+  section { padding-block: clamp(3rem, 8vh, 6rem); }
+  .sec-head { max-width: 60ch; margin-bottom: clamp(2rem, 5vh, 3.4rem); }
+  .sec-head h2 { font-size: var(--step-3); margin: .5rem 0 0; line-height: 1.05; text-wrap: balance; }
+  .sec-head p { color: var(--muted); font-size: var(--step-1); margin: 1rem 0 0; max-width: 52ch; }
+
+  /* ---------- Pillars overview ---------- */
+  .pillars {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+    gap: 1px;
+    background: var(--line);
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    overflow: hidden;
+  }
+  .pillar { background: var(--surface); padding: 1.6rem 1.5rem; display: flex; flex-direction: column; gap: .5rem; }
+  .pillar .ic { color: var(--gold); }
+  .pillar h3 { font-size: var(--step-1); margin: .3rem 0 0; }
+  .pillar p { margin: 0; color: var(--muted); font-size: var(--step--1); line-height: 1.55; }
+
+  /* ---------- Roadmap ---------- */
+  .road { position: relative; }
+  .road::before {
+    content: "";
+    position: absolute; top: 0; bottom: 0;
+    left: 27px;
+    width: 2px;
+    background: var(--line);
+  }
+  .road-fill {
+    position: absolute; top: 0; left: 27px; width: 2px;
+    background: linear-gradient(var(--gold-hi), var(--gold), var(--gold-deep));
+    height: 0;
+    box-shadow: 0 0 16px color-mix(in oklab, var(--gold) 55%, transparent);
+    transition: height .15s linear;
+  }
+  @media (min-width: 760px) {
+    .road::before, .road-fill { left: 50%; transform: translateX(-1px); }
+  }
+
+  .stage {
+    position: relative;
+    padding-left: 74px;
+    padding-block: clamp(1.4rem, 3vh, 2.2rem);
+  }
+  .node {
+    position: absolute; left: 0; top: clamp(1.4rem, 3vh, 2.2rem);
+    width: 56px; height: 56px; border-radius: 50%;
+    display: grid; place-items: center;
+    background: var(--surface-2);
+    border: 2px solid var(--line);
+    font-family: var(--serif);
+    font-size: 1.25rem; color: var(--faint);
+    z-index: 2;
+    transition: border-color .5s ease, color .5s ease, box-shadow .5s ease, background .5s ease;
+  }
+  .stage.is-in .node {
+    border-color: var(--gold);
+    color: #14100C;
+    background: linear-gradient(150deg, var(--gold-hi), var(--gold-deep));
+    box-shadow: 0 0 0 6px color-mix(in oklab, var(--gold) 16%, transparent);
+  }
+
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    padding: clamp(1.4rem, 3vw, 2.1rem);
+    box-shadow: var(--shadow);
+    opacity: 0; transform: translateY(22px);
+    transition: opacity .7s ease, transform .7s cubic-bezier(.2,.7,.2,1);
+  }
+  .stage.is-in .card { opacity: 1; transform: none; }
+  .card-top { display: flex; flex-wrap: wrap; align-items: baseline; gap: .5rem 1rem; }
+  .card .phase { font-size: var(--step--1); letter-spacing: .22em; text-transform: uppercase; color: var(--gold); }
+  .card h3 { font-size: var(--step-2); margin: .3rem 0 0; line-height: 1.05; width: 100%; }
+  .card .obj { color: var(--muted); margin: .9rem 0 0; font-size: var(--step-0); max-width: 58ch; }
+
+  .quote {
+    margin: 1.4rem 0 0;
+    padding: .9rem 0 .3rem 1.1rem;
+    border-left: 2px solid var(--gold);
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: var(--step-1);
+    color: var(--text);
+  }
+
+  .grid2 { display: grid; grid-template-columns: 1fr; gap: 1.4rem 2rem; margin-top: 1.5rem; }
+  @media (min-width: 560px) { .grid2 { grid-template-columns: 1fr 1fr; } }
+  .block h4 {
+    font-family: var(--sans);
+    font-size: var(--step--1); text-transform: uppercase; letter-spacing: .16em;
+    color: var(--faint); margin: 0 0 .7rem;
+  }
+  .chips { display: flex; flex-wrap: wrap; gap: .5rem; }
+  .chip {
+    font-size: var(--step--1);
+    padding: .32rem .7rem;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    background: var(--surface-2);
+    color: var(--text);
+  }
+  ul.ticks { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: .55rem; }
+  ul.ticks li { position: relative; padding-left: 1.5rem; color: var(--muted); font-size: var(--step-0); }
+  ul.ticks li::before {
+    content: ""; position: absolute; left: 0; top: .62em;
+    width: 7px; height: 7px; border-radius: 50%;
+    background: var(--gold);
+  }
+
+  /* ---------- Profile of super leader ---------- */
+  .final { background: var(--bg-2); border-block: 1px solid var(--line); }
+  .traits {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+    gap: 1.4rem; margin-top: 1rem;
+  }
+  .trait {
+    padding: 1.5rem 1.4rem;
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    background: var(--surface);
+  }
+  .trait .num { font-family: var(--serif); color: var(--gold); font-size: 1.1rem; letter-spacing: .1em; }
+  .trait h3 { font-size: var(--step-1); margin: .5rem 0 .4rem; }
+  .trait p { margin: 0; color: var(--muted); font-size: var(--step--1); line-height: 1.55; }
+
+  /* ---------- Closing ---------- */
+  .close { text-align: center; }
+  .close .seal {
+    width: 84px; height: 84px; margin: 0 auto 1.6rem;
+    border-radius: 50%;
+    display: grid; place-items: center;
+    border: 2px solid var(--gold);
+    color: var(--gold);
+    font-family: var(--serif); font-size: 1.8rem; letter-spacing: .02em;
+    box-shadow: 0 0 0 8px color-mix(in oklab, var(--gold) 12%, transparent);
+  }
+  .close h2 { font-size: var(--step-3); margin: 0 auto; max-width: 20ch; line-height: 1.05; text-wrap: balance; }
+  .close .grad { background: linear-gradient(100deg, var(--gold-hi), var(--gold-deep)); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; font-style: italic; }
+  .close p { color: var(--muted); font-size: var(--step-1); max-width: 44ch; margin: 1.3rem auto 0; }
+  .foot { border-top: 1px solid var(--line); margin-top: clamp(3rem,7vh,5rem); padding-block: 2rem; text-align: center; color: var(--faint); font-size: var(--step--1); letter-spacing: .04em; }
+
+  /* Theme toggle */
+  .toggle {
+    position: fixed; top: 1rem; right: 1rem; z-index: 20;
+    display: inline-flex; align-items: center; gap: .5rem;
+    padding: .5rem .8rem; border-radius: 999px;
+    border: 1px solid var(--line);
+    background: color-mix(in oklab, var(--surface) 82%, transparent);
+    backdrop-filter: blur(8px);
+    color: var(--muted); font-size: var(--step--1);
+    cursor: pointer; font-family: var(--sans);
+  }
+  .toggle:hover { color: var(--text); border-color: var(--gold); }
+  .toggle:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; }
+
+  @media (prefers-reduced-motion: reduce) {
+    .card, .node, .road-fill { transition: none; }
+    .card { opacity: 1; transform: none; }
+  }
+</style>
+
+<button class="toggle" id="themeToggle" aria-label="Cambiar tema claro u oscuro">
+  <span id="toggleIcon" aria-hidden="true">☾</span><span id="toggleTxt">Modo claro</span>
+</button>
+
+<header class="hero">
+  <div class="wrap">
+    <span class="crest">
+      <span class="mark">JK</span>
+      <span class="lbl">Academia de Liderazgo</span>
+    </span>
+
+    <h1>La ruta del <span class="grad">Súper Líder JK</span></h1>
+
+    <p class="lede">Un camino de formación integral: desde que entras a JK hasta que multiplicas líderes. Cultura, liderazgo, bienestar y resultados —en un solo recorrido.</p>
+
+    <div class="hero-meta">
+      <div><span class="n">4</span><span class="k">Etapas de formación</span></div>
+      <div><span class="n">1</span><span class="k">Perfil: Súper Líder JK</span></div>
+      <div><span class="n">360°</span><span class="k">Desarrollo integral</span></div>
+    </div>
+  </div>
+</header>
+
+<main>
+  <section class="wrap" aria-labelledby="pilares-h">
+    <div class="sec-head">
+      <p class="eyebrow">Los cuatro pilares</p>
+      <h2 id="pilares-h">Formamos personas completas, no solo vendedores</h2>
+      <p>En JK creemos que un gran líder se sostiene sobre cuatro cimientos. La Academia los desarrolla en orden, para que cada etapa prepare la siguiente.</p>
+    </div>
+
+    <div class="pillars">
+      <div class="pillar">
+        <span class="ic" aria-hidden="true">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21v-2a4 4 0 0 1 4-4h4a4 4 0 0 1 4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M17 11l2 2 4-4"/></svg>
+        </span>
+        <h3>Bienvenida</h3>
+        <p>El ingreso a la cultura JK: identidad, valores y propósito. Aquí empieza a sentir que pertenece.</p>
+      </div>
+      <div class="pillar">
+        <span class="ic" aria-hidden="true">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l2.4 5 5.6.6-4 3.9 1 5.5L12 19.8 6.9 22l1-5.5-4-3.9L9.6 7z"/></svg>
+        </span>
+        <h3>Liderazgo</h3>
+        <p>Aprende a guiar con el ejemplo, comunicar con claridad y formar a otros líderes.</p>
+      </div>
+      <div class="pillar">
+        <span class="ic" aria-hidden="true">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20.8 6.6a5 5 0 0 0-8.8-2 5 5 0 0 0-8.8 2c-1.6 4 3.2 8 8.8 11 5.6-3 10.4-7 8.8-11z"/></svg>
+        </span>
+        <h3>Bienestar</h3>
+        <p>Cuerpo, mente y emociones. Un líder con energía sostenible inspira y dura en el tiempo.</p>
+      </div>
+      <div class="pillar">
+        <span class="ic" aria-hidden="true">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M7 15l3.5-4 3 3L21 7"/><path d="M21 11V7h-4"/></svg>
+        </span>
+        <h3>Ventas y Metas</h3>
+        <p>Convierte el liderazgo en resultados: metas claras, seguimiento y crecimiento del equipo.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="wrap" aria-labelledby="ruta-h">
+    <div class="sec-head">
+      <p class="eyebrow">El recorrido</p>
+      <h2 id="ruta-h">El camino, etapa por etapa</h2>
+      <p>Cada nueva incorporación avanza por estas cuatro etapas. Al completarlas, alcanza el perfil que distingue a un Súper Líder JK.</p>
+    </div>
+
+    <div class="road" id="road">
+      <div class="road-fill" id="roadFill" aria-hidden="true"></div>
+
+      <!-- Etapa 1 -->
+      <article class="stage">
+        <div class="node">01</div>
+        <div class="card">
+          <div class="card-top">
+            <span class="phase">Etapa uno · El ingreso</span>
+            <h3>Bienvenida y Cultura JK</h3>
+          </div>
+          <p class="obj">Que el nuevo líder conozca el ADN de JK —su historia, sus valores y su propósito— y decida hacerlos suyos desde el primer día.</p>
+          <p class="quote">“Antes de aprender a vender, aprendo quién soy dentro de JK.”</p>
+          <div class="grid2">
+            <div class="block">
+              <h4>Competencias que desarrolla</h4>
+              <div class="chips">
+                <span class="chip">Identidad JK</span>
+                <span class="chip">Valores</span>
+                <span class="chip">Mentalidad de crecimiento</span>
+                <span class="chip">Pertenencia</span>
+              </div>
+            </div>
+            <div class="block">
+              <h4>Experiencias de la etapa</h4>
+              <ul class="ticks">
+                <li>Inmersión en la historia y visión de JK</li>
+                <li>Presentación del equipo y su mentor guía</li>
+                <li>Compromiso del líder: qué esperamos y qué recibe</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Etapa 2 -->
+      <article class="stage">
+        <div class="node">02</div>
+        <div class="card">
+          <div class="card-top">
+            <span class="phase">Etapa dos · Formar al líder</span>
+            <h3>Liderazgo con el ejemplo</h3>
+          </div>
+          <p class="obj">Desarrollar la capacidad de guiar, inspirar y multiplicar: comunicar con claridad, decidir con criterio y formar a su propio equipo.</p>
+          <p class="quote">“No pido lo que no hago. Lidero mostrando el camino.”</p>
+          <div class="grid2">
+            <div class="block">
+              <h4>Competencias que desarrolla</h4>
+              <div class="chips">
+                <span class="chip">Comunicación</span>
+                <span class="chip">Ejemplo</span>
+                <span class="chip">Toma de decisiones</span>
+                <span class="chip">Formar equipo</span>
+                <span class="chip">Manejo de conflictos</span>
+              </div>
+            </div>
+            <div class="block">
+              <h4>Experiencias de la etapa</h4>
+              <ul class="ticks">
+                <li>Talleres de comunicación e influencia positiva</li>
+                <li>Mentoría 1 a 1 y dirección de sus primeras reuniones</li>
+                <li>Plan de desarrollo para las personas de su equipo</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Etapa 3 -->
+      <article class="stage">
+        <div class="node">03</div>
+        <div class="card">
+          <div class="card-top">
+            <span class="phase">Etapa tres · Cuidar la energía</span>
+            <h3>Bienestar del líder</h3>
+          </div>
+          <p class="obj">Un líder sano lidera mejor. Cuidar cuerpo, mente y emociones para sostener el ritmo sin apagarse ni perder la alegría.</p>
+          <p class="quote">“Mi energía sostiene mi liderazgo. Me cuido para poder cuidar.”</p>
+          <div class="grid2">
+            <div class="block">
+              <h4>Competencias que desarrolla</h4>
+              <div class="chips">
+                <span class="chip">Equilibrio</span>
+                <span class="chip">Gestión emocional</span>
+                <span class="chip">Hábitos saludables</span>
+                <span class="chip">Manejo del estrés</span>
+                <span class="chip">Autoconocimiento</span>
+              </div>
+            </div>
+            <div class="block">
+              <h4>Experiencias de la etapa</h4>
+              <ul class="ticks">
+                <li>Rutinas de bienestar físico y descanso</li>
+                <li>Herramientas para el estrés y el equilibrio vida–trabajo</li>
+                <li>Hábitos de alto rendimiento y motivación diaria</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Etapa 4 -->
+      <article class="stage">
+        <div class="node">04</div>
+        <div class="card">
+          <div class="card-top">
+            <span class="phase">Etapa cuatro · Convertir en resultados</span>
+            <h3>Ventas y Metas</h3>
+          </div>
+          <p class="obj">Traducir el liderazgo en resultados de negocio: fijar metas claras, dar seguimiento con indicadores y hacer crecer al equipo.</p>
+          <p class="quote">“Mis metas mueven al equipo. El resultado es la consecuencia, no el atajo.”</p>
+          <div class="grid2">
+            <div class="block">
+              <h4>Competencias que desarrolla</h4>
+              <div class="chips">
+                <span class="chip">Ventas</span>
+                <span class="chip">Planeación de metas</span>
+                <span class="chip">Seguimiento (KPIs)</span>
+                <span class="chip">Crecimiento del equipo</span>
+                <span class="chip">Cierre y expansión</span>
+              </div>
+            </div>
+            <div class="block">
+              <h4>Experiencias de la etapa</h4>
+              <ul class="ticks">
+                <li>Técnicas de venta y atención centrada en la persona</li>
+                <li>Planeación de metas y tablero de seguimiento</li>
+                <li>Multiplicación: convertir a otros en nuevos líderes</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <section class="final" aria-labelledby="perfil-h">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="eyebrow">La meta del recorrido</p>
+        <h2 id="perfil-h">El perfil del Súper Líder JK</h2>
+        <p>Quien completa la ruta integra los cuatro pilares en una sola forma de liderar. Así se reconoce a un Súper Líder JK.</p>
+      </div>
+
+      <div class="traits">
+        <div class="trait">
+          <span class="num">I</span>
+          <h3>Vive los valores</h3>
+          <p>Representa la cultura JK en cada decisión. Su ejemplo es el primer entrenamiento para su equipo.</p>
+        </div>
+        <div class="trait">
+          <span class="num">II</span>
+          <h3>Multiplica líderes</h3>
+          <p>No acumula seguidores: forma nuevos líderes capaces de caminar por sí mismos esta misma ruta.</p>
+        </div>
+        <div class="trait">
+          <span class="num">III</span>
+          <h3>Cuida su energía</h3>
+          <p>Sostiene su ritmo con bienestar. Inspira porque tiene equilibrio, no porque se agota.</p>
+        </div>
+        <div class="trait">
+          <span class="num">IV</span>
+          <h3>Entrega resultados</h3>
+          <p>Convierte la visión en metas cumplidas y hace crecer al equipo y al negocio con integridad.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="wrap close" aria-labelledby="cierre-h">
+    <div class="seal" aria-hidden="true">JK</div>
+    <h2 id="cierre-h">Formamos líderes que <span class="grad">forman líderes</span></h2>
+    <p>Ese es el propósito de la Academia JK: que cada persona que entra encuentre un camino claro para crecer —y para hacer crecer a los demás.</p>
+  </section>
+</main>
+
+<footer class="foot">
+  <div class="wrap">Academia JK · Ruta de formación del Súper Líder JK · JK Business Group</div>
+</footer>
+
+<script>
+  // Theme toggle — stamps data-theme so it overrides the media query both ways.
+  (function () {
+    var root = document.documentElement;
+    var btn = document.getElementById('themeToggle');
+    var icon = document.getElementById('toggleIcon');
+    var txt = document.getElementById('toggleTxt');
+    function current() {
+      var set = root.getAttribute('data-theme');
+      if (set) return set;
+      return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    }
+    function paint() {
+      var mode = current();
+      var dark = mode === 'dark';
+      icon.textContent = dark ? '☀' : '☾';
+      txt.textContent = dark ? 'Modo claro' : 'Modo oscuro';
+    }
+    btn.addEventListener('click', function () {
+      root.setAttribute('data-theme', current() === 'dark' ? 'light' : 'dark');
+      paint();
+    });
+    paint();
+  })();
+
+  // Reveal stages + fill the golden progress line as you scroll.
+  (function () {
+    var stages = Array.prototype.slice.call(document.querySelectorAll('.stage'));
+    var road = document.getElementById('road');
+    var fill = document.getElementById('roadFill');
+
+    if ('IntersectionObserver' in window) {
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) { if (e.isIntersecting) e.target.classList.add('is-in'); });
+      }, { threshold: 0.28 });
+      stages.forEach(function (s) { io.observe(s); });
+    } else {
+      stages.forEach(function (s) { s.classList.add('is-in'); });
+    }
+
+    function onScroll() {
+      if (!road) return;
+      var r = road.getBoundingClientRect();
+      var vh = window.innerHeight;
+      var total = r.height;
+      var passed = Math.min(Math.max(vh * 0.5 - r.top, 0), total);
+      fill.style.height = passed + 'px';
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll);
+    onScroll();
+  })();
+</script>
