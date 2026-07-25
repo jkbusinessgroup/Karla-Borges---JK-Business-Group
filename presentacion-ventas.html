@@ -1,0 +1,329 @@
+<title>Presentación de Ventas — JK Business Group</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+  :root {
+    --ground:#0D191E; --ground-2:#122127; --panel:#16282E;
+    --ink:#F2ECDE; --soft:#AEBBBD; --faint:#71807F;
+    --gold:#D8B366; --gold-deep:#B98E3C;
+    --coral:#E98A6A; --coral-deep:#C25334;
+    --green:#84BE8D;
+    --line:#2A464E;
+  }
+  * { box-sizing:border-box; margin:0; padding:0; }
+  html,body { height:100%; }
+  body {
+    background:#05100e;
+    color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    -webkit-font-smoothing:antialiased;
+    overflow:hidden;
+  }
+  .serif { font-family:Georgia,"Times New Roman",serif; }
+  .mono { font-family:ui-monospace,"SF Mono",Menlo,Consolas,monospace; }
+
+  /* Stage: fixed 16:9 */
+  .stage {
+    position:fixed; inset:0; display:grid; place-items:center;
+  }
+  .deck {
+    position:relative;
+    width:min(100vw, calc(100vh * 16 / 9));
+    height:min(100vh, calc(100vw * 9 / 16));
+    background:
+      radial-gradient(120% 90% at 82% 12%, rgba(216,179,102,.10), transparent 55%),
+      linear-gradient(160deg, #10222a 0%, var(--ground) 60%, #0a1418 100%);
+    overflow:hidden;
+  }
+
+  .slide {
+    position:absolute; inset:0;
+    padding:clamp(28px, 5.2vh, 72px) clamp(34px, 6vw, 96px);
+    display:flex; flex-direction:column; justify-content:center;
+    opacity:0; visibility:hidden;
+    transform:translateY(14px);
+    transition:opacity .45s ease, transform .55s ease, visibility .45s;
+  }
+  .slide.on { opacity:1; visibility:visible; transform:none; }
+  @media (prefers-reduced-motion:reduce){ .slide{transition:none} }
+
+  .eyebrow {
+    font-size:clamp(10px,1.5vh,14px); letter-spacing:.28em; text-transform:uppercase;
+    color:var(--gold); font-weight:700; margin-bottom:clamp(10px,2.4vh,22px);
+    display:flex; align-items:center; gap:12px;
+  }
+  .eyebrow::before { content:""; width:26px; height:1.5px; background:var(--gold); display:inline-block; }
+  .slide.tone-coral .eyebrow { color:var(--coral); }
+  .slide.tone-coral .eyebrow::before { background:var(--coral); }
+
+  h1.title {
+    font-family:Georgia,serif; font-weight:700;
+    font-size:clamp(30px, 7.4vh, 82px); line-height:1.02; letter-spacing:-.5px;
+    text-wrap:balance; max-width:19ch;
+  }
+  h2.head {
+    font-family:Georgia,serif; font-weight:700;
+    font-size:clamp(26px, 5.8vh, 62px); line-height:1.06; text-wrap:balance; max-width:20ch;
+  }
+  .lead {
+    font-size:clamp(15px, 2.7vh, 27px); color:var(--soft); line-height:1.4;
+    max-width:34ch; margin-top:clamp(12px,2.6vh,26px);
+  }
+  .lead b, .head b, .title b { color:var(--gold); font-style:normal; }
+  .tone-coral .lead b { color:var(--coral); }
+  .accent { color:var(--gold); }
+  .fill { color:var(--gold); font-style:italic; font-family:-apple-system,sans-serif; font-weight:600; }
+  .tone-coral .fill { color:var(--coral); }
+
+  /* cover */
+  .cover { justify-content:space-between; }
+  .cover .top { display:flex; align-items:center; gap:12px; }
+  .brandmark { font-family:Georgia,serif; font-weight:700; font-size:clamp(16px,2.3vh,22px); border:1.6px solid var(--gold); border-radius:9px; padding:3px 12px; color:var(--gold); }
+  .brandco { font-size:clamp(10px,1.5vh,13px); letter-spacing:.2em; text-transform:uppercase; color:var(--faint); }
+  .cover .mid { display:flex; flex-direction:column; justify-content:center; flex:1; }
+  .cover .foot { font-size:clamp(11px,1.7vh,15px); color:var(--faint); }
+
+  /* rows / stat groups */
+  .cols { display:flex; gap:clamp(16px,3vw,44px); margin-top:clamp(16px,3vh,32px); flex-wrap:wrap; }
+  .stat .n { font-family:ui-monospace,monospace; font-weight:700; font-size:clamp(30px,7vh,74px); line-height:1; color:var(--coral); font-variant-numeric:tabular-nums; }
+  .stat .n span { font-size:.38em; color:var(--faint); font-weight:500; }
+  .stat .c { font-size:clamp(12px,1.9vh,17px); color:var(--soft); margin-top:8px; max-width:22ch; }
+
+  ul.list { list-style:none; margin-top:clamp(14px,3vh,30px); display:flex; flex-direction:column; gap:clamp(9px,1.8vh,17px); }
+  ul.list li { position:relative; padding-left:30px; font-size:clamp(15px,2.6vh,26px); color:var(--ink); max-width:30ch; }
+  ul.list li::before { content:""; position:absolute; left:0; top:.55em; width:11px; height:11px; border-radius:3px; background:var(--gold); }
+  .tone-coral ul.list li::before { background:var(--coral); }
+  ul.list li b { color:var(--gold); }
+
+  /* offer stack */
+  .offer { display:flex; flex-direction:column; gap:clamp(8px,1.5vh,14px); margin-top:clamp(14px,2.6vh,26px); max-width:30ch; }
+  .offer .it { display:flex; align-items:center; gap:14px; font-size:clamp(14px,2.3vh,23px); }
+  .offer .it .plus { color:var(--gold); font-family:Georgia,serif; font-weight:700; width:1em; }
+  .offer .core { font-family:Georgia,serif; font-weight:700; font-size:clamp(17px,3vh,30px); color:var(--ink); }
+  .offer .guar { color:var(--green); }
+
+  /* investment */
+  .price { font-family:ui-monospace,monospace; font-weight:700; font-size:clamp(38px,10vh,110px); color:var(--gold); line-height:1; letter-spacing:-2px; }
+  .price .cur { font-size:.5em; color:var(--soft); }
+  .perday { font-size:clamp(13px,2vh,20px); color:var(--soft); margin-top:14px; }
+
+  /* cases */
+  .cases3 { display:grid; grid-template-columns:repeat(3,1fr); gap:clamp(12px,2vw,26px); margin-top:clamp(16px,3vh,32px); }
+  .cardc { background:rgba(255,255,255,.03); border:1px solid var(--line); border-radius:16px; padding:clamp(14px,2.4vh,24px); }
+  .cardc .who { font-size:clamp(11px,1.6vh,14px); letter-spacing:.08em; text-transform:uppercase; color:var(--faint); font-weight:700; }
+  .cardc .r { font-family:Georgia,serif; font-size:clamp(18px,3.4vh,34px); color:var(--green); margin:10px 0; line-height:1.1; }
+  .cardc .d { font-size:clamp(12px,1.8vh,16px); color:var(--soft); }
+
+  /* horizons */
+  .horiz3 { display:grid; grid-template-columns:repeat(3,1fr); gap:clamp(12px,2vw,26px); margin-top:clamp(16px,3vh,34px); }
+  .hcol { border-top:2px solid var(--coral-deep); padding-top:14px; }
+  .hcol .d { font-family:ui-monospace,monospace; font-weight:700; font-size:clamp(28px,6vh,60px); color:var(--coral); line-height:1; }
+  .hcol .d span { font-size:.32em; color:var(--faint); font-weight:500; }
+  .hcol .t { font-size:clamp(12px,1.9vh,18px); color:var(--soft); margin-top:10px; max-width:20ch; }
+
+  /* CLOSER slide */
+  .closer { text-align:left; }
+  .closer .big { font-family:Georgia,serif; font-weight:700; font-size:clamp(30px,7.6vh,88px); line-height:1.02; text-wrap:balance; max-width:17ch; }
+  .closer .q { color:var(--gold); }
+  .closer .cta {
+    margin-top:clamp(20px,4vh,44px); display:inline-flex; align-items:center; gap:16px;
+    background:linear-gradient(180deg,var(--gold),var(--gold-deep)); color:#1b1405;
+    font-weight:800; font-size:clamp(15px,2.6vh,26px); padding:clamp(12px,2vh,20px) clamp(20px,3vw,40px);
+    border-radius:999px; letter-spacing:.2px; box-shadow:0 12px 40px rgba(216,179,102,.28);
+    width:max-content;
+  }
+  .closer .sub { margin-top:clamp(14px,2.6vh,24px); color:var(--soft); font-size:clamp(13px,2vh,20px); max-width:34ch; }
+
+  /* chrome */
+  .chrome { position:fixed; left:0; right:0; bottom:0; padding:14px 22px; display:flex; align-items:center; justify-content:space-between; pointer-events:none; z-index:5; }
+  .dots { display:flex; gap:7px; pointer-events:auto; }
+  .dot { width:8px; height:8px; border-radius:50%; background:rgba(242,236,222,.22); border:0; cursor:pointer; padding:0; transition:all .2s; }
+  .dot.on { background:var(--gold); transform:scale(1.35); }
+  .dot.coral.on { background:var(--coral); }
+  .counter { font-family:ui-monospace,monospace; font-size:12px; color:var(--faint); letter-spacing:.1em; }
+  .nav-hint { font-size:11px; color:var(--faint); letter-spacing:.06em; }
+  .arrows { pointer-events:auto; display:flex; gap:8px; }
+  .arrows button { background:rgba(255,255,255,.05); border:1px solid var(--line); color:var(--ink); width:34px; height:34px; border-radius:9px; cursor:pointer; font-size:15px; line-height:1; }
+  .arrows button:hover { border-color:var(--gold); color:var(--gold); }
+  .arrows button:focus-visible, .dot:focus-visible { outline:2px solid var(--gold); outline-offset:2px; }
+  .progressbar { position:fixed; top:0; left:0; height:3px; background:linear-gradient(90deg,var(--gold),var(--coral)); z-index:6; transition:width .4s ease; }
+</style>
+
+<div class="progressbar" id="pbar"></div>
+<div class="stage">
+  <div class="deck" id="deck">
+
+    <!-- 0 · Portada -->
+    <section class="slide cover on">
+      <div class="top"><span class="brandmark">JK</span><span class="brandco">Business Group</span></div>
+      <div class="mid">
+        <div class="eyebrow">Presentación de ventas</div>
+        <h1 class="title serif">Convierte tu negocio en el que <b>siempre quisiste tener.</b></h1>
+        <p class="lead">Una conversación para mostrarte, en pocos minutos, cómo lo logramos — y por qué el mejor momento para empezar es hoy.</p>
+      </div>
+      <div class="foot">Preparado para <span class="fill">[nombre del cliente]</span></div>
+    </section>
+
+    <!-- 1 · El problema -->
+    <section class="slide tone-coral">
+      <div class="eyebrow">El punto de partida</div>
+      <h2 class="head serif">Hoy tu negocio carga con <b>[el problema principal]</b>.</h2>
+      <ul class="list">
+        <li><span class="fill">[síntoma 1 que vive el cliente]</span></li>
+        <li><span class="fill">[síntoma 2]</span></li>
+        <li><span class="fill">[síntoma 3]</span></li>
+      </ul>
+    </section>
+
+    <!-- 2 · El costo de no resolverlo -->
+    <section class="slide tone-coral">
+      <div class="eyebrow">Lo que realmente cuesta</div>
+      <h2 class="head serif">Ese problema no es gratis. <b>Te cuesta cada mes.</b></h2>
+      <div class="cols">
+        <div class="stat"><div class="n"><span class="fill" style="font-size:.5em">[$]</span></div><div class="c">en ventas o ingresos que se escapan</div></div>
+        <div class="stat"><div class="n"><span class="fill" style="font-size:.5em">[hrs]</span></div><div class="c">de tu tiempo cada semana</div></div>
+        <div class="stat"><div class="n">∞</div><div class="c">del estrés de cargarlo tú solo</div></div>
+      </div>
+    </section>
+
+    <!-- 3 · La transformación -->
+    <section class="slide">
+      <div class="eyebrow">A dónde vamos a llevarte</div>
+      <h2 class="head serif">Imagina tu negocio con esto <b>ya resuelto.</b></h2>
+      <ul class="list">
+        <li><span class="fill">[resultado 1]</span></li>
+        <li><span class="fill">[resultado 2]</span></li>
+        <li><span class="fill">[resultado 3]</span></li>
+      </ul>
+    </section>
+
+    <!-- 4 · El valor -->
+    <section class="slide">
+      <div class="eyebrow">Lo que ganas</div>
+      <h2 class="head serif">No es un gasto. Es <b>recuperar lo que hoy pierdes.</b></h2>
+      <p class="lead"><span class="fill">[producto/servicio]</span> te devuelve <b>[resultado principal en número]</b> — y a partir de ahí, todo lo demás es ganancia para ti.</p>
+    </section>
+
+    <!-- 5 · La inversión -->
+    <section class="slide">
+      <div class="eyebrow">Tu inversión</div>
+      <div class="price"><span class="cur">$</span><span class="fill" style="font-style:normal">[monto]</span></div>
+      <p class="perday">Se paga solo en <span class="fill">[tiempo estimado]</span>. Son apenas <span class="fill">[monto ÷ 30]</span> al día — menos que <span class="fill">[referencia cotidiana]</span>.</p>
+    </section>
+
+    <!-- 6 · Oferta irresistible -->
+    <section class="slide">
+      <div class="eyebrow">Todo lo que incluye</div>
+      <h2 class="head serif">La oferta completa.</h2>
+      <div class="offer">
+        <div class="core">◆ <span class="fill" style="font-style:normal">[resultado / servicio principal]</span></div>
+        <div class="it"><span class="plus">+</span> Bono: <span class="fill">[bono 1]</span></div>
+        <div class="it"><span class="plus">+</span> Bono: <span class="fill">[bono 2]</span></div>
+        <div class="it"><span class="plus">+</span> Bono: <span class="fill">[bono 3]</span></div>
+        <div class="it guar"><span class="plus">✓</span> Garantía: <span class="fill" style="color:var(--green)">[garantía]</span> — el riesgo lo asumo yo.</div>
+      </div>
+    </section>
+
+    <!-- 7 · Casos de éxito -->
+    <section class="slide">
+      <div class="eyebrow">No es teoría — ya pasó</div>
+      <h2 class="head serif">Clientes que estaban <b>justo como tú.</b></h2>
+      <div class="cases3">
+        <div class="cardc"><div class="who"><span class="fill">[cliente/rubro]</span></div><div class="r">→ <span class="fill" style="color:var(--green)">[resultado]</span></div><div class="d"><span class="fill">[qué logramos juntos]</span></div></div>
+        <div class="cardc"><div class="who"><span class="fill">[cliente/rubro]</span></div><div class="r">→ <span class="fill" style="color:var(--green)">[resultado]</span></div><div class="d"><span class="fill">[qué logramos juntos]</span></div></div>
+        <div class="cardc"><div class="who"><span class="fill">[cliente/rubro]</span></div><div class="r">→ <span class="fill" style="color:var(--green)">[resultado]</span></div><div class="d"><span class="fill">[qué logramos juntos]</span></div></div>
+      </div>
+    </section>
+
+    <!-- 8 · Cupos -->
+    <section class="slide tone-coral">
+      <div class="eyebrow">Por qué es ahora</div>
+      <h2 class="head serif">Trabajo con <b>pocos negocios a la vez</b> — para darle resultados reales a cada uno.</h2>
+      <p class="lead">Me quedan <span class="fill">[X] cupos</span> este ciclo. Se cierran el <span class="fill">[fecha]</span>.</p>
+    </section>
+
+    <!-- 9 · Costo de postergar -->
+    <section class="slide tone-coral">
+      <div class="eyebrow">Qué pasa si lo dejas para después</div>
+      <h2 class="head serif">Esperar <b>también tiene un precio.</b></h2>
+      <div class="horiz3">
+        <div class="hcol"><div class="d">30<span> días</span></div><div class="t">Un mes más con el mismo problema y perdiendo esas ventas.</div></div>
+        <div class="hcol"><div class="d">60<span> días</span></div><div class="t">La competencia avanzó y tú seguiste igual.</div></div>
+        <div class="hcol"><div class="d">90<span> días</span></div><div class="t">Un trimestre entero decidido por la indecisión.</div></div>
+      </div>
+    </section>
+
+    <!-- 10 · EL CIERRE (pieza clave) -->
+    <section class="slide closer">
+      <div class="eyebrow">La decisión</div>
+      <div class="big serif">¿Qué le sucede a tu negocio <span class="q">si no empiezas hoy?</span></div>
+      <div class="cta">Aparta tu cupo y empecemos hoy →</div>
+      <p class="sub">Das el primer paso ahora y empezamos a devolverte <span class="fill">[resultado]</span> cuanto antes. ¿Lo hacemos?</p>
+    </section>
+
+    <!-- 11 · Gracias / siguiente paso -->
+    <section class="slide cover">
+      <div class="top"><span class="brandmark">JK</span><span class="brandco">Business Group</span></div>
+      <div class="mid">
+        <div class="eyebrow">El siguiente paso</div>
+        <h2 class="head serif">Bienvenido. <b>Empecemos.</b></h2>
+        <p class="lead">Confirmamos tu cupo, damos el primer paso y tu negocio deja de esperar.</p>
+      </div>
+      <div class="foot"><span class="fill">[nombre]</span> · <span class="fill">[teléfono / correo]</span></div>
+    </section>
+
+  </div>
+</div>
+
+<div class="chrome">
+  <div class="counter" id="counter">01 / 12</div>
+  <div class="dots" id="dots"></div>
+  <div class="arrows">
+    <span class="nav-hint">← →&nbsp;&nbsp;·&nbsp;&nbsp;F pantalla completa</span>
+    <button id="prev" aria-label="Anterior">‹</button>
+    <button id="next" aria-label="Siguiente">›</button>
+  </div>
+</div>
+
+<script>
+  const slides = [...document.querySelectorAll('.slide')];
+  const dotsWrap = document.getElementById('dots');
+  const counter = document.getElementById('counter');
+  const pbar = document.getElementById('pbar');
+  let i = 0;
+
+  slides.forEach((s, k) => {
+    const d = document.createElement('button');
+    d.className = 'dot' + (s.classList.contains('tone-coral') ? ' coral' : '') + (k === 0 ? ' on' : '');
+    d.setAttribute('aria-label', 'Ir a diapositiva ' + (k + 1));
+    d.addEventListener('click', () => show(k));
+    dotsWrap.appendChild(d);
+  });
+  const dots = [...dotsWrap.children];
+  const pad = n => String(n).padStart(2, '0');
+
+  function show(n) {
+    i = Math.max(0, Math.min(slides.length - 1, n));
+    slides.forEach((s, k) => s.classList.toggle('on', k === i));
+    dots.forEach((d, k) => d.classList.toggle('on', k === i));
+    counter.textContent = pad(i + 1) + ' / ' + pad(slides.length);
+    pbar.style.width = ((i + 1) / slides.length * 100) + '%';
+  }
+  const next = () => show(i + 1);
+  const prev = () => show(i - 1);
+
+  document.getElementById('next').addEventListener('click', next);
+  document.getElementById('prev').addEventListener('click', prev);
+  document.addEventListener('keydown', e => {
+    if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'PageDown') { e.preventDefault(); next(); }
+    else if (e.key === 'ArrowLeft' || e.key === 'PageUp') { e.preventDefault(); prev(); }
+    else if (e.key === 'Home') show(0);
+    else if (e.key === 'End') show(slides.length - 1);
+    else if (e.key.toLowerCase() === 'f') { if (!document.fullscreenElement) document.documentElement.requestFullscreen?.(); else document.exitFullscreen?.(); }
+  });
+  // swipe on touch
+  let x0 = null;
+  document.addEventListener('touchstart', e => x0 = e.touches[0].clientX, {passive:true});
+  document.addEventListener('touchend', e => { if (x0 === null) return; const dx = e.changedTouches[0].clientX - x0; if (Math.abs(dx) > 44) (dx < 0 ? next : prev)(); x0 = null; }, {passive:true});
+
+  show(0);
+</script>
