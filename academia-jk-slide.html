@@ -1,0 +1,334 @@
+<title>Academia JK · Bienvenida</title>
+<style>
+  :root {
+    color-scheme: dark light;
+    /* Premium palette — warm ink + gold */
+    --ink:        #100D0A;
+    --ink-2:      #17130D;
+    --panel:      #1E1811;
+    --gold:       #C9A24B;
+    --gold-soft:  #E4C878;
+    --champagne:  #EFE3C6;
+    --cream:      #F5F0E6;
+    --muted:      #9A8E77;
+    --hairline:   rgba(201,162,75,.28);
+    --glow:       rgba(201,162,75,.16);
+    --bg-grad-1:  #15110B;
+    --bg-grad-2:  #0C0A07;
+    --shadow:     rgba(0,0,0,.55);
+  }
+
+  @media (prefers-color-scheme: light) {
+    :root {
+      --ink:        #F5F0E6;
+      --ink-2:      #EFE8D8;
+      --panel:      #FBF7EE;
+      --gold:       #9C7420;
+      --gold-soft:  #7E5D14;
+      --champagne:  #4A3E27;
+      --cream:      #221B10;
+      --muted:      #6E6350;
+      --hairline:   rgba(120,88,20,.30);
+      --glow:       rgba(156,116,32,.14);
+      --bg-grad-1:  #F7F1E4;
+      --bg-grad-2:  #ECE3D0;
+      --shadow:     rgba(90,70,30,.16);
+    }
+  }
+  :root[data-theme="dark"] {
+    color-scheme: dark;
+    --ink:#100D0A; --ink-2:#17130D; --panel:#1E1811;
+    --gold:#C9A24B; --gold-soft:#E4C878; --champagne:#EFE3C6; --cream:#F5F0E6;
+    --muted:#9A8E77; --hairline:rgba(201,162,75,.28); --glow:rgba(201,162,75,.16);
+    --bg-grad-1:#15110B; --bg-grad-2:#0C0A07; --shadow:rgba(0,0,0,.55);
+  }
+  :root[data-theme="light"] {
+    color-scheme: light;
+    --ink:#F5F0E6; --ink-2:#EFE8D8; --panel:#FBF7EE;
+    --gold:#9C7420; --gold-soft:#7E5D14; --champagne:#4A3E27; --cream:#221B10;
+    --muted:#6E6350; --hairline:rgba(120,88,20,.30); --glow:rgba(156,116,32,.14);
+    --bg-grad-1:#F7F1E4; --bg-grad-2:#ECE3D0; --shadow:rgba(90,70,30,.16);
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    min-height: 100vh;
+    display: grid;
+    place-items: center;
+    padding: clamp(16px, 4vw, 56px);
+    background:
+      radial-gradient(120% 90% at 78% 12%, var(--glow) 0%, transparent 46%),
+      radial-gradient(100% 80% at 12% 100%, var(--glow) 0%, transparent 40%),
+      linear-gradient(160deg, var(--bg-grad-1) 0%, var(--bg-grad-2) 100%);
+    color: var(--cream);
+    font-family: "Helvetica Neue", "Segoe UI", system-ui, -apple-system, sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .slide {
+    width: min(1120px, 100%);
+    background:
+      linear-gradient(180deg, var(--panel) 0%, var(--ink-2) 100%);
+    border: 1px solid var(--hairline);
+    border-radius: 4px;
+    box-shadow: 0 40px 90px -30px var(--shadow), inset 0 1px 0 rgba(255,255,255,.03);
+    position: relative;
+    overflow: hidden;
+    display: grid;
+    grid-template-columns: 0.86fr 1.14fr;
+  }
+
+  /* corner filigree */
+  .slide::before, .slide::after {
+    content: "";
+    position: absolute;
+    width: 46px; height: 46px;
+    border: 1px solid var(--gold);
+    opacity: .5;
+    pointer-events: none;
+  }
+  .slide::before { top: 18px; left: 18px; border-right: 0; border-bottom: 0; }
+  .slide::after  { bottom: 18px; right: 18px; border-left: 0; border-top: 0; }
+
+  /* ---------- Left: emblem / brand ---------- */
+  .brand {
+    position: relative;
+    padding: clamp(32px, 4vw, 56px) clamp(26px, 3vw, 44px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 22px;
+    text-align: center;
+    border-right: 1px solid var(--hairline);
+    background:
+      radial-gradient(90% 70% at 50% 22%, rgba(201,162,75,.10) 0%, transparent 60%);
+  }
+
+  .monogram {
+    width: clamp(128px, 15vw, 170px);
+    height: clamp(128px, 15vw, 170px);
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    position: relative;
+    background:
+      radial-gradient(circle at 50% 34%, rgba(228,200,120,.14), transparent 62%);
+    border: 1px solid var(--gold);
+    box-shadow: 0 0 0 6px rgba(201,162,75,.06), inset 0 0 26px rgba(201,162,75,.10);
+    animation: rise .9s cubic-bezier(.2,.7,.2,1) both;
+  }
+  .monogram::after {
+    content: "";
+    position: absolute;
+    inset: 9px;
+    border-radius: 50%;
+    border: 1px solid var(--hairline);
+  }
+  .monogram span {
+    font-family: Georgia, "Times New Roman", "Playfair Display", serif;
+    font-size: clamp(46px, 6vw, 66px);
+    font-weight: 700;
+    letter-spacing: .04em;
+    background: linear-gradient(180deg, var(--gold-soft), var(--gold));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    line-height: 1;
+    padding-left: .06em;
+  }
+
+  .wordmark {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    animation: rise .9s cubic-bezier(.2,.7,.2,1) .08s both;
+  }
+  .wordmark .academia {
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: clamp(30px, 4vw, 44px);
+    font-weight: 700;
+    letter-spacing: .02em;
+    color: var(--cream);
+    line-height: .98;
+  }
+  .wordmark .academia em {
+    font-style: normal;
+    background: linear-gradient(180deg, var(--gold-soft), var(--gold));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  .rule {
+    width: 74px; height: 1px;
+    margin: 4px auto 0;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  }
+  .tagline {
+    font-size: 11.5px;
+    letter-spacing: .34em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-top: 4px;
+  }
+  .group {
+    font-size: 11px;
+    letter-spacing: .22em;
+    text-transform: uppercase;
+    color: var(--gold);
+    opacity: .85;
+  }
+
+  /* ---------- Right: CEO welcome ---------- */
+  .welcome {
+    padding: clamp(34px, 4.4vw, 64px) clamp(30px, 4vw, 60px);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 20px;
+    animation: rise .9s cubic-bezier(.2,.7,.2,1) .16s both;
+  }
+  .eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 11px;
+    letter-spacing: .28em;
+    text-transform: uppercase;
+    color: var(--gold);
+    font-weight: 600;
+  }
+  .eyebrow::before {
+    content: "";
+    width: 30px; height: 1px;
+    background: var(--gold);
+    display: inline-block;
+  }
+  .welcome h1 {
+    margin: 0;
+    font-family: Georgia, "Times New Roman", serif;
+    font-weight: 700;
+    font-size: clamp(30px, 4.4vw, 50px);
+    line-height: 1.06;
+    letter-spacing: -.01em;
+    text-wrap: balance;
+    color: var(--cream);
+  }
+  .welcome h1 em {
+    font-style: italic;
+    color: var(--gold-soft);
+  }
+  .lead {
+    font-size: clamp(15px, 1.35vw, 17px);
+    line-height: 1.72;
+    color: color-mix(in srgb, var(--cream) 82%, transparent);
+    max-width: 56ch;
+  }
+  .lead + .lead { margin-top: -4px; }
+
+  .signature {
+    margin-top: 8px;
+    padding-top: 20px;
+    border-top: 1px solid var(--hairline);
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+  .sig-mark {
+    font-family: Georgia, "Times New Roman", cursive, serif;
+    font-style: italic;
+    font-size: 30px;
+    line-height: 1;
+    color: var(--gold-soft);
+    padding-right: 4px;
+  }
+  .sig-meta { display: flex; flex-direction: column; gap: 3px; }
+  .sig-name {
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--cream);
+    letter-spacing: .01em;
+  }
+  .sig-role {
+    font-size: 11px;
+    letter-spacing: .2em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  .pillars {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 6px;
+  }
+  .pillar {
+    font-size: 11.5px;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: var(--champagne);
+    padding: 7px 14px;
+    border: 1px solid var(--hairline);
+    border-radius: 999px;
+    background: rgba(201,162,75,.05);
+  }
+
+  @keyframes rise {
+    from { opacity: 0; transform: translateY(14px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .monogram, .wordmark, .welcome { animation: none; }
+  }
+
+  @media (max-width: 780px) {
+    .slide { grid-template-columns: 1fr; }
+    .brand { border-right: 0; border-bottom: 1px solid var(--hairline); padding-top: clamp(40px,10vw,56px); }
+    .welcome { text-align: left; }
+  }
+</style>
+
+<main class="slide" role="img" aria-label="Diapositiva de bienvenida de Academia JK con mensaje de la CEO Karla Borges">
+  <section class="brand">
+    <div class="monogram" aria-hidden="true"><span>JK</span></div>
+    <div class="wordmark">
+      <div class="academia">Academia&nbsp;<em>JK</em></div>
+      <div class="rule"></div>
+      <div class="tagline">Escuela de Negocios</div>
+    </div>
+    <div class="group">JK Business Group</div>
+  </section>
+
+  <section class="welcome">
+    <span class="eyebrow">Bienvenida de la CEO</span>
+    <h1>Bienvenido a la <em>Academia JK</em>, donde tu ambición se convierte en resultados.</h1>
+    <p class="lead">
+      Creamos Academia JK para acompañar a emprendedores y empresarios que
+      no se conforman. Aquí no vendemos promesas: entregamos método, mentoría
+      real y una comunidad que empuja hacia adelante.
+    </p>
+    <p class="lead">
+      Cada programa nace de la experiencia de construir negocios de verdad.
+      Si estás listo para tomar acción, nosotros estamos listos para caminar
+      contigo. Este es tu punto de partida.
+    </p>
+
+    <div class="pillars" aria-label="Pilares">
+      <span class="pillar">Estrategia</span>
+      <span class="pillar">Mentoría</span>
+      <span class="pillar">Comunidad</span>
+      <span class="pillar">Resultados</span>
+    </div>
+
+    <div class="signature">
+      <span class="sig-mark" aria-hidden="true">KB</span>
+      <div class="sig-meta">
+        <span class="sig-name">Karla Borges</span>
+        <span class="sig-role">Fundadora &amp; CEO · Academia JK</span>
+      </div>
+    </div>
+  </section>
+</main>
