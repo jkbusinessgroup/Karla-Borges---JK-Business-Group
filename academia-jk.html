@@ -58,247 +58,235 @@
 
 :root {
   color-scheme: dark light;
-  /* Palette matched to the "Academia JK · Bienvenida" slide — warm ink + gold */
-  --gold:        #C9A24B;
-  --gold-hi:     #E4C878;
-  --gold-deep:   #9A7A2E;
-  --champagne:   #EFE3C6;
-
-  /* functional data colors */
-  --positive:    #4E9C77;
-  --attention:   #C9962F;
-  --risk:        #C05A4E;
-
-  /* Dark ceremonial ground (default) */
-  --bg:          #100D0A;
-  --bg-top:      #1A140C;
-  --surface:     #1E1811;
-  --surface-2:   #251E15;
-  --line:        rgba(201,162,75,.26);
-  --line-soft:   rgba(245,240,230,.09);
-  --text:        #F5F0E6;
-  --muted:       #B4A98E;
-  --faint:       #8B7E63;
-  --accent-text: #E4C878;
-
-  --serif: "Cormorant Garamond", Georgia, "Times New Roman", serif;
-  --sans:  "Poppins", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-
-  --maxw: 1120px;
-  --fs-label: .72rem;
-  --fs-body:  clamp(1rem, .96rem + .2vw, 1.08rem);
-  --fs-sub:   clamp(1.15rem, 1.05rem + .5vw, 1.4rem);
-  --fs-h3:    clamp(1.7rem, 1.3rem + 1.8vw, 2.6rem);
-  --fs-h2:    clamp(2rem, 1.5rem + 2.4vw, 3.2rem);
-  --fs-hero:  clamp(3.2rem, 2rem + 6vw, 6.5rem);
+  --gold:#C9A24B; --gold-hi:#E4C878; --gold-deep:#9A7A2E; --champagne:#EFE3C6;
+  --positive:#4E9C77; --attention:#C9962F; --risk:#C05A4E;
+  --bg:#100D0A; --bg-top:#1A140C; --surface:#1E1811; --surface-2:#251E15;
+  --line:rgba(201,162,75,.26); --line-soft:rgba(245,240,230,.09);
+  --text:#F5F0E6; --muted:#B4A98E; --faint:#8B7E63; --accent-text:#E4C878;
+  --serif:"Cormorant Garamond",Georgia,"Times New Roman",serif;
+  --sans:"Poppins",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  --maxw:1120px;
+  --fs-label:.72rem; --fs-body:clamp(1rem,.96rem + .2vw,1.08rem);
+  --fs-sub:clamp(1.12rem,1.03rem + .45vw,1.35rem);
+  --fs-h3:clamp(1.55rem,1.25rem + 1.5vw,2.3rem);
+  --fs-h2:clamp(1.9rem,1.45rem + 2.2vw,3rem);
+  --fs-hero:clamp(2.9rem,1.9rem + 5.4vw,5.8rem);
 }
-
-@media (prefers-color-scheme: light) {
-  :root {
-    /* Institutional light ground — warm cream */
-    --gold:        #9C7420;
-    --gold-hi:     #C79A46;
-    --gold-deep:   #7E5D14;
-    --bg:          #F5F0E6;
-    --bg-top:      #FFFFFF;
-    --surface:     #FBF7EE;
-    --surface-2:   #F3ECDD;
-    --line:        rgba(120,88,20,.30);
-    --line-soft:   #E7DEC9;
-    --text:        #221B10;
-    --muted:       #6E6350;
-    --faint:       #8C7E63;
-    --accent-text: #7E5D14;
+@media (prefers-color-scheme: light){
+  :root{
+    --gold:#9C7420; --gold-hi:#C79A46; --gold-deep:#7E5D14;
+    --bg:#F5F0E6; --bg-top:#FFFFFF; --surface:#FBF7EE; --surface-2:#F3ECDD;
+    --line:rgba(120,88,20,.30); --line-soft:#E7DEC9;
+    --text:#221B10; --muted:#5E5444; --faint:#8C7E63; --accent-text:#7E5D14;
   }
 }
-:root[data-theme="dark"] {
+:root[data-theme="dark"]{
   --gold:#C9A24B; --gold-hi:#E4C878; --gold-deep:#9A7A2E;
   --bg:#100D0A; --bg-top:#1A140C; --surface:#1E1811; --surface-2:#251E15;
   --line:rgba(201,162,75,.26); --line-soft:rgba(245,240,230,.09);
   --text:#F5F0E6; --muted:#B4A98E; --faint:#8B7E63; --accent-text:#E4C878;
 }
-:root[data-theme="light"] {
+:root[data-theme="light"]{
   --gold:#9C7420; --gold-hi:#C79A46; --gold-deep:#7E5D14;
   --bg:#F5F0E6; --bg-top:#FFFFFF; --surface:#FBF7EE; --surface-2:#F3ECDD;
   --line:rgba(120,88,20,.30); --line-soft:#E7DEC9;
-  --text:#221B10; --muted:#6E6350; --faint:#8C7E63; --accent-text:#7E5D14;
+  --text:#221B10; --muted:#5E5444; --faint:#8C7E63; --accent-text:#7E5D14;
 }
 
-* { box-sizing: border-box; }
-body {
-  margin: 0;
-  background: var(--bg);
-  color: var(--text);
-  font-family: var(--sans);
-  font-size: var(--fs-body);
-  font-weight: 400;
-  line-height: 1.75;
-  -webkit-font-smoothing: antialiased;
-  overflow-x: hidden;
-}
-.wrap { max-width: var(--maxw); margin-inline: auto; padding-inline: clamp(1.25rem, 5vw, 3rem); }
+*{box-sizing:border-box;}
+body{margin:0;background:var(--bg);color:var(--text);font-family:var(--sans);font-size:var(--fs-body);line-height:1.7;-webkit-font-smoothing:antialiased;overflow-x:hidden;}
+.wrap{max-width:var(--maxw);margin-inline:auto;padding-inline:clamp(1.25rem,5vw,3rem);}
+h1,h2,h3,h4,.serif{font-family:var(--serif);font-weight:600;line-height:1.05;}
+::selection{background:var(--gold);color:#100D0A;}
+a{color:inherit;text-decoration:none;}
 
-h1, h2, h3, .serif { font-family: var(--serif); font-weight: 600; line-height: 1.04; }
-::selection { background: var(--gold); color: #100D0A; }
+.eyebrow{font-family:var(--sans);text-transform:uppercase;letter-spacing:.24em;font-size:var(--fs-label);font-weight:600;color:var(--accent-text);margin:0;}
+.grad{background:linear-gradient(94deg,var(--gold-hi),var(--gold) 45%,var(--gold-deep));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;font-style:italic;}
+:root[data-theme="light"] .grad{-webkit-text-fill-color:var(--gold-deep);background:none;}
+@media (prefers-color-scheme:light){:root:not([data-theme="dark"]) .grad{-webkit-text-fill-color:var(--gold-deep);background:none;}}
 
-.eyebrow {
-  font-family: var(--sans);
-  text-transform: uppercase;
-  letter-spacing: .24em;
-  font-size: var(--fs-label);
-  font-weight: 600;
-  color: var(--accent-text);
-  margin: 0;
-}
-a { color: inherit; }
+/* ---------- sticky nav ---------- */
+.topnav{position:sticky;top:0;z-index:20;display:flex;align-items:center;gap:.2rem;padding:.55rem clamp(1rem,4vw,2rem);background:color-mix(in oklab,var(--bg) 86%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--line-soft);overflow-x:auto;scrollbar-width:none;}
+.topnav::-webkit-scrollbar{display:none;}
+.topnav .nav-mono{font-family:var(--serif);font-weight:700;color:var(--gold);letter-spacing:.04em;margin-right:.8rem;flex:none;}
+.topnav a{flex:none;font-size:.76rem;letter-spacing:.04em;color:var(--muted);padding:.35rem .6rem;border-radius:999px;white-space:nowrap;}
+.topnav a:hover{color:var(--text);}
+.topnav .sp{flex:1 0 1rem;}
+.toggle{flex:none;display:inline-flex;align-items:center;gap:.4rem;padding:.4rem .7rem;border-radius:999px;border:1px solid var(--line);background:transparent;color:var(--muted);font-family:var(--sans);font-size:.74rem;font-weight:500;cursor:pointer;}
+.toggle:hover{color:var(--text);border-color:var(--gold);}
+.toggle:focus-visible{outline:2px solid var(--gold);outline-offset:3px;}
 
-.grad {
-  background: linear-gradient(94deg, var(--gold-hi), var(--gold) 45%, var(--gold-deep));
-  -webkit-background-clip: text; background-clip: text;
-  -webkit-text-fill-color: transparent;
-  font-style: italic;
-}
-:root[data-theme="light"] .grad { -webkit-text-fill-color: var(--gold-deep); background: none; }
-@media (prefers-color-scheme: light) {
-  :root:not([data-theme="dark"]) .grad { -webkit-text-fill-color: var(--gold-deep); background: none; }
-}
+/* ---------- hero ---------- */
+.hero{position:relative;background:radial-gradient(120% 85% at 78% 4%,color-mix(in oklab,var(--gold) 14%,transparent),transparent 48%),radial-gradient(90% 70% at 6% 100%,color-mix(in oklab,var(--gold) 9%,transparent),transparent 44%),linear-gradient(160deg,var(--bg-top),var(--bg));padding-block:clamp(2.6rem,7vh,5rem) clamp(2.6rem,6vh,4.5rem);overflow:hidden;}
+.hero .fil{position:absolute;width:44px;height:44px;border:1px solid var(--gold);opacity:.5;pointer-events:none;z-index:1;}
+.hero .fil.tl{top:16px;left:16px;border-right:0;border-bottom:0;}
+.hero .fil.br{bottom:16px;right:16px;border-left:0;border-top:0;}
+.watermark{position:absolute;right:-3vw;bottom:-9vw;font-family:var(--serif);font-weight:700;font-style:italic;font-size:42vw;line-height:.7;color:var(--gold);opacity:.05;pointer-events:none;user-select:none;z-index:0;}
+.hero .wrap{position:relative;z-index:2;}
+.lockup{display:flex;align-items:center;gap:1.05rem;}
+.monogram{width:4rem;height:4rem;border-radius:50%;display:grid;place-items:center;position:relative;flex:none;border:1px solid var(--gold);background:radial-gradient(circle at 50% 34%,color-mix(in oklab,var(--gold-hi) 18%,transparent),transparent 62%);box-shadow:0 0 0 5px color-mix(in oklab,var(--gold) 6%,transparent),inset 0 0 22px color-mix(in oklab,var(--gold) 10%,transparent);}
+.monogram::after{content:"";position:absolute;inset:7px;border-radius:50%;border:1px solid var(--line);}
+.monogram span{font-family:var(--serif);font-weight:700;font-size:1.8rem;letter-spacing:.03em;line-height:1;background:linear-gradient(180deg,var(--gold-hi),var(--gold));-webkit-background-clip:text;background-clip:text;color:transparent;}
+.wordmark{display:flex;flex-direction:column;gap:.18rem;}
+.wordmark .academia{font-family:var(--serif);font-weight:700;font-size:1.6rem;line-height:1;color:var(--text);}
+.wordmark .academia em{font-style:normal;background:linear-gradient(180deg,var(--gold-hi),var(--gold));-webkit-background-clip:text;background-clip:text;color:transparent;}
+.wordmark .tagline{font-size:.66rem;letter-spacing:.3em;text-transform:uppercase;color:var(--muted);}
+.wordmark .group{font-size:.62rem;letter-spacing:.22em;text-transform:uppercase;color:var(--accent-text);}
+.hero h1{font-size:var(--fs-hero);margin:clamp(1.4rem,4.5vh,2.4rem) 0 0;letter-spacing:-.005em;text-wrap:balance;}
+.manifesto{max-width:36ch;margin:1.4rem 0 0;font-family:var(--serif);font-style:italic;font-weight:500;font-size:var(--fs-sub);line-height:1.4;color:var(--text);}
+.manifesto + p{max-width:52ch;margin:1rem 0 0;color:var(--muted);}
+.hero-meta{margin-top:clamp(1.8rem,4.5vh,2.8rem);display:flex;flex-wrap:wrap;gap:1.3rem 2.6rem;padding-top:1.5rem;border-top:1px solid var(--line);}
+.hero-meta div{display:flex;flex-direction:column;gap:.1rem;}
+.hero-meta .n{font-family:var(--serif);font-weight:600;font-size:clamp(1.7rem,3vw,2.4rem);color:var(--accent-text);line-height:1;}
+.hero-meta .k{font-size:var(--fs-label);letter-spacing:.14em;text-transform:uppercase;color:var(--faint);}
 
-/* ---------------- Hero (matches Bienvenida slide) ---------------- */
-.hero {
-  position: relative;
-  background:
-    radial-gradient(120% 85% at 78% 6%, color-mix(in oklab, var(--gold) 14%, transparent), transparent 48%),
-    radial-gradient(90% 70% at 8% 100%, color-mix(in oklab, var(--gold) 10%, transparent), transparent 44%),
-    linear-gradient(160deg, var(--bg-top), var(--bg));
-  padding-block: clamp(3.5rem, 10vh, 7rem) clamp(3rem, 7vh, 5.5rem);
-  overflow: hidden;
-}
-/* Corner filigree — mirrors the slide */
-.hero .fil { position: absolute; width: 46px; height: 46px; border: 1px solid var(--gold); opacity: .5; pointer-events: none; z-index: 1; }
-.hero .fil.tl { top: 20px; left: 20px; border-right: 0; border-bottom: 0; }
-.hero .fil.br { bottom: 20px; right: 20px; border-left: 0; border-top: 0; }
-.watermark {
-  position: absolute; right: -3vw; bottom: -9vw;
-  font-family: var(--serif); font-weight: 700; font-style: italic;
-  font-size: 44vw; line-height: .7; color: var(--gold);
-  opacity: .05; pointer-events: none; user-select: none; z-index: 0;
-}
-.hero .wrap { position: relative; z-index: 2; }
+/* ---------- sections ---------- */
+section{padding-block:clamp(2.6rem,7vh,5rem);scroll-margin-top:4rem;}
+.sec-head{max-width:64ch;margin-bottom:clamp(1.8rem,4.5vh,3rem);}
+.sec-head h2{font-size:var(--fs-h2);margin:.6rem 0 0;text-wrap:balance;}
+.sec-head p{color:var(--muted);font-size:var(--fs-sub);margin:.9rem 0 0;max-width:58ch;line-height:1.5;}
 
-/* Brand lockup */
-.lockup { display: flex; align-items: center; gap: 1.1rem; }
-.monogram {
-  width: 4.2rem; height: 4.2rem; border-radius: 50%;
-  display: grid; place-items: center; position: relative; flex: none;
-  border: 1px solid var(--gold);
-  background: radial-gradient(circle at 50% 34%, color-mix(in oklab, var(--gold-hi) 18%, transparent), transparent 62%);
-  box-shadow: 0 0 0 5px color-mix(in oklab, var(--gold) 6%, transparent), inset 0 0 22px color-mix(in oklab, var(--gold) 10%, transparent);
-}
-.monogram::after { content: ""; position: absolute; inset: 7px; border-radius: 50%; border: 1px solid var(--line); }
-.monogram span {
-  font-family: var(--serif); font-weight: 700; font-size: 1.9rem; letter-spacing: .03em; line-height: 1;
-  background: linear-gradient(180deg, var(--gold-hi), var(--gold));
-  -webkit-background-clip: text; background-clip: text; color: transparent;
-}
-.wordmark { display: flex; flex-direction: column; gap: .2rem; }
-.wordmark .academia { font-family: var(--serif); font-weight: 700; font-size: 1.7rem; line-height: 1; color: var(--text); }
-.wordmark .academia em { font-style: normal; background: linear-gradient(180deg, var(--gold-hi), var(--gold)); -webkit-background-clip: text; background-clip: text; color: transparent; }
-.wordmark .tagline { font-size: .68rem; letter-spacing: .3em; text-transform: uppercase; color: var(--muted); }
-.wordmark .group { font-size: .64rem; letter-spacing: .24em; text-transform: uppercase; color: var(--accent-text); }
+/* system-in-one-page panel */
+.sys{border:1px solid var(--line);border-radius:6px;padding:clamp(1.6rem,4vw,2.8rem);background:linear-gradient(160deg,var(--surface),var(--bg));}
+.sys .big{font-family:var(--serif);font-size:var(--fs-h3);font-weight:600;line-height:1.2;margin:0;text-wrap:balance;}
+.sys .big em{font-style:italic;color:var(--accent-text);}
+.sys .rule{margin:1.4rem 0;border:0;border-top:1px solid var(--line-soft);}
+.sys .gold-rule{font-family:var(--sans);font-size:.95rem;color:var(--muted);margin:0;}
+.sys .gold-rule b{color:var(--text);font-weight:600;}
+.sys .summary{margin:1.4rem 0 0;font-family:var(--serif);font-style:italic;font-size:var(--fs-sub);color:var(--text);line-height:1.4;}
 
-.hero h1 { font-size: var(--fs-hero); margin: clamp(1.6rem, 5vh, 2.8rem) 0 0; letter-spacing: -.005em; text-wrap: balance; }
-.manifesto { max-width: 34ch; margin: 1.5rem 0 0; font-family: var(--serif); font-style: italic; font-size: var(--fs-sub); font-weight: 500; line-height: 1.4; color: var(--text); }
-.manifesto + p { max-width: 46ch; margin: 1.1rem 0 0; color: var(--muted); }
+/* pillars / grids */
+.pillars{display:grid;grid-template-columns:repeat(auto-fit,minmax(215px,1fr));gap:1px;background:var(--line-soft);border:1px solid var(--line-soft);border-radius:6px;overflow:hidden;}
+.pillar{background:var(--bg);padding:1.6rem 1.5rem;display:flex;flex-direction:column;gap:.45rem;}
+.pillar .rn{font-family:var(--serif);font-style:italic;font-weight:600;color:var(--accent-text);font-size:1.05rem;}
+.pillar h3{font-size:var(--fs-sub);margin:.15rem 0 .1rem;}
+.pillar p{margin:0;color:var(--muted);font-size:.9rem;line-height:1.5;}
+.pillar .sostiene{margin-top:.3rem;font-size:var(--fs-label);text-transform:uppercase;letter-spacing:.12em;color:var(--faint);}
 
-.hero-meta { margin-top: clamp(2rem, 5vh, 3rem); display: flex; flex-wrap: wrap; gap: 1.4rem 3rem; padding-top: 1.6rem; border-top: 1px solid var(--line); }
-.hero-meta div { display: flex; flex-direction: column; gap: .1rem; }
-.hero-meta .n { font-family: var(--serif); font-weight: 600; font-size: clamp(1.8rem,3vw,2.6rem); color: var(--accent-text); line-height: 1; }
-.hero-meta .k { font-size: var(--fs-label); letter-spacing: .16em; text-transform: uppercase; color: var(--faint); }
+/* tables */
+.tablewrap{overflow-x:auto;border:1px solid var(--line-soft);border-radius:6px;-webkit-overflow-scrolling:touch;}
+table.jk{width:100%;border-collapse:collapse;min-width:560px;font-size:.92rem;}
+table.jk caption{text-align:left;padding:.9rem 1.1rem;color:var(--faint);font-size:var(--fs-label);text-transform:uppercase;letter-spacing:.16em;border-bottom:1px solid var(--line-soft);}
+table.jk th,table.jk td{text-align:left;padding:.7rem 1.1rem;border-bottom:1px solid var(--line-soft);vertical-align:top;}
+table.jk thead th{font-family:var(--sans);font-weight:600;font-size:var(--fs-label);letter-spacing:.1em;text-transform:uppercase;color:var(--accent-text);background:var(--surface-2);}
+table.jk tbody tr:last-child td{border-bottom:0;}
+table.jk td b,table.jk td strong{color:var(--text);font-weight:600;}
+table.jk .lead-col{color:var(--text);font-weight:600;white-space:nowrap;}
+table.jk .num{font-variant-numeric:tabular-nums;white-space:nowrap;}
 
-/* ---------------- Sections ---------------- */
-section { padding-block: clamp(3rem, 8vh, 6rem); }
-.sec-head { max-width: 62ch; margin-bottom: clamp(2rem, 5vh, 3.4rem); }
-.sec-head h2 { font-size: var(--fs-h2); margin: .7rem 0 0; text-wrap: balance; }
-.sec-head p { color: var(--muted); font-size: var(--fs-sub); margin: 1rem 0 0; max-width: 54ch; line-height: 1.5; }
+/* Línea de Ruta (cascade) */
+.road{position:relative;}
+.road::before{content:"";position:absolute;top:8px;bottom:8px;left:27px;width:1.5px;background:var(--line-soft);}
+.road-fill{position:absolute;top:8px;left:27px;width:1.5px;height:0;background:linear-gradient(var(--gold-hi),var(--gold),var(--gold-deep));box-shadow:0 0 14px color-mix(in oklab,var(--gold) 55%,transparent);transition:height .12s linear;}
+@media (min-width:800px){.road::before,.road-fill{left:50%;transform:translateX(-.75px);}}
+.stage{position:relative;padding-left:72px;padding-block:clamp(1rem,2.6vh,1.7rem);}
+.node{position:absolute;left:0;top:clamp(1rem,2.6vh,1.7rem);width:56px;height:56px;border-radius:50%;display:grid;place-items:center;background:var(--surface);border:1.5px solid var(--line-soft);font-family:var(--serif);font-weight:600;font-size:1.1rem;color:var(--faint);z-index:2;transition:all .55s ease;}
+.stage.is-in .node{border-color:var(--gold);color:#100D0A;background:linear-gradient(150deg,var(--gold-hi),var(--gold) 55%,var(--gold-deep));box-shadow:0 0 0 6px color-mix(in oklab,var(--gold) 14%,transparent);}
+.node.seal{font-style:italic;font-size:1.35rem;}
 
-.pillars { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1px; background: var(--line-soft); border: 1px solid var(--line-soft); }
-.pillar { background: var(--bg); padding: 1.8rem 1.6rem; display: flex; flex-direction: column; gap: .5rem; }
-.pillar .rn { font-family: var(--serif); font-style: italic; font-weight: 600; color: var(--accent-text); font-size: 1.1rem; }
-.pillar h3 { font-size: var(--fs-sub); margin: .2rem 0 .1rem; }
-.pillar p { margin: 0; color: var(--muted); font-size: .92rem; line-height: 1.5; }
-.pillar .sostiene { margin-top: .3rem; font-size: var(--fs-label); text-transform: uppercase; letter-spacing: .14em; color: var(--faint); }
+/* cards */
+.card{background:var(--surface);border:1px solid var(--line-soft);border-radius:6px;padding:clamp(1.4rem,3.2vw,2.2rem);opacity:0;transform:translateY(18px);transition:opacity .7s ease,transform .7s cubic-bezier(.2,.7,.2,1);}
+.stage.is-in .card{opacity:1;transform:none;}
+.card-top{display:flex;flex-direction:column;gap:.3rem;}
+.card .phase{font-size:var(--fs-label);letter-spacing:.2em;text-transform:uppercase;color:var(--accent-text);}
+.card h3{font-size:var(--fs-h3);margin:.1rem 0 0;}
+.card .obj{color:var(--muted);margin:.9rem 0 0;max-width:64ch;line-height:1.55;}
+.quote{margin:1.3rem 0 0;padding:.3rem 0 .3rem 1.1rem;border-left:2px solid var(--gold);font-family:var(--serif);font-style:italic;font-weight:500;font-size:var(--fs-sub);line-height:1.35;color:var(--text);}
 
-/* ---------------- La Ruta (roadmap) ---------------- */
-.road { position: relative; }
-.road::before { content: ""; position: absolute; top: 8px; bottom: 8px; left: 27px; width: 1.5px; background: var(--line-soft); }
-.road-fill { position: absolute; top: 8px; left: 27px; width: 1.5px; height: 0; background: linear-gradient(var(--gold-hi), var(--gold), var(--gold-deep)); box-shadow: 0 0 14px color-mix(in oklab, var(--gold) 55%, transparent); transition: height .12s linear; }
-@media (min-width: 800px) { .road::before, .road-fill { left: 50%; transform: translateX(-.75px); } }
+/* ritual cards grid */
+.rituals{display:grid;grid-template-columns:1fr;gap:1.2rem;}
+@media (min-width:720px){.rituals{grid-template-columns:1fr 1fr;}}
+.ritual{background:var(--surface);border:1px solid var(--line-soft);border-radius:6px;padding:clamp(1.3rem,2.6vw,1.8rem);display:flex;flex-direction:column;gap:.5rem;}
+.ritual h3{font-size:var(--fs-h3);margin:0;}
+.ritual .tag{font-size:var(--fs-label);letter-spacing:.2em;text-transform:uppercase;color:var(--accent-text);}
+.ritual dl{margin:.4rem 0 0;display:grid;grid-template-columns:auto 1fr;gap:.35rem .9rem;font-size:.9rem;}
+.ritual dt{color:var(--faint);text-transform:uppercase;letter-spacing:.1em;font-size:.66rem;padding-top:.15rem;font-weight:600;}
+.ritual dd{margin:0;color:var(--muted);}
+.ritual dd b{color:var(--text);font-weight:600;}
+.ritual .ex{margin:.6rem 0 0;padding:.7rem .9rem;background:var(--surface-2);border-radius:5px;border-left:2px solid var(--gold);font-family:var(--serif);font-style:italic;font-size:.98rem;color:var(--text);line-height:1.4;}
+.ritual.wide{grid-column:1/-1;}
 
-.stage { position: relative; padding-left: 72px; padding-block: clamp(1.2rem, 3vh, 2rem); }
-.node { position: absolute; left: 0; top: clamp(1.2rem, 3vh, 2rem); width: 56px; height: 56px; border-radius: 50%; display: grid; place-items: center; background: var(--surface); border: 1.5px solid var(--line-soft); font-family: var(--serif); font-weight: 600; font-size: 1.15rem; color: var(--faint); z-index: 2; transition: all .55s ease; }
-.stage.is-in .node { border-color: var(--gold); color: #100D0A; background: linear-gradient(150deg, var(--gold-hi), var(--gold) 55%, var(--gold-deep)); box-shadow: 0 0 0 6px color-mix(in oklab, var(--gold) 14%, transparent); }
-.node.seal { font-style: italic; font-size: 1.4rem; }
+/* generic blocks / chips / ticks */
+.grid2{display:grid;grid-template-columns:1fr;gap:1.4rem 2.2rem;margin-top:1.4rem;}
+@media (min-width:600px){.grid2{grid-template-columns:1fr 1fr;}}
+.block h4{font-family:var(--sans);font-weight:600;font-size:var(--fs-label);text-transform:uppercase;letter-spacing:.16em;color:var(--faint);margin:0 0 .7rem;}
+.chips{display:flex;flex-wrap:wrap;gap:.5rem;}
+.chip{font-size:.82rem;font-weight:500;padding:.33rem .8rem;border:1px solid var(--line);border-radius:999px;color:var(--text);}
+ul.ticks{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:.55rem;}
+ul.ticks li{position:relative;padding-left:1.4rem;color:var(--muted);font-size:.95rem;line-height:1.5;}
+ul.ticks li::before{content:"";position:absolute;left:0;top:.6em;width:6px;height:6px;border-radius:50%;background:var(--gold);}
+ul.ticks li b{color:var(--text);font-weight:600;}
 
-.card { background: var(--surface); border: 1px solid var(--line-soft); border-radius: 4px; padding: clamp(1.5rem, 3.5vw, 2.4rem); opacity: 0; transform: translateY(20px); transition: opacity .7s ease, transform .7s cubic-bezier(.2,.7,.2,1); }
-.stage.is-in .card { opacity: 1; transform: none; }
-.card-top { display: flex; flex-direction: column; gap: .3rem; }
-.card .phase { font-size: var(--fs-label); letter-spacing: .22em; text-transform: uppercase; color: var(--accent-text); }
-.card h3 { font-size: var(--fs-h3); margin: .15rem 0 0; }
-.card .obj { color: var(--muted); margin: 1rem 0 0; max-width: 60ch; line-height: 1.6; }
+/* gauge (SPyF scale) */
+.gauge{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:.8rem;margin-top:1.4rem;}
+.lvl{border:1px solid var(--line-soft);border-radius:6px;padding:1rem 1.1rem;background:var(--surface-2);}
+.lvl .dot{width:11px;height:11px;border-radius:50%;display:inline-block;margin-right:.5rem;vertical-align:middle;}
+.lvl b{font-weight:600;}
+.lvl .rng{color:var(--accent-text);font-variant-numeric:tabular-nums;font-size:.85rem;}
+.lvl span{display:block;color:var(--muted);font-size:.82rem;margin-top:.3rem;line-height:1.45;}
+.dot.g{background:var(--positive);} .dot.y{background:var(--attention);} .dot.r{background:var(--risk);}
 
-.quote { margin: 1.5rem 0 0; padding: .3rem 0 .3rem 1.2rem; border-left: 2px solid var(--gold); font-family: var(--serif); font-style: italic; font-weight: 500; font-size: var(--fs-sub); line-height: 1.35; color: var(--text); }
+/* numbered list (ventas) */
+ol.inolv{list-style:none;counter-reset:n;margin:0;padding:0;display:grid;grid-template-columns:1fr;gap:1rem;}
+@media (min-width:640px){ol.inolv{grid-template-columns:1fr 1fr;}}
+ol.inolv li{counter-increment:n;position:relative;padding:1.1rem 1.2rem 1.1rem 3.3rem;background:var(--surface);border:1px solid var(--line-soft);border-radius:6px;}
+ol.inolv li::before{content:counter(n,decimal-leading-zero);position:absolute;left:1.1rem;top:1.05rem;font-family:var(--serif);font-style:italic;font-weight:700;color:var(--accent-text);font-size:1.1rem;}
+ol.inolv li b{display:block;font-family:var(--serif);font-size:1.15rem;color:var(--text);margin-bottom:.2rem;font-weight:600;}
+ol.inolv li span{color:var(--muted);font-size:.9rem;line-height:1.5;}
 
-.grid2 { display: grid; grid-template-columns: 1fr; gap: 1.5rem 2.4rem; margin-top: 1.7rem; }
-@media (min-width: 600px) { .grid2 { grid-template-columns: 1fr 1fr; } }
-.block h4 { font-family: var(--sans); font-weight: 600; font-size: var(--fs-label); text-transform: uppercase; letter-spacing: .18em; color: var(--faint); margin: 0 0 .8rem; }
-.chips { display: flex; flex-wrap: wrap; gap: .5rem; }
-.chip { font-size: .82rem; font-weight: 500; padding: .34rem .8rem; border: 1px solid var(--line); border-radius: 999px; background: transparent; color: var(--text); }
-ul.ticks { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: .6rem; }
-ul.ticks li { position: relative; padding-left: 1.4rem; color: var(--muted); font-size: .95rem; line-height: 1.5; }
-ul.ticks li::before { content: ""; position: absolute; left: 0; top: .6em; width: 6px; height: 6px; border-radius: 50%; background: var(--gold); }
-ul.ticks li b { color: var(--text); font-weight: 600; }
+/* escalera / rutas */
+.ladder{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1px;background:var(--line-soft);border:1px solid var(--line-soft);border-radius:6px;overflow:hidden;}
+.rung{background:var(--bg);padding:1.4rem 1.4rem;}
+.rung .step{font-family:var(--serif);font-style:italic;color:var(--accent-text);font-weight:600;}
+.rung h3{font-size:var(--fs-sub);margin:.2rem 0 .4rem;}
+.rung p{margin:0;color:var(--muted);font-size:.88rem;line-height:1.5;}
 
-.gauge { display: grid; grid-template-columns: repeat(auto-fit,minmax(150px,1fr)); gap: .8rem; margin-top: 1.7rem; }
-.lvl { border: 1px solid var(--line-soft); border-radius: 4px; padding: 1rem 1.1rem; background: var(--surface-2); }
-.lvl .dot { width: 11px; height: 11px; border-radius: 50%; display: inline-block; margin-right: .5rem; }
-.lvl b { font-weight: 600; }
-.lvl span { display: block; color: var(--faint); font-size: .82rem; margin-top: .2rem; }
-.dot.g { background: var(--positive); } .dot.y { background: var(--attention); } .dot.r { background: var(--risk); }
+/* glossary */
+.gloss{display:grid;grid-template-columns:1fr;gap:.1rem;border:1px solid var(--line-soft);border-radius:6px;overflow:hidden;}
+.gloss div{padding:.9rem 1.2rem;border-bottom:1px solid var(--line-soft);background:var(--surface);}
+.gloss div:last-child{border-bottom:0;}
+.gloss dt{font-family:var(--serif);font-weight:600;font-size:1.1rem;color:var(--text);}
+.gloss dd{margin:.2rem 0 0;color:var(--muted);font-size:.9rem;line-height:1.5;}
 
-/* ---------------- Perfil final ---------------- */
-.final { background: linear-gradient(180deg, var(--bg-top), var(--bg)); border-block: 1px solid var(--line); }
-.traits { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1.2rem; margin-top: 1rem; }
-.trait { padding: 1.6rem 1.5rem; border: 1px solid var(--line-soft); border-radius: 4px; background: var(--surface); }
-.trait .num { font-family: var(--serif); font-style: italic; font-weight: 600; color: var(--accent-text); font-size: 1.15rem; }
-.trait h3 { font-size: var(--fs-sub); margin: .5rem 0 .4rem; }
-.trait p { margin: 0; color: var(--muted); font-size: .9rem; line-height: 1.5; }
+/* perfil / close */
+.final{background:linear-gradient(180deg,var(--bg-top),var(--bg));border-block:1px solid var(--line);}
+.traits{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1.1rem;margin-top:1rem;}
+.trait{padding:1.5rem 1.4rem;border:1px solid var(--line-soft);border-radius:6px;background:var(--surface);}
+.trait .num{font-family:var(--serif);font-style:italic;font-weight:600;color:var(--accent-text);font-size:1.1rem;}
+.trait h3{font-size:var(--fs-sub);margin:.4rem 0 .4rem;}
+.trait p{margin:0;color:var(--muted);font-size:.88rem;line-height:1.5;}
+.affirm{margin-top:clamp(2rem,5vh,3rem);border:1px solid var(--line);border-radius:6px;padding:clamp(1.6rem,4vw,2.8rem);background:var(--surface);}
+.affirm p{font-family:var(--serif);font-style:italic;font-weight:500;font-size:var(--fs-sub);line-height:1.4;margin:0;text-wrap:pretty;}
+.close{text-align:center;}
+.close .seal{width:88px;height:88px;margin:0 auto 1.6rem;border-radius:50%;display:grid;place-items:center;border:1.5px solid var(--gold);color:var(--gold);font-family:var(--serif);font-weight:700;font-style:italic;font-size:1.9rem;box-shadow:0 0 0 7px color-mix(in oklab,var(--gold) 10%,transparent);}
+.close h2{font-size:var(--fs-h2);margin:0 auto;max-width:20ch;text-wrap:balance;}
+.close p{color:var(--muted);font-size:var(--fs-sub);max-width:48ch;margin:1.2rem auto 0;line-height:1.5;}
+.foot{border-top:1px solid var(--line);padding-block:2rem;text-align:center;}
+.foot .band{color:var(--faint);font-size:var(--fs-label);letter-spacing:.14em;text-transform:uppercase;}
+.foot .band b{color:var(--accent-text);font-weight:600;}
+.foot .internal{margin-top:.6rem;font-size:.7rem;color:var(--faint);letter-spacing:.1em;text-transform:uppercase;}
 
-.affirm { margin-top: clamp(2.4rem,6vh,3.6rem); border: 1px solid var(--line); border-radius: 4px; padding: clamp(1.8rem, 4vw, 3rem); background: var(--surface); }
-.affirm p { font-family: var(--serif); font-style: italic; font-weight: 500; font-size: var(--fs-sub); line-height: 1.4; margin: 0; text-wrap: pretty; }
-
-/* ---------------- Closing ---------------- */
-.close { text-align: center; }
-.close .seal { width: 92px; height: 92px; margin: 0 auto 1.8rem; border-radius: 50%; display: grid; place-items: center; border: 1.5px solid var(--gold); color: var(--gold); font-family: var(--serif); font-weight: 700; font-style: italic; font-size: 2rem; box-shadow: 0 0 0 7px color-mix(in oklab, var(--gold) 10%, transparent); }
-.close h2 { font-size: var(--fs-h2); margin: 0 auto; max-width: 18ch; text-wrap: balance; }
-.close p { color: var(--muted); font-size: var(--fs-sub); max-width: 46ch; margin: 1.3rem auto 0; line-height: 1.5; }
-
-.foot { border-top: 1px solid var(--line); padding-block: 2rem; text-align: center; }
-.foot .band { color: var(--faint); font-size: var(--fs-label); letter-spacing: .16em; text-transform: uppercase; }
-.foot .band b { color: var(--accent-text); font-weight: 600; }
-
-.toggle { position: fixed; top: 1rem; right: 1rem; z-index: 30; display: inline-flex; align-items: center; gap: .5rem; padding: .5rem .85rem; border-radius: 999px; border: 1px solid var(--line); background: color-mix(in oklab, var(--surface) 80%, transparent); backdrop-filter: blur(8px); color: var(--muted); font-family: var(--sans); font-size: .78rem; font-weight: 500; cursor: pointer; }
-.toggle:hover { color: var(--text); border-color: var(--gold); }
-.toggle:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; }
-
-@media (prefers-reduced-motion: reduce) {
-  .card, .node, .road-fill { transition: none; }
-  .card { opacity: 1; transform: none; }
+@media (prefers-reduced-motion:reduce){
+  .card,.node,.road-fill{transition:none;}
+  .card{opacity:1;transform:none;}
 }
 </style>
 
-<button class="toggle" id="themeToggle" aria-label="Cambiar entre tema claro y oscuro">
-  <span id="toggleIcon" aria-hidden="true">☀</span><span id="toggleTxt">Modo claro</span>
-</button>
+<nav class="topnav" aria-label="Secciones">
+  <span class="nav-mono" aria-hidden="true">JK</span>
+  <a href="#sistema">Sistema</a>
+  <a href="#ritmos">Ritmos</a>
+  <a href="#instrumentos">Instrumentos</a>
+  <a href="#rituales">Rituales</a>
+  <a href="#ciclo">Ciclo</a>
+  <a href="#evaluacion">Evaluación</a>
+  <a href="#academia">Academia</a>
+  <a href="#ventas">Ventas</a>
+  <a href="#rutas">Rutas</a>
+  <a href="#glosario">Glosario</a>
+  <span class="sp"></span>
+  <button class="toggle" id="themeToggle" aria-label="Cambiar entre tema claro y oscuro"><span id="toggleIcon" aria-hidden="true">☀</span><span id="toggleTxt">Claro</span></button>
+</nav>
 
 <header class="hero">
   <span class="fil tl" aria-hidden="true"></span>
@@ -309,320 +297,522 @@ ul.ticks li b { color: var(--text); font-weight: 600; }
       <div class="monogram" aria-hidden="true"><span>JK</span></div>
       <div class="wordmark">
         <div class="academia">Academia&nbsp;<em>JK</em></div>
-        <div class="tagline">Escuela de Negocios</div>
-        <div class="group">JK Business Group</div>
+        <div class="tagline">Guía del Súper Líder</div>
+        <div class="group">JK Business Group Firm</div>
       </div>
     </div>
 
-    <h1>Líder por <span class="grad">Diseño</span></h1>
+    <h1>El Súper Líder <span class="grad">por Diseño</span></h1>
 
-    <p class="manifesto">«Construimos nuestra mejor versión un día a la vez, hasta que sucede. Inspirando y dejando huellas.»</p>
-    <p>La ruta de formación que acompaña a cada líder JK desde que entra hasta que se convierte en un Súper Líder: cultura, liderazgo, bienestar y resultados.</p>
+    <p class="manifesto">«Ocho instrumentos, cuatro ritmos y un principio: el número se escribe una sola vez, en el nivel más bajo, y sube solo.»</p>
+    <p>La Cooltura de reuniones, reportes, métricas e indicadores del rol. Quién, qué, cómo, dónde y cuándo de cada instrumento del sistema — con el nombre de su dueño.</p>
 
     <div class="hero-meta">
-      <div><span class="n">4</span><span class="k">Etapas de formación</span></div>
-      <div><span class="n">90</span><span class="k">Días de inducción</span></div>
-      <div><span class="n">11</span><span class="k">Comportamientos JK</span></div>
-      <div><span class="n">1</span><span class="k">Perfil: Súper Líder JK</span></div>
+      <div><span class="n">8</span><span class="k">Instrumentos</span></div>
+      <div><span class="n">4</span><span class="k">Ritmos del sistema</span></div>
+      <div><span class="n">15</span><span class="k">Puntos de evaluación</span></div>
+      <div><span class="n">5</span><span class="k">Rutas del cliente</span></div>
     </div>
   </div>
 </header>
 
 <main>
-  <!-- El principio + pilares -->
-  <section class="wrap" aria-labelledby="principio-h">
+  <!-- 1 · El sistema en una página -->
+  <section id="sistema" class="wrap" aria-labelledby="sistema-h">
     <div class="sec-head">
-      <p class="eyebrow">El principio</p>
-      <h2 id="principio-h">Liderar por decisión, no por <span class="grad">reacción</span></h2>
-      <p>El líder por defecto responde a lo que le llega: apaga lo que se prende y termina el día ocupado sin mover lo importante. El líder por diseño decide antes qué va a hacer, en qué bloque y con quién. El día no te pasa: tú lo diseñas. Hacia afuera, la marca se sostiene con cuatro pilares.</p>
+      <p class="eyebrow">Capítulo 01 · El sistema en una página</p>
+      <h2 id="sistema-h">Un sistema, no una suma de <span class="grad">buenas intenciones</span></h2>
     </div>
-
-    <div class="pillars">
-      <div class="pillar">
-        <span class="rn">I</span>
-        <h3>Integridad</h3>
-        <p>Hacemos lo correcto, incluso cuando nadie nos observa.</p>
-        <span class="sostiene">Sostiene · Ética y confianza</span>
-      </div>
-      <div class="pillar">
-        <span class="rn">II</span>
-        <h3>Claridad</h3>
-        <p>Transformamos información compleja en decisiones simples y estratégicas.</p>
-        <span class="sostiene">Sostiene · La promesa</span>
-      </div>
-      <div class="pillar">
-        <span class="rn">III</span>
-        <h3>Excelencia</h3>
-        <p>Cada entregable refleja el estándar de calidad que representa a JK.</p>
-        <span class="sostiene">Sostiene · Cultura y calidad</span>
-      </div>
-      <div class="pillar">
-        <span class="rn">IV</span>
-        <h3>Legado</h3>
-        <p>Construimos empresas —y personas— que trascienden generaciones.</p>
-        <span class="sostiene">Sostiene · El propósito</span>
-      </div>
+    <div class="sys">
+      <p class="big">«El número se escribe una sola vez, en el nivel más bajo, y <em>sube solo</em>.»</p>
+      <hr class="rule">
+      <p class="gold-rule"><b>Regla de oro.</b> Usted escribe en un solo lugar: su Lista de Pendientes. Todo lo demás se llena solo. Si un número aparece en dos hojas y hay que teclearlo dos veces, es que el sistema está mal armado — repórtelo.</p>
+      <p class="summary">«Anoto lo que surge con fecha, escojo siete el jueves, presento el lunes, mido el viernes, cierro el mes el primer lunes, leo la tendencia cada cuatro meses y decido el año en enero.»</p>
     </div>
   </section>
 
-  <!-- La Ruta -->
-  <section class="wrap" aria-labelledby="ruta-h">
+  <!-- 2 · Los 4 ritmos -->
+  <section id="ritmos" class="wrap" aria-labelledby="ritmos-h">
     <div class="sec-head">
-      <p class="eyebrow">La Línea de Ruta</p>
-      <h2 id="ruta-h">El recorrido del líder, etapa por etapa</h2>
-      <p>La misma línea dorada que le mostramos al cliente marca aquí el avance del líder. Cuatro etapas, cada una con su hito. Al recorrerlas, el líder alcanza el estándar de un Súper Líder JK.</p>
+      <p class="eyebrow">Los ritmos</p>
+      <h2 id="ritmos-h">Cuatro ritmos sostienen la Cooltura</h2>
+      <p>La cultura no se sostiene con discursos, se sostiene con ritmo. Cada ritmo tiene su instrumento, su facilitador y lo que produce.</p>
     </div>
+    <div class="tablewrap">
+      <table class="jk">
+        <thead><tr><th>Ritmo</th><th>Cuándo</th><th>Instrumento</th><th>Facilita</th><th>Qué produce</th></tr></thead>
+        <tbody>
+          <tr><td class="lead-col">Diario</td><td>Antes de las 9:00 a.m.</td><td>Cool Speed</td><td>Cada líder</td><td>Prioridad del día y el sapo, publicados en el chat del equipo.</td></tr>
+          <tr><td class="lead-col">Semanal</td><td>Lunes 4:00 a 5:00 p.m.</td><td>Cool Focus</td><td>Yomaries</td><td>Súper Enfoque de la semana comprometido, con día y dueño.</td></tr>
+          <tr><td class="lead-col">Mensual</td><td>Primer lunes</td><td>Cool Results + AUTO MV™</td><td>Karla</td><td>Resultados del mes y metas del siguiente, en presencia.</td></tr>
+          <tr><td class="lead-col">Cuatrimestral</td><td>1.º lunes de may · sep · ene</td><td>Check-in + AUTO MV™ + Gold Day</td><td>Karla</td><td>Tendencia de cuatro meses, AUTO MV de todos, encuestas del cliente y casos de éxito.</td></tr>
+          <tr><td class="lead-col">Anual</td><td>Primer lunes de febrero</td><td>Retiro de Plan Estratégico</td><td>Karla</td><td>Plan del año y nombre del año.</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
 
+  <!-- 3 · La cascada -->
+  <section id="cascada" class="wrap" aria-labelledby="cascada-h">
+    <div class="sec-head">
+      <p class="eyebrow">La cascada</p>
+      <h2 id="cascada-h">El número sube solo</h2>
+      <p>Usted solo escribe en el nivel más bajo. De ahí, el dato asciende hasta cerrar el año — sin volver a teclearse.</p>
+    </div>
     <div class="road" id="road">
       <div class="road-fill" id="roadFill" aria-hidden="true"></div>
-
-      <!-- Etapa 1 -->
-      <article class="stage">
-        <div class="node">01</div>
-        <div class="card">
-          <div class="card-top">
-            <span class="phase">Etapa uno · El ingreso</span>
-            <h3>Bienvenida: los primeros 90 días</h3>
-          </div>
-          <p class="obj">Nadie entra a JK a improvisar. Se contrata por valores, potencial y actitud —el currículo solo confirma lo técnico— y todo líder inicia un proceso formal de integración a la cultura, la historia y la promesa que le hacemos al cliente.</p>
-          <p class="quote">«La excelencia es un hábito, no un evento.»</p>
-          <div class="grid2">
-            <div class="block">
-              <h4>La inducción formal</h4>
-              <ul class="ticks">
-                <li><b>Academia Team SPY</b> — identidad, liderazgo, planificación, enfoque y seguimiento</li>
-                <li><b>Portal de Onboarding</b> — accesos, herramientas y estándares desde el día uno</li>
-                <li><b>Historia y Manual de Cultura</b> — de dónde viene la firma antes de operar en su nombre</li>
-                <li><b>Check-ins y plan de desarrollo</b> — seguimiento estructurado durante 90 días</li>
-              </ul>
-            </div>
-            <div class="block">
-              <h4>Entra a JK quien…</h4>
-              <div class="chips">
-                <span class="chip">Aprende rápido y pregunta sin miedo</span>
-                <span class="chip">Documenta sin que se lo pidan</span>
-                <span class="chip">Propone mejoras, no excusas</span>
-                <span class="chip">Responde por su resultado y el del equipo</span>
-                <span class="chip">Sirve con criterio, no solo con tareas</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </article>
-
-      <!-- Etapa 2 -->
-      <article class="stage">
-        <div class="node">02</div>
-        <div class="card">
-          <div class="card-top">
-            <span class="phase">Etapa dos · Formar al líder</span>
-            <h3>Liderazgo: primero el sistema, después la persona</h3>
-          </div>
-          <p class="obj">El supervisor revisa el trabajo; el Líder JK construye a quien lo hace: desarrolla personas, forma talento y comunica la visión. Cuando algo falla, la primera pregunta nunca es quién —es qué falló—, porque el líder asume la responsabilidad por el sistema.</p>
-          <p class="quote">«Toda corrección termina en aprendizaje, seguimiento y crecimiento. Si termina en vergüenza, se hizo mal.»</p>
-          <div class="grid2">
-            <div class="block">
-              <h4>Cuando alguien falla · las 5 causas</h4>
-              <ul class="ticks">
-                <li><b>Claridad</b> — ¿sabía qué se esperaba de ella?</li>
-                <li><b>Capacitación</b> — ¿tenía la formación para hacerlo?</li>
-                <li><b>Proceso</b> — ¿el procedimiento estaba definido?</li>
-                <li><b>Herramientas</b> — ¿contaba con lo necesario?</li>
-                <li><b>Ejecución</b> — solo cuando las cuatro están cubiertas</li>
-              </ul>
-            </div>
-            <div class="block">
-              <h4>Cómo se corrige · los 4 pasos</h4>
-              <ul class="ticks">
-                <li><b>Qué ocurrió</b> — los hechos, con evidencia</li>
-                <li><b>Cuál fue el impacto</b> — en el cliente, el equipo o la firma</li>
-                <li><b>Cuál es el estándar</b> — dicho con precisión</li>
-                <li><b>Qué plan de mejora</b> — con seguimiento y fecha</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </article>
-
-      <!-- Etapa 3 -->
-      <article class="stage">
-        <div class="node">03</div>
-        <div class="card">
-          <div class="card-top">
-            <span class="phase">Etapa tres · Cuidar la energía</span>
-            <h3>Bienestar: tu Mejor Versión</h3>
-          </div>
-          <p class="obj">Cuidamos nuestro PA y nuestra MV: el estado personal se atiende, no se aguanta. Todos tenemos días fuera de nuestra Mejor Versión; la cultura no lo niega, da la ruta de regreso. Primero se cambia el lenguaje, después la energía.</p>
-          <p class="quote">«Quien reconoce que no está en su MV no recibe reclamo, recibe apoyo.»</p>
-          <div class="grid2">
-            <div class="block">
-              <h4>Energía positiva · 7 acciones</h4>
-              <div class="chips">
-                <span class="chip">Música</span>
-                <span class="chip">Nutrición y ejercicio</span>
-                <span class="chip">Sonreír</span>
-                <span class="chip">Meditar</span>
-                <span class="chip">Leer o escuchar audios</span>
-                <span class="chip">Visualizar</span>
-                <span class="chip">Agradecer</span>
-              </div>
-            </div>
-            <div class="block">
-              <h4>Mis afirmaciones</h4>
-              <ul class="ticks">
-                <li>Me preocupo → <b>Me ocupo</b></li>
-                <li>Tenemos problemas → <b>Tenemos situaciones</b></li>
-                <li>Es difícil → <b>Es un reto</b></li>
-                <li>No se puede → <b>Por sí se puede</b></li>
-                <li>Estoy bien → <b>Estoy súper</b></li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </article>
-
-      <!-- Etapa 4 -->
-      <article class="stage">
-        <div class="node">04</div>
-        <div class="card">
-          <div class="card-top">
-            <span class="phase">Etapa cuatro · Sostener el estándar</span>
-            <h3>Desempeño: vivir en Súper JK</h3>
-          </div>
-          <p class="obj">La cultura no se sostiene con discursos, se sostiene con ritmo. El líder mide su día con un solo color, arranca antes de las 9:00 a.m. con el check-in Súper JK y cierra cada comunicación con claridad, próximo paso, responsable y fecha.</p>
-          <p class="quote">«Lo que no se mide, se opina. El color mide el día; la insignia reconoce el hábito.»</p>
-
-          <div class="gauge">
-            <div class="lvl"><b><span class="dot g"></span>Súper JK</b><span>100% o más del estándar</span></div>
-            <div class="lvl"><b><span class="dot y"></span>Medio JK</b><span>70% a 99%</span></div>
-            <div class="lvl"><b><span class="dot r"></span>En Ruta</b><span>Menos de 70% — se corrige</span></div>
-          </div>
-
-          <div class="grid2">
-            <div class="block">
-              <h4>Check-in diario Súper JK · 5 preguntas</h4>
-              <ul class="ticks">
-                <li>¿Cerré lo de ayer, hecho y documentado?</li>
-                <li>¿Cuál es la prioridad de hoy? Una sola</li>
-                <li>¿Cuál es el sapo? Lo que menos quiero, primero</li>
-                <li>¿Qué está trancado y con quién?</li>
-                <li>¿Qué cliente sale hoy con más claridad?</li>
-              </ul>
-            </div>
-            <div class="block">
-              <h4>Las 3 insignias del mes</h4>
-              <ul class="ticks">
-                <li><b>Ejecución</b> — hace que las cosas sucedan hasta el final</li>
-                <li><b>Claridad</b> — convirtió información en una decisión real</li>
-                <li><b>Sistema</b> — dejó el proceso mejor de como lo encontró</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </article>
-
-      <!-- Culminación -->
-      <article class="stage">
-        <div class="node seal">★</div>
-        <div class="card">
-          <div class="card-top">
-            <span class="phase">La meta del recorrido</span>
-            <h3>Súper Líder JK</h3>
-          </div>
-          <p class="obj">Quien recorre la Línea de Ruta integra los cuatro pilares en una sola forma de liderar: vive los valores, desarrolla personas, sostiene su energía y hace que los resultados sucedan —con o sin los fundadores en la sala.</p>
-        </div>
-      </article>
+      <article class="stage"><div class="node">01</div><div class="card"><div class="card-top"><span class="phase">Escribo</span><h3>Mi Lista de Pendientes</h3></div><p class="obj">Cada cosa que surge la anoto: <b>Task, Área de enfoque y Due Date</b>. Nada más. Es el único lugar donde tecleo.</p></div></article>
+      <article class="stage"><div class="node">02</div><div class="card"><div class="card-top"><span class="phase">Se arma</span><h3>Cool Focus semanal</h3></div><p class="obj">El jueves marco <b>las 7</b> prioridades de la semana. El Cool Focus se arma solo desde la lista.</p></div></article>
+      <article class="stage"><div class="node">03</div><div class="card"><div class="card-top"><span class="phase">Suma</span><h3>52 semanas</h3></div><p class="obj">El cumplimiento semanal se acumula a lo largo de las cincuenta y dos semanas del año.</p></div></article>
+      <article class="stage"><div class="node">04</div><div class="card"><div class="card-top"><span class="phase">Suma</span><h3>12 meses + AUTO MV™</h3></div><p class="obj">Cada mes cierra con Cool Results y el AUTO MV que destila lo vivido en metas del mes siguiente.</p></div></article>
+      <article class="stage"><div class="node seal">★</div><div class="card"><div class="card-top"><span class="phase">Cierra</span><h3>3 cuatrimestres y 1 anual</h3></div><p class="obj">La tendencia de cada cuatrimestre y el cierre anual de enero se nutren de todo lo anterior. El año se decide con el dato, no con la memoria.</p></div></article>
     </div>
   </section>
 
-  <!-- Perfil -->
+  <!-- 4 · Los instrumentos -->
+  <section id="instrumentos" class="wrap" aria-labelledby="inst-h">
+    <div class="sec-head">
+      <p class="eyebrow">Los instrumentos</p>
+      <h2 id="inst-h">Ocho instrumentos y su dueño</h2>
+      <p>Cada instrumento tiene un dueño que responde por él y alguien que lo llena. Si un instrumento no tiene dueño, esa función no está gobernada.</p>
+    </div>
+    <div class="tablewrap">
+      <table class="jk">
+        <thead><tr><th>Instrumento</th><th>Dueño</th><th>Quién lo llena</th><th>Para qué existe</th></tr></thead>
+        <tbody>
+          <tr><td class="lead-col">Cuaderno del Líder</td><td>Yomaries</td><td>Cada líder el suyo</td><td>Todo lo mío en un archivo: mapa, indicadores, metas, semana, pendientes y períodos.</td></tr>
+          <tr><td class="lead-col">Cool Métricas de la Firma</td><td>Dueño de cada área</td><td>Cada líder su indicador</td><td>Los 96 indicadores de la firma, agrupados por área.</td></tr>
+          <tr><td class="lead-col">Cool Tracker Comercial</td><td>Karla</td><td>Joaris y quien cierre</td><td>El pipeline completo, del lead al handoff.</td></tr>
+          <tr><td class="lead-col">Entregables y Accionables</td><td>Yomaries</td><td>Cada dueño lo suyo</td><td>Lo que la firma debe entregar, con dueño y fecha.</td></tr>
+          <tr><td class="lead-col">Calendario Maestro</td><td>Yomaries</td><td>Yomaries</td><td>El ritmo del año: qué pasa cada semana y cada mes.</td></tr>
+          <tr><td class="lead-col">Academia Team SPYF</td><td>Jatniel · Champion</td><td>Cada líder su avance</td><td>Formación por track y certificación cuatrimestral.</td></tr>
+          <tr><td class="lead-col">Sistema de Expediente</td><td>Yomaries</td><td>Yomaries</td><td>Expediente laboral completo y auditable de cada persona.</td></tr>
+          <tr><td class="lead-col">Registro de Asistencia y Ritmo</td><td>Yomaries</td><td>Yomaries</td><td>Asistencia, puntualidad y ritmo. Alimenta la evaluación de la cuarta semana.</td></tr>
+          <tr><td class="lead-col">Mapa de Gestión</td><td>Karla</td><td>Se firma al entrar</td><td>Mi descripción de puesto: nueve áreas y mis tareas no negociables.</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- 5 · Rituales Cool -->
+  <section id="rituales" class="wrap" aria-labelledby="rit-h">
+    <div class="sec-head">
+      <p class="eyebrow">Los rituales Cool</p>
+      <h2 id="rit-h">Cómo se reúne, reporta y corrige un Súper Líder</h2>
+      <p>Cinco rituales sostienen el ritmo. Cada uno define quién, qué, cuándo, dónde, cómo y quién es su dueño.</p>
+    </div>
+    <div class="rituals">
+      <div class="ritual">
+        <span class="tag">Diario</span>
+        <h3>Cool Speed</h3>
+        <dl>
+          <dt>Qué</dt><dd>Un mensaje corto con la prioridad del día, cuál es el sapo y qué necesito para no trabarme.</dd>
+          <dt>Quién</dt><dd>Todos. Sin excepción, incluida la CEO.</dd>
+          <dt>Cuándo</dt><dd><b>Antes de las 9:00 a.m.</b>, todos los días laborables.</dd>
+          <dt>Dónde</dt><dd>Chat del equipo.</dd>
+          <dt>Dueño</dt><dd>Yomaries sostiene el ritmo y reporta quién no publicó.</dd>
+        </dl>
+        <p class="ex">«Prioridad de hoy: cerrar las tres decisiones de alcance que llevan cuatro semanas. Mi sapo: la de Power Sun, porque frena la facturación. Necesito: nada. Si me trabo, aviso antes de las 11:00.»</p>
+      </div>
+
+      <div class="ritual">
+        <span class="tag">Semanal</span>
+        <h3>Cool Focus</h3>
+        <dl>
+          <dt>Qué</dt><dd>La reunión donde cada líder presenta su semana en seis secciones: generales, métricas, status, su Súper Enfoque, varios y distribución por área.</dd>
+          <dt>Cuándo</dt><dd>La hoja se envía el <b>jueves</b> antes de las 5:00 p.m. La reunión es el <b>lunes</b> de 4:00 a 5:00 p.m.</dd>
+          <dt>Cómo</dt><dd>Las secciones 3, 4 y 6 se llenan solas desde la Lista de Pendientes. Usted llena 1, 2 y 5.</dd>
+          <dt>Dueño</dt><dd>Yomaries facilita y levanta minuta. Karla dirige la decisión.</dd>
+        </dl>
+        <p class="ex">«El error más común: llenarlo el lunes por la mañana. Si se llena el mismo día, no es preparación: es improvisación con formato. La hoja se envía el jueves; el lunes se lee.»</p>
+      </div>
+
+      <div class="ritual">
+        <span class="tag">Mensual</span>
+        <h3>Cool Results + AUTO MV™</h3>
+        <dl>
+          <dt>Qué</dt><dd>La presentación mensual: qué se comprometió, qué se logró y las metas del mes que entra, con el AUTO MV.</dd>
+          <dt>Cuándo</dt><dd>La hoja se completa el último día del mes. Se presenta el <b>primer lunes</b>, en presencia. Quince minutos por persona.</dd>
+          <dt>Dueño</dt><dd>Karla dirige la sesión. Yomaries verifica que todos hayan entregado.</dd>
+        </dl>
+        <p class="ex">«El AUTO MV no es un resumen del mes: es lo que decide qué se pone en el mes siguiente. Por eso se escribe antes de fijar metas, nunca después.»</p>
+        <div class="grid2" style="margin-top:.9rem">
+          <div class="block">
+            <h4>AUTO MV mensual · 3 bloques</h4>
+            <ul class="ticks">
+              <li><b>Celebraciones</b> — lo que celebro y me hace feliz de haber logrado.</li>
+              <li><b>Revisiones</b> — lo que no logré o logré a medias y sé que pude mejor.</li>
+              <li><b>Alertas</b> — información que llama mi atención y exige actuar.</li>
+            </ul>
+          </div>
+          <div class="block">
+            <h4>AUTO MV cuatrimestral · +2 bloques</h4>
+            <ul class="ticks">
+              <li><b>Aprendizajes</b> — momentos ajá o conceptos que me dieron productividad.</li>
+              <li><b>Innovaciones</b> — lo que hice mejor o diferente en mi gestión.</li>
+              <li>Regla: <b>tres por bloque, no más.</b> Tres obliga a escoger.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="ritual">
+        <span class="tag">Semanal · continuo</span>
+        <h3>Cool Métricas</h3>
+        <dl>
+          <dt>Qué</dt><dd>Los 96 indicadores de la firma. Cada líder es dueño de los suyos; el dueño del área consolida.</dd>
+          <dt>Cuándo</dt><dd>Semanales: viernes antes de las 10:00 a.m. Mensuales: último día del mes.</dd>
+          <dt>Dueño</dt><dd>El dueño del área consolida. José responde por que cada indicador tenga fuente y objetivo.</dd>
+        </dl>
+        <p class="ex">«Un indicador tardío confirma lo que ya pasó. Un indicador predictivo se mueve esta semana y anticipa el resultado: contactos, citas confirmadas, asistencia.»</p>
+      </div>
+
+      <div class="ritual wide">
+        <span class="tag">Cuando ocurre · el mismo día</span>
+        <h3>Cool Moments · la conversación que corrige a tiempo</h3>
+        <dl>
+          <dt>Qué</dt><dd>No es una reprimenda ni una evaluación: es nombrar el hecho y acordar el plan. <b>«Una conversación de hace tres semanas ya no corrige: reclama.»</b></dd>
+          <dt>Dónde</dt><dd>En privado. Se registra en la hoja 08 del Cuaderno del Líder.</dd>
+        </dl>
+        <div class="grid2">
+          <div class="block">
+            <h4>El guion de reto · 4 pasos</h4>
+            <ul class="ticks">
+              <li><b>Hecho</b> — observable, sin interpretación. Lo que una cámara habría grabado.</li>
+              <li><b>Impacto</b> — sobre el trabajo, no sobre la persona.</li>
+              <li><b>Estándar</b> — el del puesto, no el del carácter.</li>
+              <li><b>Plan</b> — con dueño y fecha. Sin las dos cosas no es un plan.</li>
+            </ul>
+          </div>
+          <div class="block">
+            <h4>Diagnóstico de las 5 causas</h4>
+            <ul class="ticks">
+              <li><b>Claridad</b> — ¿sabía qué se esperaba? Si no: es comunicación.</li>
+              <li><b>Capacitación</b> — ¿sabe cómo? Si no: se asigna Academia.</li>
+              <li><b>Proceso</b> — ¿existe SOP? Si no: se documenta primero.</li>
+              <li><b>Herramientas</b> — ¿acceso y tiempo? Si no: falta acceso o sobra carga.</li>
+              <li><b>Ejecución</b> — solo si las cuatro son sí, es conversación de desempeño.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6 · Ciclo cuatrimestral -->
+  <section id="ciclo" class="wrap" aria-labelledby="ciclo-h">
+    <div class="sec-head">
+      <p class="eyebrow">El ciclo cuatrimestral</p>
+      <h2 id="ciclo-h">Tres conversaciones al año deciden el rumbo</h2>
+      <p>Enero, mayo y septiembre no se reprograman. Son las ventanas donde se decide rumbo y no operación. Cada cuatrimestre tiene su nombre.</p>
+    </div>
+    <div class="pillars">
+      <div class="pillar"><span class="rn">C1</span><h3>Súper Enfoque JK</h3><p>Enero a abril · cierra el 30 de abril. Se define el año: metas, estructura y reserva.</p><span class="sostiene">Check-in · 1.º lunes de mayo</span></div>
+      <div class="pillar"><span class="rn">C2</span><h3>Hasta que Suceda</h3><p>Mayo a agosto · cierra el 31 de agosto. Medio camino: qué se sostuvo y qué se corrige.</p><span class="sostiene">Check-in · 1.º lunes de septiembre</span></div>
+      <div class="pillar"><span class="rn">C3</span><h3>Cierre con Broche de Oro</h3><p>Septiembre a diciembre · cierra el 31 de diciembre. Última ventana para decidir antes del cierre.</p><span class="sostiene">Check-in · 1.º lunes de enero</span></div>
+    </div>
+    <div class="grid2" style="margin-top:1.6rem">
+      <div class="block">
+        <h4>Gold Day · el mismo día del check-in</h4>
+        <p style="margin:0;color:var(--muted);font-size:.95rem;line-height:1.55">Reconocimiento del cuatrimestre, con todo el equipo. <b style="color:var(--text)">Se reconoce lo que se sostuvo, no solo lo que se logró</b>: quien mantuvo el ritmo cuatro meses seguidos merece nombre y aplauso.</p>
+      </div>
+      <div class="block">
+        <h4>Sesión del cliente · tercera semana</h4>
+        <p style="margin:0;color:var(--muted);font-size:.95rem;line-height:1.55">Noventa minutos con cada Súper Socio. Se entrega el AUTO MV del cliente en persona, se lee su tablero y se cierra con decisiones escritas: <b style="color:var(--text)">verbo, número y fecha.</b></p>
+      </div>
+    </div>
+    <p style="margin-top:1.4rem;color:var(--faint);font-size:.82rem">El Check-in Anual y Retiro de Plan Estratégico se hace el primer lunes de febrero: se fija el plan del año y se le pone nombre al año. <em>Los nombres de los cuatrimestres y la estructura AUTO MV™ se usan bajo licencia de ViveSmart / Suz Amaro.</em></p>
+  </section>
+
+  <!-- 7 · Evaluación -->
+  <section id="evaluacion" class="final" aria-labelledby="eval-h">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="eyebrow">La evaluación de la persona · 4.ª semana</p>
+        <h2 id="eval-h">Quince puntos, cada uno con evidencia</h2>
+        <p>«Cada punto se evalúa con evidencia, no con impresión. Si no hay evidencia, no se evalúa.» Se agrupan en cuatro categorías.</p>
+      </div>
+      <div class="grid2">
+        <div class="block">
+          <h4>Resultado</h4>
+          <ul class="ticks">
+            <li>Cumplimiento de sus métricas del cuatrimestre</li>
+            <li>Cumplimiento de sus metas no negociables</li>
+            <li>Sus tareas no negociables por área</li>
+            <li>Avance de Academia en su track</li>
+          </ul>
+        </div>
+        <div class="block">
+          <h4>Presencia</h4>
+          <ul class="ticks">
+            <li>Asistencia y días presente</li>
+            <li>Puntualidad y tardanzas</li>
+            <li>Ausencias sin aviso</li>
+          </ul>
+        </div>
+        <div class="block">
+          <h4>Comunicación</h4>
+          <ul class="ticks">
+            <li>Respuesta dentro de 24 horas laborables</li>
+            <li>Toda reunión cierra con compromiso, responsable y fecha</li>
+            <li>Documenta en ClickUp con dueño, fecha y evidencia</li>
+            <li>Escala a tiempo lo que no le corresponde</li>
+          </ul>
+        </div>
+        <div class="block">
+          <h4>Ritmo del sistema</h4>
+          <ul class="ticks">
+            <li>Cool Speed diario antes de las 9:00</li>
+            <li>Cool Focus entregado el jueves</li>
+            <li>Cool Métricas anotadas el viernes</li>
+            <li>Cool Results y AUTO MV en su fecha</li>
+          </ul>
+        </div>
+      </div>
+
+      <h3 style="font-size:var(--fs-h3);margin:2.4rem 0 .4rem">La escala de cumplimiento</h3>
+      <p style="color:var(--muted);margin:0 0 .2rem;font-size:.95rem">El objetivo se fija antes del período y no se cambia a mitad de camino. Un resultado bajo no se castiga: se explica y se decide.</p>
+      <div class="gauge">
+        <div class="lvl"><b><span class="dot g"></span>SPyF</b> <span class="rng">100% o más</span><span>Súper Positivo y Favorable. Documentar qué lo hizo posible, para repetirlo.</span></div>
+        <div class="lvl"><b><span class="dot y"></span>MPyF</b> <span class="rng">80% a 99%</span><span>Medio Positivo y Favorable. Escribir la causa y el ajuste concreto.</span></div>
+        <div class="lvl"><b><span class="dot r"></span>PyF</b> <span class="rng">Bajo 80%</span><span>Positivo y Favorable. Escribir la causa y tomar una decisión. No se castiga: se decide.</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 8 · Academia Team SPYF + 9 · Primera semana -->
+  <section id="academia" class="wrap" aria-labelledby="acad-h">
+    <div class="sec-head">
+      <p class="eyebrow">Formación y arranque</p>
+      <h2 id="acad-h">Academia Team SPYF y mi primera semana</h2>
+      <p>La formación por track de cada puesto, con módulos, quiz y certificación. Y el orden exacto para abrir el Cuaderno del Líder por primera vez.</p>
+    </div>
+    <div class="rituals">
+      <div class="ritual">
+        <span class="tag">Cuatrimestral · Champion: Jatniel</span>
+        <h3>Academia Team SPYF</h3>
+        <dl>
+          <dt>Qué</dt><dd>Formación por track de cada puesto, con módulos, quiz y certificación.</dd>
+          <dt>Cuándo</dt><dd>El módulo se completa dentro del cuatrimestre. La certificación se otorga en el check-in del primer lunes.</dd>
+          <dt>Cómo</dt><dd>Módulo, quiz aprobado y aplicación demostrada en el puesto. <b>Ver el video no es completar el módulo.</b></dd>
+        </dl>
+        <p class="ex">«Un instrumento llenado a medias hace más daño que uno vacío, porque el sistema lo lee como si fuera verdad.»</p>
+      </div>
+      <div class="ritual">
+        <span class="tag">Mi primera semana</span>
+        <h3>No abra 23 hojas: abra cinco</h3>
+        <div class="tablewrap" style="border:0">
+          <table class="jk" style="min-width:420px">
+            <thead><tr><th>Día</th><th>Qué hago</th></tr></thead>
+            <tbody>
+              <tr><td class="lead-col num">Día 1</td><td>Leo y firmo mi Mapa de Gestión y los No Negociables de Jornada.</td></tr>
+              <tr><td class="lead-col num">Día 2</td><td>Reviso mis indicadores (cuáles son predictivos) y vacío todo lo pendiente en mi lista.</td></tr>
+              <tr><td class="lead-col num">Día 3</td><td>Diseño mi semana y bloqueo mis horas — incluido almuerzo y tiempo personal.</td></tr>
+              <tr><td class="lead-col num">Día 4</td><td>Marco mis siete de la semana; envío mi Cool Focus antes de las 5:00 p.m.</td></tr>
+              <tr><td class="lead-col num">Día 5</td><td>Anoto mis Cool Métricas de la semana antes de las 10:00 a.m.</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <h3 style="font-size:var(--fs-h3);margin:2.2rem 0 .6rem">Los No Negociables del sistema</h3>
+    <div class="grid2" style="margin-top:0">
+      <ul class="ticks">
+        <li>Lo que no tiene dueño, fecha y entrada en ClickUp, <b>no existe.</b></li>
+        <li>Cero excusitis. Cero asumitis. Cero mañanitis. Soluciones antes que excusas.</li>
+        <li>Haz el sapo primero. Y que ese sapo lleve el indicador que demuestra que movió la meta.</li>
+      </ul>
+      <ul class="ticks">
+        <li>Toda reunión cierra con <b>compromiso, responsable y fecha.</b> Sin las tres, fue una conversación.</li>
+        <li>Toda métrica bajo objetivo termina en <b>decisión</b>, no en explicación.</li>
+        <li>Respuesta dentro de <b>24 horas laborables</b>, siempre, a todo.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- 10 · Ventas -->
+  <section id="ventas" class="wrap" aria-labelledby="ventas-h">
+    <div class="sec-head">
+      <p class="eyebrow">Ventas · basado en «Vendes o Vendes» de Grant Cardone</p>
+      <h2 id="ventas-h">Los 9 inolvidables, en versión <span class="grad">JK</span></h2>
+      <p>Paráfrasis y aplicaciones a la cultura JK — no citas textuales. Vender también es comunicar una idea, presentar una propuesta y conseguir apoyo.</p>
+    </div>
+    <ol class="inolv">
+      <li><b>Vender es una habilidad de vida</b><span>También vendes cuando comunicas una idea, presentas una propuesta o consigues apoyo para un proyecto.</span></li>
+      <li><b>La convicción comienza contigo</b><span>Comprende tu servicio, su alcance y el problema que ayuda a resolver para comunicarlo con seguridad.</span></li>
+      <li><b>Comprométete con aprender a vender</b><span>La preparación, la práctica y la revisión de conversaciones fortalecen tu desempeño.</span></li>
+      <li><b>Construye confianza</b><span>Escucha, demuestra conocimiento y cumple lo que prometes. La credibilidad facilita la decisión.</span></li>
+      <li><b>Comunica el valor más allá del precio</b><span>Explica qué incluye la propuesta y cómo responde a la necesidad, sin prometer resultados que no puedes garantizar.</span></li>
+      <li><b>Atiende las objeciones con curiosidad</b><span>Antes de responder, identifica si la duda está en el alcance, la inversión, el momento o la confianza.</span></li>
+      <li><b>Da seguimiento con disciplina</b><span>Registra lo conversado y acuerda un próximo paso. La persistencia debe respetar la decisión del prospecto.</span></li>
+      <li><b>Pide una decisión clara</b><span>Después de confirmar que existe encaje, invita al cliente a avanzar y explica qué necesita para comenzar.</span></li>
+      <li><b>Asume responsabilidad por tu proceso</b><span>Revisa tu preparación, actividad y seguimiento; usa lo aprendido para mejorar sin culpar al cliente.</span></li>
+    </ol>
+    <div class="affirm" style="margin-top:1.6rem">
+      <p>Compromiso Súper Líder JK: «Diagnosticaré antes de proponer, comunicaré el valor con claridad y documentaré cada próximo paso con fecha y responsable.»</p>
+    </div>
+  </section>
+
+  <!-- 11 · Rutas comerciales -->
+  <section id="rutas" class="wrap" aria-labelledby="rutas-h">
+    <div class="sec-head">
+      <p class="eyebrow">Lo que acompaña el Súper Líder · Ecosistema SHIFT™</p>
+      <h2 id="rutas-h">La Ruta Empresarial Éxito 6X Pro™</h2>
+      <p>«Un negocio desordenado no necesita más servicios: necesita una secuencia.» Seis etapas, siempre en el mismo orden, ejecutadas por cinco Rutas que se apilan.</p>
+    </div>
+
+    <div class="tablewrap">
+      <table class="jk">
+        <caption>Las 6 etapas del ecosistema</caption>
+        <thead><tr><th>#</th><th>Etapa</th><th>Qué ocurre</th><th>Ruta</th></tr></thead>
+        <tbody>
+          <tr><td class="num">1</td><td class="lead-col">Diagnóstico</td><td>Lectura real del estado legal, contable, fiscal y financiero.</td><td>Ruta 1</td></tr>
+          <tr><td class="num">2</td><td class="lead-col">Organización</td><td>Se ordena la estructura, los sistemas y la documentación.</td><td>Ruta 1</td></tr>
+          <tr><td class="num">3</td><td class="lead-col">Cumplimiento</td><td>Se instala y sostiene el cumplimiento contable, fiscal y patronal.</td><td>Ruta 1 → 2</td></tr>
+          <tr><td class="num">4</td><td class="lead-col">Optimización</td><td>Estrategia contributiva y eficiencia financiera.</td><td>Ruta 3</td></tr>
+          <tr><td class="num">5</td><td class="lead-col">Crecimiento</td><td>Acceso a capital y dirección con datos.</td><td>Ruta 4</td></tr>
+          <tr><td class="num">6</td><td class="lead-col">Resultados</td><td>Sostenibilidad, gobierno, sistemas y legado.</td><td>Ruta 5</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3 style="font-size:var(--fs-h3);margin:2rem 0 .8rem">Las 5 Rutas</h3>
+    <div class="tablewrap">
+      <table class="jk">
+        <thead><tr><th>Ruta</th><th>Qué resuelve</th><th>Cómo debe sentirse</th><th>Modalidad</th></tr></thead>
+        <tbody>
+          <tr><td class="lead-col">1 · Instalación</td><td>El desorden. Instala la base legal, contable y fiscal.</td><td>Orden, estructura, claridad</td><td>Proyecto de 90 días</td></tr>
+          <tr><td class="lead-col">2 · Contabilidad y KPI</td><td>La falta de control. Sostiene números y cumplimiento mes a mes.</td><td>Seguimiento, visibilidad</td><td>Mensual · recurrente</td></tr>
+          <tr><td class="lead-col">3 · Tax Estratégico</td><td>La carga contributiva sin estrategia y las decisiones de última hora.</td><td>Estrategia, protección, alivio</td><td>Ciclo anual</td></tr>
+          <tr><td class="lead-col">4 · Dashboard y Capital</td><td>Decidir a ciegas y no estar listo para financiamiento.</td><td>Acompañamiento ejecutivo</td><td>Ciclo anual</td></tr>
+          <tr><td class="lead-col">5 · CEO SHIFT™ y Legado</td><td>Un dueño atrapado en la operación y un negocio que no crece sin él.</td><td>Liderazgo, gobierno, expansión</td><td>Ciclo anual</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p style="margin:1rem 0 0;color:var(--faint);font-size:.82rem">«Ruta 1 instala · Ruta 2 sostiene · Ruta 3 optimiza · Ruta 4 dirige · Ruta 5 escala y deja legado. Nunca ofrecemos una Ruta superior sin el dato que la justifica.»</p>
+
+    <h3 style="font-size:var(--fs-h3);margin:2.2rem 0 .8rem">La Escalera del Dueño</h3>
+    <div class="ladder">
+      <div class="rung"><span class="step">Escalón 1</span><h3>Todólogo</h3><p>Hace todo. Vende, entrega, cobra y apaga fuegos. Si se enferma, el negocio para.</p></div>
+      <div class="rung"><span class="step">Escalón 2</span><h3>Dueño promedio</h3><p>Delegó tareas pero supervisa todo. Sabe cuánto facturó, no cuánto ganó. Decide por corazonada.</p></div>
+      <div class="rung"><span class="step">Escalón 3</span><h3>Liderazgo</h3><p>Tiene equipo con roles y procesos escritos. Lee sus números cada mes y decide con ellos.</p></div>
+      <div class="rung"><span class="step">Escalón 4</span><h3>CEO · Súper Socio JK</h3><p>Dirige, no ejecuta. Los dueños de área responden por resultado. El negocio opera y crece sin él.</p></div>
+    </div>
+    <p style="margin:1rem 0 0;color:var(--faint);font-size:.82rem">«Nadie sube dos escalones de golpe. Se sube un SOP a la vez, un número a la vez, una delegación a la vez.»</p>
+
+    <h3 style="font-size:var(--fs-h3);margin:2.2rem 0 .8rem">Mapa 3XS™ — las 5 dimensiones</h3>
+    <div class="pillars">
+      <div class="pillar"><span class="rn">1</span><h3>Claridad financiera</h3><p>¿Sabe cuánto entra, cuánto sale y cuánto gana?</p></div>
+      <div class="pillar"><span class="rn">2</span><h3>Control y estructura</h3><p>¿Su información contable es confiable, está al día y refleja la operación real?</p></div>
+      <div class="pillar"><span class="rn">3</span><h3>Flujo y rentabilidad</h3><p>¿Su negocio produce efectivo? ¿Dónde gana de verdad y dónde solo factura?</p></div>
+      <div class="pillar"><span class="rn">4</span><h3>Cumplimiento y riesgo</h3><p>¿Está protegido ante las agencias o acumulando exposición sin saberlo?</p></div>
+      <div class="pillar"><span class="rn">5</span><h3>Dirección y escalabilidad</h3><p>¿Decide con datos o con intuición? ¿Su estructura aguanta crecer?</p></div>
+    </div>
+  </section>
+
+  <!-- 12 · Tabla maestra -->
+  <section id="maestra" class="wrap" aria-labelledby="maestra-h">
+    <div class="sec-head">
+      <p class="eyebrow">La tabla maestra</p>
+      <h2 id="maestra-h">Todo el ritmo en una página</h2>
+      <p>«Si solo puede imprimir una página de esta guía, imprima esta.»</p>
+    </div>
+    <div class="tablewrap">
+      <table class="jk">
+        <thead><tr><th>Instrumento</th><th>Ritmo</th><th>Cuándo se entrega</th><th>Quién lo llena</th><th>Quién dirige</th></tr></thead>
+        <tbody>
+          <tr><td class="lead-col">Cool Speed</td><td>Diario</td><td>Antes de 9:00 a.m.</td><td>Todos</td><td>Yomaries</td></tr>
+          <tr><td class="lead-col">Lista de Pendientes</td><td>Continuo</td><td>Cuando surge</td><td>Cada líder</td><td>—</td></tr>
+          <tr><td class="lead-col">Cool Focus</td><td>Semanal</td><td>Jueves 5:00 p.m.</td><td>Cada líder</td><td>Yomaries</td></tr>
+          <tr><td class="lead-col">Reunión Cool Focus</td><td>Semanal</td><td>Lunes 4:00 p.m.</td><td>—</td><td>Yomaries</td></tr>
+          <tr><td class="lead-col">Cool Métricas</td><td>Semanal</td><td>Viernes 10:00 a.m.</td><td>Cada líder</td><td>Dueño del área</td></tr>
+          <tr><td class="lead-col">Cool Results + AUTO MV™</td><td>Mensual</td><td>Último día del mes</td><td>Cada líder</td><td>Karla</td></tr>
+          <tr><td class="lead-col">Presentación Cool Results</td><td>Mensual</td><td>Primer lunes · 15 min</td><td>—</td><td>Karla</td></tr>
+          <tr><td class="lead-col">Cool Moments</td><td>Cuando ocurre</td><td>El mismo día</td><td>Quien lo vio</td><td>Yomaries</td></tr>
+          <tr><td class="lead-col">Academia</td><td>Cuatrimestral</td><td>Dentro del período</td><td>Cada líder</td><td>Jatniel</td></tr>
+          <tr><td class="lead-col">AUTO MV™ Laboral</td><td>Cuatrimestral</td><td>5 días antes</td><td>Cada líder</td><td>Karla</td></tr>
+          <tr><td class="lead-col">Check-in cuatrimestral</td><td>Cuatrimestral</td><td>1.º lunes may · sep · ene</td><td>—</td><td>Karla</td></tr>
+          <tr><td class="lead-col">Sesión del cliente</td><td>Cuatrimestral</td><td>3.ª semana · 90 min</td><td>Jatniel prepara</td><td>Karla</td></tr>
+          <tr><td class="lead-col">Evaluación de la persona</td><td>Cuatrimestral</td><td>4.ª semana</td><td>Yomaries</td><td>Karla</td></tr>
+          <tr><td class="lead-col">Gold Day</td><td>Cuatrimestral</td><td>Mismo día del check-in</td><td>—</td><td>Karla</td></tr>
+          <tr><td class="lead-col">Retiro Plan Estratégico</td><td>Anual</td><td>1.º lunes de febrero</td><td>Cada líder</td><td>Karla</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- 13 · Glosario -->
+  <section id="glosario" class="wrap" aria-labelledby="gloss-h">
+    <div class="sec-head">
+      <p class="eyebrow">Glosario</p>
+      <h2 id="gloss-h">El idioma del sistema</h2>
+    </div>
+    <dl class="gloss">
+      <div><dt>El sapo</dt><dd>La prioridad más importante del día. «Haz el sapo primero. Un sapo sin métrica es ocupación; con indicador predictivo es ejecución estratégica.»</dd></div>
+      <div><dt>Súper Enfoque</dt><dd>Las siete prioridades comprometidas de la semana, que se presentan en el Cool Focus.</dd></div>
+      <div><dt>Cooltura</dt><dd>La cultura y el sistema de reuniones, reportes, métricas e indicadores de la firma.</dd></div>
+      <div><dt>AUTO MV™</dt><dd>La estructura de reflexión que decide las metas del período siguiente (3 bloques mensual, 5 cuatrimestral). Bajo licencia de ViveSmart.</dd></div>
+      <div><dt>SPyF · MPyF · PyF</dt><dd>La escala de cumplimiento: Súper (100%+), Medio (80–99%) y Positivo y Favorable (bajo 80%). El bajo no se castiga: se decide.</dd></div>
+      <div><dt>Cuaderno del Líder</dt><dd>El archivo personal de cada líder: mapa, indicadores, metas, semana, pendientes y períodos.</dd></div>
+      <div><dt>Mapa de Gestión</dt><dd>La descripción de puesto: nueve áreas y las tareas no negociables. Se firma al entrar.</dd></div>
+      <div><dt>Champion</dt><dd>Quien sostiene el avance de la Academia Team SPYF (hoy, Jatniel).</dd></div>
+      <div><dt>Súper Socio</dt><dd>El cliente de la firma. (La Guía es de uso interno y no se comparte con Súper Socios.)</dd></div>
+      <div><dt>Súper Aliado</dt><dd>Los aliados externos del sistema, como Koppla (marketing) y Aníbal.</dd></div>
+      <div><dt>Predictivo vs. tardío</dt><dd>El indicador tardío confirma lo que pasó; el predictivo se mueve esta semana y anticipa el resultado.</dd></div>
+      <div><dt>Excusitis · Asumitis · Mañanitis</dt><dd>Los tres males prohibidos: explicar en vez de resolver, dar por hecho sin confirmar, y mover a mañana lo de hoy.</dd></div>
+    </dl>
+  </section>
+
+  <!-- 14 · Perfil + cierre -->
   <section class="final" aria-labelledby="perfil-h">
     <div class="wrap">
       <div class="sec-head">
         <p class="eyebrow">El perfil</p>
         <h2 id="perfil-h">Así se reconoce a un Súper Líder JK</h2>
       </div>
-
       <div class="traits">
-        <div class="trait">
-          <span class="num">I</span>
-          <h3>Está presente</h3>
-          <p>Completo donde está: en la reunión, con el cliente y con el equipo, sin dividir la atención.</p>
-        </div>
-        <div class="trait">
-          <span class="num">II</span>
-          <h3>Ve los dragones a los ojos</h3>
-          <p>El tema difícil se nombra, no se rodea. Resuelve primero; explica después.</p>
-        </div>
-        <div class="trait">
-          <span class="num">III</span>
-          <h3>Se vacuna de los virus</h3>
-          <p>Nada de excusitis, mañanitis ni victimitis. Usa el sistema para que nadie dependa de nadie.</p>
-        </div>
-        <div class="trait">
-          <span class="num">IV</span>
-          <h3>Deja huella</h3>
-          <p>Ayuda a cada persona a crecer hasta ser mejor profesional y mejor ser humano.</p>
-        </div>
+        <div class="trait"><span class="num">I</span><h3>Escribe una vez</h3><p>Anota en su Lista de Pendientes y deja que el número suba solo. No teclea dos veces.</p></div>
+        <div class="trait"><span class="num">II</span><h3>Hace el sapo primero</h3><p>Ataca lo más importante del día, y conecta ese sapo con el indicador que mueve la meta.</p></div>
+        <div class="trait"><span class="num">III</span><h3>Corrige a tiempo</h3><p>Nombra el hecho el mismo día, con el guion de reto, antes de que la conversación se vuelva expediente.</p></div>
+        <div class="trait"><span class="num">IV</span><h3>Cierra con decisión</h3><p>Toda reunión y toda métrica terminan en compromiso, responsable y fecha — nunca en explicación.</p></div>
       </div>
-
       <div class="affirm">
         <p>«Soy protagonista de mis decisiones y de mi liderazgo para hacer que las cosas sucedan. Acepto cuando cometo un error y me hago responsable. Uso el sistema para que todos hagamos lo mismo y el proceso mejore, hasta que suceda.»</p>
       </div>
     </div>
   </section>
 
-  <!-- Cierre -->
   <section class="wrap close" aria-labelledby="cierre-h">
     <div class="seal" aria-hidden="true">JK</div>
-    <h2 id="cierre-h">Formamos líderes que <span class="grad">forman líderes</span></h2>
-    <p>Un contador registra el pasado; un arquitecto diseña el futuro. En la Academia JK diseñamos, un día a la vez, a las personas que sostienen la promesa.</p>
+    <h2 id="cierre-h">El día no te pasa: <span class="grad">tú lo diseñas</span></h2>
+    <p>Somos líderes por diseño. Construimos nuestra mejor versión un día a la vez, hasta que sucede — inspirando y dejando huellas.</p>
   </section>
 </main>
 
 <footer class="foot">
-  <div class="wrap band">Academia <b>JK</b> · Escuela de Negocios · <b>JK Business Group</b></div>
+  <div class="wrap band">Academia Team <b>SPYF</b> · Guía del Súper Líder JK · <b>JK Business Group Firm</b>
+    <div class="internal">Documento de uso interno · No se comparte con Súper Socios</div>
+  </div>
 </footer>
 
 <script>
-  (function () {
-    var root = document.documentElement, btn = document.getElementById('themeToggle');
-    var icon = document.getElementById('toggleIcon'), txt = document.getElementById('toggleTxt');
-    function current() {
-      var s = root.getAttribute('data-theme');
-      if (s) return s;
-      return window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
-    }
-    function paint() {
-      var dark = current() === 'dark';
-      icon.textContent = dark ? '☀' : '☾';
-      txt.textContent = dark ? 'Modo claro' : 'Modo oscuro';
-    }
-    btn.addEventListener('click', function () {
-      root.setAttribute('data-theme', current() === 'dark' ? 'light' : 'dark');
-      paint();
-    });
+  (function(){
+    var root=document.documentElement,btn=document.getElementById('themeToggle');
+    var icon=document.getElementById('toggleIcon'),txt=document.getElementById('toggleTxt');
+    function current(){var s=root.getAttribute('data-theme');if(s)return s;return window.matchMedia('(prefers-color-scheme: light)').matches?'light':'dark';}
+    function paint(){var dark=current()==='dark';icon.textContent=dark?'☀':'☾';txt.textContent=dark?'Claro':'Oscuro';}
+    btn.addEventListener('click',function(){root.setAttribute('data-theme',current()==='dark'?'light':'dark');paint();});
     paint();
   })();
-
-  (function () {
-    var stages = Array.prototype.slice.call(document.querySelectorAll('.stage'));
-    var road = document.getElementById('road'), fill = document.getElementById('roadFill');
-    if ('IntersectionObserver' in window) {
-      var io = new IntersectionObserver(function (es) {
-        es.forEach(function (e) { if (e.isIntersecting) e.target.classList.add('is-in'); });
-      }, { threshold: 0.25 });
-      stages.forEach(function (s) { io.observe(s); });
-    } else { stages.forEach(function (s) { s.classList.add('is-in'); }); }
-
-    function onScroll() {
-      if (!road) return;
-      var r = road.getBoundingClientRect(), total = r.height;
-      var passed = Math.min(Math.max(window.innerHeight * 0.5 - r.top, 0), total);
-      fill.style.height = passed + 'px';
-    }
-    window.addEventListener('scroll', onScroll, { passive: true });
-    window.addEventListener('resize', onScroll);
-    onScroll();
+  (function(){
+    var stages=Array.prototype.slice.call(document.querySelectorAll('.stage'));
+    var road=document.getElementById('road'),fill=document.getElementById('roadFill');
+    if('IntersectionObserver' in window){
+      var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting)e.target.classList.add('is-in');});},{threshold:0.25});
+      stages.forEach(function(s){io.observe(s);});
+    } else {stages.forEach(function(s){s.classList.add('is-in');});}
+    function onScroll(){if(!road)return;var r=road.getBoundingClientRect(),total=r.height;var passed=Math.min(Math.max(window.innerHeight*0.5-r.top,0),total);fill.style.height=passed+'px';}
+    window.addEventListener('scroll',onScroll,{passive:true});window.addEventListener('resize',onScroll);onScroll();
   })();
 </script>
